@@ -30,3 +30,7 @@ body::before {
 a {
     color: $links;
 }
+
+address {
+    font-style: inherit;
+}
