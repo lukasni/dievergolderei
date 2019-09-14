@@ -1,35 +1,51 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
-</section>
-
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-    </ul>
-  </article>
-</section>
+<div class="row">
+    <section class="column responsive column-67">
+        <article>
+            <h2>Herzlich Willkommen</h2>
+            <p>Das Rahmenatelier „Die Vergolderei“ ist ihr Werkstattladen für individuelle Bilderrahmen, Einrahmungen und Spiegel in Rheinfelden.</p>
+            <p>Dazu führe ich eine kleine, feine Auswahl an Künstlerbedarf.</p>
+        </article>
+        <h2>Aktuell</h2>
+        <article>
+            <h3>Blog 1</h3>
+            <p><%= Faker.Lorem.paragraph() %></p>
+            <p><%= Faker.Lorem.paragraph() %></p>
+            <p><%= Faker.Lorem.paragraph() %></p>
+            <p><%= Faker.Lorem.paragraph() %></p>
+        </article>
+            <h3>Blog 2</h3>
+            <p><%= Faker.Lorem.paragraph() %></p>
+            <p><%= Faker.Lorem.paragraph() %></p>
+            <p><%= Faker.Lorem.paragraph() %></p>
+            <p><%= Faker.Lorem.paragraph() %></p>
+        </article>
+            <h3>Blog 3</h3>
+            <p><%= Faker.Lorem.paragraph() %></p>
+            <p><%= Faker.Lorem.paragraph(8) %></p>
+            <p><%= Faker.Lorem.paragraph() %></p>
+            <p><%= Faker.Lorem.paragraph() %></p>
+        </article>
+    </section>
+    <aside class="column responsive column-33">
+    <h2>Öffnungszeiten</h2>
+    <dl class="hours">
+    <div class="row">
+        <dt class="column">Montag</dt>
+        <dd class="column">geschlossen</dd>
+    </div>
+    <div class="row">
+        <dt class="column">Dienstag - Freitag</dt>
+        <dd class="column">09:00 - 12:30<br>
+        14:00 - 18:00</dd>
+    </div>
+    <div class="row">
+        <dt class="column">Samstag</dt>
+        <dd class="column">09:00 - 12:30</dd>
+    </div>
+    <div class="row">
+        <dt class="column">Sonntag</dt>
+        <dd class="column">geschlossen</dd>
+    </div>
+    </dl>
+    </aside>
+</div>
