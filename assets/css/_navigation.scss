@@ -8,7 +8,7 @@ $nav-boder: 1px solid $dark;
 .main-nav nav {
     border-top: $nav-boder;
     border-bottom: $nav-boder;
-    background: rgba(240, 240, 240, .3);
+    background: $light-transparent
 }
 
 .main-nav nav .column {
@@ -16,7 +16,7 @@ $nav-boder: 1px solid $dark;
 }
 
 .main-nav nav .column:hover {
-    background: $light;
+    background: $mid-transparent;
 }
 
 .main-nav nav .column:hover a {
