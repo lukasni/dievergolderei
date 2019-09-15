@@ -5,25 +5,25 @@ $nav-boder: 1px solid $dark;
     margin-bottom: 2em;
 }
 
-nav {
+.main-nav nav {
     border-top: $nav-boder;
     border-bottom: $nav-boder;
     background: rgba(240, 240, 240, .3);
 }
 
-nav .column {
+.main-nav nav .column {
     text-align: center;
 }
 
-nav .column:hover {
+.main-nav nav .column:hover {
     background: $light;
 }
 
-nav .column:hover a {
+.main-nav nav .column:hover a {
     color: $dv-blue;
 }
 
-nav a {
+.main-nav nav a {
     font-variant: small-caps;
     font-weight: 400;
     color: $dark;

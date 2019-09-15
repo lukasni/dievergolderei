@@ -9,8 +9,19 @@
 .map {
     width: 100%;
     height: 50vh;
+    border: 0;
 }
 
-main {
-    background: $light-transparent
+.blogpost {
+    border-bottom: 1px solid $light;
+    margin-bottom: 2rem;
+}
+
+.blogpost:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+}
+
+.blog nav li {
+    margin-bottom: 0;
 }

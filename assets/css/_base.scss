@@ -7,6 +7,10 @@
     }
 }
 
+html {
+    overflow-y: scroll;
+}
+
 body {
     color: $text;
     font-family: 'Lato', sans-serif;
@@ -24,7 +28,11 @@ body::before {
     height: 100%;
     z-index: -2;
     opacity: 0.20;
-    filter: blur(15px);
+    filter: blur(10px);
+}
+
+main {
+    background: $main-bg;
 }
 
 a {
@@ -33,4 +41,8 @@ a {
 
 address {
     font-style: inherit;
+}
+
+hr {
+    border-color: $light
 }
