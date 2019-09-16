@@ -5,6 +5,13 @@ $dv-gold: #C3AA00;
 $light-transparent: rgba(240, 240, 240, .4);
 $mid-transparent: scale-color($light-transparent, $lightness: -25%);
 
+$info: $dv-blue;
+$success: #4CAF50;
+$warning: #ff9800;
+$danger: #f44336;
+
+$alert-text: white;
+
 $text: $dark;
 $links: $dv-blue;
 $main-bg: $light-transparent;

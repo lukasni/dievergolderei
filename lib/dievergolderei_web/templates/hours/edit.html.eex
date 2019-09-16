@@ -1,5 +1,5 @@
-<h1>Edit Hours</h1>
+<h1>Öffnungszeiten Bearbeiten</h1>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.hours_path(@conn, :update, @hours)) %>
 
-<span><%= link "Back", to: Routes.hours_path(@conn, :index) %></span>
+<span><%= link "Zurück", to: Routes.hours_path(@conn, :index) %></span>

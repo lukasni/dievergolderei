@@ -1,23 +1,23 @@
 <%= form_for @changeset, @action, fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      Formular enthält Fehler und konnte nicht gespeichert werden.
     </div>
   <% end %>
 
-  <%= label f, :label %>
+  <%= label f, :label, "Tag" %>
   <%= text_input f, :label %>
   <%= error_tag f, :label %>
 
-  <%= label f, :times %>
+  <%= label f, :times, "Zeit" %>
   <%= textarea f, :times %>
   <%= error_tag f, :times %>
 
-  <%= label f, :active %>
+  <%= label f, :active, "Aktiv" %>
   <%= checkbox f, :active %>
   <%= error_tag f, :active %>
 
-  <%= label f, :list_position %>
+  <%= label f, :list_position, "Sortierung" %>
   <%= number_input f, :list_position %>
   <%= error_tag f, :list_position %>
 

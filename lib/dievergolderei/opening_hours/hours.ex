@@ -15,6 +15,6 @@ defmodule Dievergolderei.OpeningHours.Hours do
   def changeset(hours, attrs) do
     hours
     |> cast(attrs, [:label, :times, :active, :list_position])
-    |> validate_required([:label, :times, :active, :list_position])
+    |> validate_required([:label, :times, :active])
   end
 end
