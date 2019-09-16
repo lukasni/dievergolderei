@@ -2,7 +2,8 @@ defmodule DievergoldereiWeb.PageController do
   use DievergoldereiWeb, :controller
 
   def index(conn, _params) do
-    render(conn, "index.html")
+    hours = Dievergolderei.OpeningHours.list_active_hours()
+    render(conn, "index.html", hours: hours)
   end
 
   def contact(conn, _params) do

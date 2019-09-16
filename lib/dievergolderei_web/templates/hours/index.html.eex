@@ -1,0 +1,31 @@
+<h1>Listing Hours</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Label</th>
+      <th>Times</th>
+      <th>Active</th>
+      <th>List position</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for hours <- @hours do %>
+    <tr>
+      <td><%= hours.label %></td>
+      <td style="white-space: pre-line"><%= hours.times %></td>
+      <td><%= hours.active %></td>
+      <td><%= hours.list_position %></td>
+
+      <td>
+        <span><%= link "Edit", to: Routes.hours_path(@conn, :edit, hours) %></span>
+        <span><%= link "Delete", to: Routes.hours_path(@conn, :delete, hours), method: :delete, data: [confirm: "Wirklich löschen?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Hours", to: Routes.hours_path(@conn, :new) %></span>
