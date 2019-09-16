@@ -1,0 +1,16 @@
+<div class="row blog" role="blog">
+    <section class="column responsive column-75">
+        <%= for post <- @posts do %>
+          <%= render @view_module, "post.html", post: post %>
+        <% end %>
+    </section>
+    <nav role="navigation" class="column responsive">
+        <h4>Archiv</h4>
+        <ul style="">
+        <li><%= link "Neueste Beiträge", to: Routes.post_path(@conn, :blog) %></li>
+        <%= for month <- @months do %>
+          <li><%= month_link(@conn, month) %></li>
+        <% end %>
+        </ul>
+    </nav>
+</div>

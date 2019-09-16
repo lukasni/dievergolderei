@@ -7,7 +7,12 @@ defmodule Dievergolderei.OpeningHoursTest do
     alias Dievergolderei.OpeningHours.Hours
 
     @valid_attrs %{active: true, label: "some label", list_position: 42, times: "some times"}
-    @update_attrs %{active: false, label: "some updated label", list_position: 43, times: "some updated times"}
+    @update_attrs %{
+      active: false,
+      label: "some updated label",
+      list_position: 43,
+      times: "some updated times"
+    }
     @invalid_attrs %{active: nil, label: nil, list_position: nil, times: nil}
 
     def hours_fixture(attrs \\ %{}) do

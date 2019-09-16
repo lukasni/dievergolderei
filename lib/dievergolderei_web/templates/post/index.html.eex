@@ -1,0 +1,30 @@
+<h1>Blogbeiträge</h1>
+
+<span><%= link "Neuen Beitrag erstellen", to: Routes.post_path(@conn, :new), class: "button" %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titel</th>
+      <th>Slug</th>
+      <th>Datum</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for post <- @posts do %>
+    <tr>
+      <td><%= post.title %></td>
+      <td><%= post.slug %></td>
+      <td><%= post.publish_on %></td>
+
+      <td>
+        <span><%= link "Vorschau", to: Routes.post_path(@conn, :show, post), class: "button button-outline button-small mb-0" %></span>
+        <span><%= link "Bearbeiten", to: Routes.post_path(@conn, :edit, post), class: "button button-outline button-small mb-0" %></span>
+        <span><%= link "Löschen", to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-danger button-small mb-0" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

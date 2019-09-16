@@ -67,6 +67,16 @@
     background-color: $danger;
 }
 
+.button.button-danger {
+    background-color: $danger;
+    border-color: $danger;
+}
+
+.button.button-danger.button-outline {
+    background-color: transparent;
+    color: $danger;
+}
+
 .help-block {
     margin-top: -1.5rem;
     margin-bottom: 1.5rem;

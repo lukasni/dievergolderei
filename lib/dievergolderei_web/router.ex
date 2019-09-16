@@ -20,13 +20,15 @@ defmodule DievergoldereiWeb.Router do
     get "/kontakt", PageController, :contact
     get "/impressionen", PageController, :gallery
     get "/geschichte", PageController, :history
-    get "/blog", PageController, :blog
+    get "/blog", PostController, :blog
+    get "/blog/:month", PostController, :list
   end
 
   scope "/admin", DievergoldereiWeb do
     pipe_through :browser
 
     resources "/hours", HoursController, only: [:index, :new, :create, :edit, :update, :delete]
+    resources "/posts", PostController
   end
 
   # Other scopes may use custom stacks.
