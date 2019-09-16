@@ -17,7 +17,10 @@ body {
 }
 
 body::before {
-    background-image: url("/images/background_1.webp");
+    // background-image: url("/images/background_1.webp");
+    // background-position: bottom right;
+    // background-repeat: no-repeat;
+    background-image: url("/images/bg.png");
     background-size: cover;
     content: "";
     display: block;
