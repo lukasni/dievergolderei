@@ -48,7 +48,7 @@ defmodule Dievergolderei.Blog do
   """
   def list_posts_published_in_month(month, year) do
     {:ok, start_date} = Date.new(year, month, 1)
-    {:ok, end_date} = Date.new(year, month + 1, 1)
+    end_date = Date.add(start_date, Date.days_in_month(start_date))
 
     Post
     |> where([p], p.publish_on >= ^start_date)
