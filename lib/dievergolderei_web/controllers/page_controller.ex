@@ -3,7 +3,8 @@ defmodule DievergoldereiWeb.PageController do
 
   def index(conn, _params) do
     hours = Dievergolderei.OpeningHours.list_active_hours()
-    render(conn, "index.html", hours: hours)
+    posts = Dievergolderei.Blog.list_posts()
+    render(conn, "index.html", hours: hours, posts: posts)
   end
 
   def contact(conn, _params) do

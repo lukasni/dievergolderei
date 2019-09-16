@@ -27,6 +27,7 @@ defmodule DievergoldereiWeb.Router do
     pipe_through :browser
 
     resources "/hours", HoursController, only: [:index, :new, :create, :edit, :update, :delete]
+    resources "/posts", PostController
   end
 
   # Other scopes may use custom stacks.

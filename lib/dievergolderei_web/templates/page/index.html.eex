@@ -5,26 +5,15 @@
             <p>Das Rahmenatelier „Die Vergolderei“ ist ihr Werkstattladen für individuelle Bilderrahmen, Einrahmungen und Spiegel in Rheinfelden.</p>
             <p>Dazu führe ich eine kleine, feine Auswahl an Künstlerbedarf.</p>
         </article>
+        <%= if length(@posts) > 0 do %>
         <h2>Aktuell</h2>
-        <article>
-            <h3>Blog 1</h3>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-        </article>
-            <h3>Blog 2</h3>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-        </article>
-            <h3>Blog 3</h3>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph(8) %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-        </article>
+        <% end %>
+        <%= for post <- @posts do %>
+          <article>
+              <h3><%= post.title %></h3>
+              <div class="post-content"><%= raw Earmark.as_html!(post.content) %></div>
+          </article>
+        <% end %>
     </section>
     <aside class="column responsive column-33">
     <h2>Öffnungszeiten</h2>
