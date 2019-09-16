@@ -10,8 +10,7 @@ use Mix.Config
 config :dievergolderei,
   ecto_repos: [Dievergolderei.Repo]
 
-config :dievergolderei, DievergoldereiWeb.Gettext,
-  default_locale: "de"
+config :dievergolderei, DievergoldereiWeb.Gettext, default_locale: "de"
 
 # Configures the endpoint
 config :dievergolderei, DievergoldereiWeb.Endpoint,

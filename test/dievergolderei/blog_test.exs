@@ -6,8 +6,18 @@ defmodule Dievergolderei.BlogTest do
   describe "posts" do
     alias Dievergolderei.Blog.Post
 
-    @valid_attrs %{content: "some content", publish_on: ~D[2010-04-17], slug: "some slug", title: "some title"}
-    @update_attrs %{content: "some updated content", publish_on: ~D[2011-05-18], slug: "some updated slug", title: "some updated title"}
+    @valid_attrs %{
+      content: "some content",
+      publish_on: ~D[2010-04-17],
+      slug: "some slug",
+      title: "some title"
+    }
+    @update_attrs %{
+      content: "some updated content",
+      publish_on: ~D[2011-05-18],
+      slug: "some updated slug",
+      title: "some updated title"
+    }
     @invalid_attrs %{content: nil, publish_on: nil, slug: nil, title: nil}
 
     def post_fixture(attrs \\ %{}) do

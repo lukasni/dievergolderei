@@ -16,7 +16,7 @@ defmodule DievergoldereiWeb.PostController do
   end
 
   def list(conn, %{"month" => month}) do
-    [y , m] = String.split(month, "-")
+    [y, m] = String.split(month, "-")
     month = String.to_integer(m)
     year = String.to_integer(y)
 

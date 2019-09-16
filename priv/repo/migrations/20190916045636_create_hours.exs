@@ -10,6 +10,5 @@ defmodule Dievergolderei.Repo.Migrations.CreateHours do
 
       timestamps()
     end
-
   end
 end
