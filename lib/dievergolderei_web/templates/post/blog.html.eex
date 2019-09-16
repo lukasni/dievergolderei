@@ -1,10 +1,7 @@
 <div class="row blog" role="blog">
     <section class="column responsive column-75">
         <%= for post <- @posts do %>
-          <article class="blogpost">
-              <h3><%= post.title %></h3>
-              <div class="post-content"><%= raw Earmark.as_html!(post.content) %></div>
-          </article>
+          <%= render @view_module, "post.html", post: post %>
         <% end %>
     </section>
     <nav role="navigation" class="column responsive">

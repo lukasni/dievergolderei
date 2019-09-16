@@ -9,10 +9,7 @@
         <h2>Aktuell</h2>
         <% end %>
         <%= for post <- @posts do %>
-          <article>
-              <h3><%= post.title %></h3>
-              <div class="post-content"><%= raw Earmark.as_html!(post.content) %></div>
-          </article>
+          <%= render DievergoldereiWeb.PostView, "post.html", post: post %>
         <% end %>
     </section>
     <aside class="column responsive column-33">
