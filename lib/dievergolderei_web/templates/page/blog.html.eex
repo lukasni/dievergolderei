@@ -1,26 +1,11 @@
 <div class="row blog" role="blog">
     <section class="column responsive column-75">
+        <%= for post <- @posts do %>
         <article class="blogpost">
-            <h2>Blog 1</h2>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
+              <h3><%= post.title %></h3>
+              <div class="post-content"><%= raw Earmark.as_html!(post.content) %></div>
         </article>
-        <article class="blogpost">
-            <h2>Blog 2</h2>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-        </article>
-        <article class="blogpost">
-            <h2>Blog 3</h2>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph(8) %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-            <p><%= Faker.Lorem.paragraph() %></p>
-        </article>
+        <% end %>
     </section>
     <nav role="navigation" class="column responsive">
         <h4>Archiv</h4>

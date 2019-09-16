@@ -3,7 +3,7 @@ defmodule DievergoldereiWeb.PageController do
 
   def index(conn, _params) do
     hours = Dievergolderei.OpeningHours.list_active_hours()
-    posts = Dievergolderei.Blog.list_posts()
+    posts = Dievergolderei.Blog.list_most_recent_published_posts(3)
     render(conn, "index.html", hours: hours, posts: posts)
   end
 
@@ -20,6 +20,7 @@ defmodule DievergoldereiWeb.PageController do
   end
 
   def blog(conn, _params) do
-    render(conn, "blog.html", title: "Blog — ")
+    posts = Dievergolderei.Blog.list_most_recent_published_posts(5)
+    render(conn, "blog.html", title: "Blog — ", posts: posts)
   end
 end

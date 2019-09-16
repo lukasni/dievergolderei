@@ -23,6 +23,23 @@ defmodule Dievergolderei.Blog do
   end
 
   @doc """
+  Returns a list of recent posts sorted by publish date in descending order
+
+  ## Examples
+
+      iex> list_most_recent_published_posts(2) do
+      [%Post{}, ...]
+  """
+  def list_most_recent_published_posts(count \\ 3) do
+    Post
+    |> where([p], p.publish_on <= ^Date.utc_today())
+    |> order_by(desc: :publish_on)
+    |> order_by(desc: :inserted_at)
+    |> limit(^count)
+    |> Repo.all()
+  end
+
+  @doc """
   Gets a single post.
 
   Raises `Ecto.NoResultsError` if the Post does not exist.
