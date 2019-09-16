@@ -1,11 +1,6 @@
-<h1>Show Post</h1>
+<h1>Vorschau</h1>
 
 <ul>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @post.title %>
-  </li>
 
   <li>
     <strong>Slug:</strong>
@@ -13,16 +8,13 @@
   </li>
 
   <li>
-    <strong>Content:</strong>
-    <%= @post.content %>
-  </li>
-
-  <li>
-    <strong>Publish on:</strong>
+    <strong>Datum:</strong>
     <%= @post.publish_on %>
   </li>
 
 </ul>
 
-<span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
-<span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
+<span><%= link "Bearbeiten", to: Routes.post_path(@conn, :edit, @post), class: "button button-outline button-small" %></span>
+<span><%= link "Zurück", to: Routes.post_path(@conn, :index), class: "button button-outline button-small" %></span>
+<hr>
+<%= render @view_module, "post.html", post: @post %>

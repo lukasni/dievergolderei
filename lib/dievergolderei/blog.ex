@@ -20,7 +20,9 @@ defmodule Dievergolderei.Blog do
 
   """
   def list_posts do
-    Repo.all(Post)
+    Post
+    |> order_by_published()
+    |> Repo.all()
   end
 
   @doc """
