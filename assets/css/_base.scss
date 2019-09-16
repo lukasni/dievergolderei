@@ -7,13 +7,20 @@
     }
 }
 
+html {
+    overflow-y: scroll;
+}
+
 body {
     color: $text;
     font-family: 'Lato', sans-serif;
 }
 
 body::before {
-    background-image: url("/images/background_1.webp");
+    // background-image: url("/images/background_1.webp");
+    // background-position: bottom right;
+    // background-repeat: no-repeat;
+    background-image: url("/images/bg.png");
     background-size: cover;
     content: "";
     display: block;
@@ -24,9 +31,21 @@ body::before {
     height: 100%;
     z-index: -2;
     opacity: 0.20;
-    filter: blur(15px);
+    filter: blur(10px);
+}
+
+main {
+    background: $main-bg;
 }
 
 a {
     color: $links;
+}
+
+address {
+    font-style: inherit;
+}
+
+hr {
+    border-color: $light
 }

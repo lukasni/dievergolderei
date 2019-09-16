@@ -17,6 +17,10 @@ defmodule DievergoldereiWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/kontakt", PageController, :contact
+    get "/impressionen", PageController, :gallery
+    get "/geschichte", PageController, :history
+    get "/blog", PageController, :blog
   end
 
   # Other scopes may use custom stacks.

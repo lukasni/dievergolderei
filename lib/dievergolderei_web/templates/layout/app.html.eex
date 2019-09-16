@@ -11,11 +11,11 @@
     <header class="container">
       <section class="main-nav">
         <nav role="navigation" class="row">
-            <div class="column"><a href="#">Start</a></div>
-            <div class="column"><a href="#">Kontakt</a></div>
-            <div class="column"><a href="#">Impressionen</a></div>
-            <div class="column"><a href="#">Geschichte</a></div>
-            <div class="column"><a href="#">Blog</a></div>
+            <div class="column"><a href="<%= Routes.page_path(@conn, :index) %>">Start</a></div>
+            <div class="column"><a href="<%= Routes.page_path(@conn, :contact) %>">Kontakt</a></div>
+            <div class="column"><a href="<%= Routes.page_path(@conn, :gallery) %>">Impressionen</a></div>
+            <div class="column"><a href="<%= Routes.page_path(@conn, :history) %>">Geschichte</a></div>
+            <div class="column"><a href="<%= Routes.page_path(@conn, :blog) %>">Blog</a></div>
         </nav>
       </section>
       <img src="<%= Routes.static_path(@conn, "/images/header.svg") %>" alt="Logo Die Vergolderei">
