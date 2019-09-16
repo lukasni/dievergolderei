@@ -1,4 +1,4 @@
-defmodule Dievergolderei.Blog.Util do
+defmodule Dievergolderei.Util do
   @months %{
     1 => "Januar",
     2 => "Februar",
@@ -13,11 +13,13 @@ defmodule Dievergolderei.Blog.Util do
     11 => "November",
     12 => "Dezember"
   }
-  def date_to_month_year_string(%Date{month: month, year: year}) do
-    "#{@months[month]} #{year}"
+
+  def month_name(month) when month in 1..12 do
+    @months[month]
   end
 
-  def month_links(%Date{month: month, year: year} = date) do
-    {date_to_month_year_string(date), "#{year}-#{month}"}
+  def first_day_of_month(%Date{year: year, month: month}) do
+    {:ok, date} = Date.new(year, month, 1)
+    date
   end
 end

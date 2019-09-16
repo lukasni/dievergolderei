@@ -9,9 +9,10 @@
     </section>
     <nav role="navigation" class="column responsive">
         <h4>Archiv</h4>
-        <ul>
-        <%= for {text, link} <- @months do %>
-          <li><%= link text, to: Routes.post_path(@conn, :list, link) %></li>
+        <ul style="">
+        <li><%= link "Neueste", to: Routes.post_path(@conn, :blog) %></li>
+        <%= for month <- @months do %>
+          <li><%= month_link(@conn, month) %></li>
         <% end %>
         </ul>
     </nav>

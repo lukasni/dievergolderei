@@ -7,7 +7,8 @@ defmodule Dievergolderei.Blog do
   require Date
   alias Dievergolderei.Repo
 
-  alias Dievergolderei.Blog.{Post, Util}
+  alias Dievergolderei.Util
+  alias Dievergolderei.Blog.Post
 
   @doc """
   Returns the list of posts.
@@ -69,22 +70,22 @@ defmodule Dievergolderei.Blog do
   end
 
   @doc """
-  Returns all months that have a blog post as a tuple of {"Month YYYY", "MM-YYYY"}
+  Returns first day of month as a %Date{} for all months that have posts
 
   ## Examples
 
       iex> list_months()
-      [{String.t(), String.t()}, ...]
+      [%Date{}, ...]
   """
-  def list_months() do
+  def months_with_posts() do
     Post
     |> filter_publish_on_in_past()
     |> select([p], p.publish_on)
     |> Repo.all()
-    |> Enum.map(&Util.month_links/1)
+    |> Enum.map(&Util.first_day_of_month/1)
     |> MapSet.new()
     |> MapSet.to_list()
-    |> Enum.sort(fn {_, t1}, {_, t2} -> t1 > t2 end)
+    |> Enum.sort(fn a, b -> Date.compare(a, b) == :gt end)
   end
 
   @doc """

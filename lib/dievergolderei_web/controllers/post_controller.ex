@@ -11,7 +11,7 @@ defmodule DievergoldereiWeb.PostController do
 
   def blog(conn, _params) do
     posts = Dievergolderei.Blog.list_most_recent_published_posts(5)
-    months = Dievergolderei.Blog.list_months()
+    months = Dievergolderei.Blog.months_with_posts()
     render(conn, "blog.html", title: "Blog — ", posts: posts, months: months)
   end
 
@@ -21,7 +21,7 @@ defmodule DievergoldereiWeb.PostController do
     year = String.to_integer(y)
 
     posts = Dievergolderei.Blog.list_posts_published_in_month(month, year)
-    months = Dievergolderei.Blog.list_months()
+    months = Dievergolderei.Blog.months_with_posts()
     render(conn, "blog.html", title: "Blog — ", posts: posts, months: months)
   end
 
