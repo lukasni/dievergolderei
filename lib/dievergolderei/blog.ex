@@ -32,11 +32,59 @@ defmodule Dievergolderei.Blog do
   """
   def list_most_recent_published_posts(count \\ 3) do
     Post
-    |> where([p], p.publish_on <= ^Date.utc_today())
-    |> order_by(desc: :publish_on)
-    |> order_by(desc: :inserted_at)
+    |> filter_publish_on_in_past()
+    |> order_by_published()
     |> limit(^count)
     |> Repo.all()
+  end
+
+  @doc """
+  List blog posts published in a given month, sorted by publish date in descending order
+
+  ## Examples
+
+      iex> list_posts_published_in_month("01-2019")
+      [%Post{}, ...]
+  """
+  def list_posts_published_in_month(month, year) do
+    {:ok, start_date} = Date.new(year, month, 1)
+    {:ok, end_date} = Date.new(year, month + 1, 1)
+
+    Post
+    |> where([p], p.publish_on >= ^start_date)
+    |> where([p], p.publish_on < ^end_date)
+    |> order_by_published()
+    |> Repo.all()
+  end
+
+  defp order_by_published(post) do
+    post
+    |> order_by(desc: :publish_on)
+    |> order_by(desc: :inserted_at)
+  end
+
+  defp filter_publish_on_in_past(post) do
+    post
+    |> where([p], p.publish_on <= ^Date.utc_today())
+  end
+
+  @doc """
+  Returns all months that have a blog post as a tuple of {"Month YYYY", "MM-YYYY"}
+
+  ## Examples
+
+      iex> list_months()
+      [{String.t(), String.t()}, ...]
+  """
+  def list_months() do
+    Post
+    |> filter_publish_on_in_past()
+    |> select([p], p.publish_on)
+    |> Repo.all()
+    |> Enum.map(&Util.month_links/1)
+    |> MapSet.new()
+    |> MapSet.to_list()
+    |> Enum.sort(fn {_, t1}, {_, t2} -> t1 > t2 end)
   end
 
   @doc """

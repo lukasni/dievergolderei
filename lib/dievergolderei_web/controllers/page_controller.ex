@@ -18,9 +18,4 @@ defmodule DievergoldereiWeb.PageController do
   def history(conn, _params) do
     render(conn, "history.html", title: "Geschichte — ")
   end
-
-  def blog(conn, _params) do
-    posts = Dievergolderei.Blog.list_most_recent_published_posts(5)
-    render(conn, "blog.html", title: "Blog — ", posts: posts)
-  end
 end

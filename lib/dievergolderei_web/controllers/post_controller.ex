@@ -9,6 +9,22 @@ defmodule DievergoldereiWeb.PostController do
     render(conn, "index.html", posts: posts)
   end
 
+  def blog(conn, _params) do
+    posts = Dievergolderei.Blog.list_most_recent_published_posts(5)
+    months = Dievergolderei.Blog.list_months()
+    render(conn, "blog.html", title: "Blog — ", posts: posts, months: months)
+  end
+
+  def list(conn, %{"month" => month}) do
+    [y , m] = String.split(month, "-")
+    month = String.to_integer(m)
+    year = String.to_integer(y)
+
+    posts = Dievergolderei.Blog.list_posts_published_in_month(month, year)
+    months = Dievergolderei.Blog.list_months()
+    render(conn, "blog.html", title: "Blog — ", posts: posts, months: months)
+  end
+
   def new(conn, _params) do
     changeset = Blog.change_post(%Post{publish_on: Date.utc_today()})
     render(conn, "new.html", changeset: changeset)

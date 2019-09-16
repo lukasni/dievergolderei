@@ -15,7 +15,7 @@
             <div class="column"><a href="<%= Routes.page_path(@conn, :contact) %>">Kontakt</a></div>
             <div class="column"><a href="<%= Routes.page_path(@conn, :gallery) %>">Impressionen</a></div>
             <div class="column"><a href="<%= Routes.page_path(@conn, :history) %>">Geschichte</a></div>
-            <div class="column"><a href="<%= Routes.page_path(@conn, :blog) %>">Blog</a></div>
+            <div class="column"><a href="<%= Routes.post_path(@conn, :blog) %>">Blog</a></div>
         </nav>
       </section>
       <img src="<%= Routes.static_path(@conn, "/images/header.svg") %>" alt="Logo Die Vergolderei">

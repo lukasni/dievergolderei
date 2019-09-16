@@ -1,18 +1,18 @@
 <div class="row blog" role="blog">
     <section class="column responsive column-75">
         <%= for post <- @posts do %>
-        <article class="blogpost">
+          <article class="blogpost">
               <h3><%= post.title %></h3>
               <div class="post-content"><%= raw Earmark.as_html!(post.content) %></div>
-        </article>
+          </article>
         <% end %>
     </section>
     <nav role="navigation" class="column responsive">
         <h4>Archiv</h4>
         <ul>
-            <li><a href="#">September 2019</a></li>
-            <li><a href="#">August 2019</a></li>
-            <li><a href="#">Juli 2019</a></li>
+        <%= for {text, link} <- @months do %>
+          <li><%= link text, to: Routes.post_path(@conn, :list, link) %></li>
+        <% end %>
         </ul>
     </nav>
 </div>
