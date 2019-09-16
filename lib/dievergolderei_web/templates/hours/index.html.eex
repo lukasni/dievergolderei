@@ -1,0 +1,27 @@
+<h1>Öffnungszeiten</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tag</th>
+      <th>Zeit</th>
+      <th>Aktiv</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for hours <- @hours do %>
+    <tr>
+      <td><%= hours.label %></td>
+      <td style="white-space: pre-line"><%= hours.times %></td>
+      <td><%= checkbox :active, :active, value: hours.active, disabled: true %></td>
+      <td>
+        <span><%= link "Bearbeiten", to: Routes.hours_path(@conn, :edit, hours), class: "button button-outline mb-0" %></span>
+        <span><%= link "Löschen", to: Routes.hours_path(@conn, :delete, hours), method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-outline mb-0" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "Neuer Eintrag", to: Routes.hours_path(@conn, :new), class: "button" %></span>

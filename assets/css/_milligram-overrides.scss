@@ -1,0 +1,16 @@
+
+
+.button {
+    background-color: $dv-blue;
+    border-color: $dv-blue;
+}
+
+.button.button-clear,
+.button.button-outline {
+    background-color: transparent;
+    color: $dv-blue;
+}
+
+.button.button-clear {
+    border-color: transparent;
+}

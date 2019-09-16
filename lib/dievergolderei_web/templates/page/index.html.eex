@@ -29,23 +29,12 @@
     <aside class="column responsive column-33">
     <h2>Öffnungszeiten</h2>
     <dl class="hours">
+    <%= for hour <- @hours do %>
     <div class="row">
-        <dt class="column">Montag</dt>
-        <dd class="column">geschlossen</dd>
+        <dt class="column"><%= hour.label %></dt>
+        <dd class="column"><%= hour.times %></dd>
     </div>
-    <div class="row">
-        <dt class="column">Dienstag - Freitag</dt>
-        <dd class="column">09:00 - 12:30<br>
-        14:00 - 18:00</dd>
-    </div>
-    <div class="row">
-        <dt class="column">Samstag</dt>
-        <dd class="column">09:00 - 12:30</dd>
-    </div>
-    <div class="row">
-        <dt class="column">Sonntag</dt>
-        <dd class="column">geschlossen</dd>
-    </div>
+    <% end %>
     </dl>
     </aside>
 </div>

@@ -6,6 +6,10 @@
     font-weight: 400;
 }
 
+.hours dd {
+    white-space: pre-line;
+}
+
 .map {
     width: 100%;
     height: 50vh;
@@ -24,4 +28,46 @@
 
 .blog nav li {
     margin-bottom: 0;
+}
+
+.button-small {
+    font-size: .8rem;
+    height: 2.8rem;
+    line-height: 2.8rem;
+    padding: 0 1.5rem;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.alert {
+    font-weight: 400;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+}
+
+.alert.alert-info {
+    color: $alert-text;
+    background-color: $info;
+}
+
+.alert.alert-success {
+    color: $alert-text;
+    background-color: $success;
+}
+
+.alert.alert-warning {
+    color: $alert-text;
+    background-color: $warning;
+}
+
+.alert.alert-danger {
+    color: $alert-text;
+    background-color: $danger;
+}
+
+.help-block {
+    margin-top: -1.5rem;
+    margin-bottom: 1.5rem;
 }

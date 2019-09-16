@@ -23,6 +23,12 @@ defmodule DievergoldereiWeb.Router do
     get "/blog", PageController, :blog
   end
 
+  scope "/admin", DievergoldereiWeb do
+    pipe_through :browser
+
+    resources "/hours", HoursController, only: [:index, :new, :create, :edit, :update, :delete]
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", DievergoldereiWeb do
   #   pipe_through :api

@@ -31,12 +31,12 @@ body::before {
     height: 100%;
     z-index: -2;
     opacity: 0.20;
-    filter: blur(10px);
+    filter: blur(5px);
 }
 
-main {
-    background: $main-bg;
-}
+// main {
+//     background: $main-bg;
+// }
 
 a {
     color: $links;
