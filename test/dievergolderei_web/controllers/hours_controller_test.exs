@@ -15,14 +15,14 @@ defmodule DievergoldereiWeb.HoursControllerTest do
   describe "index" do
     test "lists all hours", %{conn: conn} do
       conn = get(conn, Routes.hours_path(conn, :index))
-      assert html_response(conn, 200) =~ "Listing Hours"
+      assert html_response(conn, 200) =~ "Öffnungszeiten"
     end
   end
 
   describe "new hours" do
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.hours_path(conn, :new))
-      assert html_response(conn, 200) =~ "New Hours"
+      assert html_response(conn, 200) =~ "Neue Öffnungszeiten"
     end
   end
 
@@ -38,7 +38,7 @@ defmodule DievergoldereiWeb.HoursControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.hours_path(conn, :create), hours: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New Hours"
+      assert html_response(conn, 200) =~ "Neue Öffnungszeiten"
     end
   end
 
@@ -47,7 +47,7 @@ defmodule DievergoldereiWeb.HoursControllerTest do
 
     test "renders form for editing chosen hours", %{conn: conn, hours: hours} do
       conn = get(conn, Routes.hours_path(conn, :edit, hours))
-      assert html_response(conn, 200) =~ "Edit Hours"
+      assert html_response(conn, 200) =~ "Öffnungszeiten Bearbeiten"
     end
   end
 
@@ -64,7 +64,7 @@ defmodule DievergoldereiWeb.HoursControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, hours: hours} do
       conn = put(conn, Routes.hours_path(conn, :update, hours), hours: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Edit Hours"
+      assert html_response(conn, 200) =~ "Öffnungszeiten Bearbeiten"
     end
   end
 
