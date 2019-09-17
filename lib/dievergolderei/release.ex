@@ -4,9 +4,11 @@ defmodule Dievergolderei.Release do
   def migrate do
     for repo <- repos() do
       {:ok, _, _} = Ecto.Migrator.with_repo(repo, &Ecto.Migrator.run(&1, :up, all: true))
-      # Code.require_file("priv/repo/seeds.exs")
-      # TODO: figure out how to exclude Faker stuff from prod
     end
+  end
+
+  def seed do
+    Code.require_file("priv/repo/seeds.exs")
   end
 
   def rollback(repo, version) do
