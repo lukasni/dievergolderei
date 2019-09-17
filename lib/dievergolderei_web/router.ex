@@ -27,6 +27,7 @@ defmodule DievergoldereiWeb.Router do
   scope "/admin", DievergoldereiWeb do
     pipe_through :browser
 
+    get "/", PageController, :admin
     resources "/hours", HoursController, only: [:index, :new, :create, :edit, :update, :delete]
     resources "/posts", PostController
     resources "/pages", StaticPageController, only: [:index, :create, :edit, :update, :show]

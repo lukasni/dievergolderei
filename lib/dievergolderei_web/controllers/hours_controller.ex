@@ -6,12 +6,12 @@ defmodule DievergoldereiWeb.HoursController do
 
   def index(conn, _params) do
     hours = OpeningHours.list_hours()
-    render(conn, "index.html", hours: hours)
+    render(conn, "index.html", hours: hours, title: "Übersicht Öffnungszeiten — Admin — ")
   end
 
   def new(conn, _params) do
     changeset = OpeningHours.change_hours(%Hours{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, title: "Neue Öffnungszeiten — Admin — ")
   end
 
   def create(conn, %{"hours" => hours_params}) do
@@ -22,14 +22,14 @@ defmodule DievergoldereiWeb.HoursController do
         |> redirect(to: Routes.hours_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, title: "Neue Öffnungszeiten — Admin — ")
     end
   end
 
   def edit(conn, %{"id" => id}) do
     hours = OpeningHours.get_hours!(id)
     changeset = OpeningHours.change_hours(hours)
-    render(conn, "edit.html", hours: hours, changeset: changeset)
+    render(conn, "edit.html", hours: hours, changeset: changeset, title: "Öffnungszeiten Bearbeiten — Admin — ")
   end
 
   def update(conn, %{"id" => id, "hours" => hours_params}) do
@@ -42,7 +42,7 @@ defmodule DievergoldereiWeb.HoursController do
         |> redirect(to: Routes.hours_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", hours: hours, changeset: changeset)
+        render(conn, "edit.html", hours: hours, changeset: changeset, title: "Öffnungszeiten Bearbeiten — Admin — ")
     end
   end
 
