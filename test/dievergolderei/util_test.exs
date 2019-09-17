@@ -4,7 +4,6 @@ defmodule Dievergolderei.UtilTest do
   alias Dievergolderei.Util
 
   describe "date" do
-
     test "first day of month is found" do
       dates = [~D[2019-01-01], ~D[2019-01-13], ~D[2019-01-31]]
 

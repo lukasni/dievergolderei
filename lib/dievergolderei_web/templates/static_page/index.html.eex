@@ -1,0 +1,25 @@
+<h1>Statische Seiteninhalte</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Inhaltsvorschau</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for static_page <- @static_pages do %>
+    <tr>
+      <td><%= static_page.name %></td>
+      <td><%= (String.slice(static_page.content, 0..120) <> "...") |> markdown %></td>
+
+      <td>
+        <span><%= link "Vorschau", to: Routes.static_page_path(@conn, :show, static_page), class: "button button-outline button-small mb-0" %></span>
+        <span><%= link "Bearbeiten", to: Routes.static_page_path(@conn, :edit, static_page), class: "button button-outline button-small mb-0" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

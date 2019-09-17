@@ -41,6 +41,7 @@ defmodule DievergoldereiWeb do
 
       import DievergoldereiWeb.ErrorHelpers
       import DievergoldereiWeb.Gettext
+      import DievergoldereiWeb.Markdown
       alias DievergoldereiWeb.Router.Helpers, as: Routes
     end
   end
