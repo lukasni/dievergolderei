@@ -32,7 +32,7 @@ config :dievergolderei, DievergoldereiWeb.Endpoint,
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start each relevant endpoint:
 #
-#     config :dievergolderei, DievergoldereiWeb.Endpoint, server: true
+config :dievergolderei, DievergoldereiWeb.Endpoint, server: true
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
