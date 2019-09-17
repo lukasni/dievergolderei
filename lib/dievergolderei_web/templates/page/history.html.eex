@@ -1,7 +1,7 @@
 <div class="row">
     <section class="column">
         <article>
-            <%= raw Earmark.as_html!(@static_content) %>
+            <%= markdown @static_content %>
         </article>
     </section>
 </div>

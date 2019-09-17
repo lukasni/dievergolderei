@@ -1,7 +1,7 @@
 <div class="row">
     <section class="column responsive column-67">
         <article>
-            <%= raw Earmark.as_html!(@static_content) %>
+            <%= markdown @static_content %>
         </article>
         <%= if length(@posts) > 0 do %>
         <h2>Aktuell</h2>

@@ -45,6 +45,7 @@ defmodule Dievergolderei.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:earmark, "~> 1.4.0"},
       {:slugger, ">= 0.3.0"},
+      {:html_sanitize_ex, "~> 1.3.0"},
       {:faker, "~> 0.12.0", only: [:dev, :test]}
     ]
   end

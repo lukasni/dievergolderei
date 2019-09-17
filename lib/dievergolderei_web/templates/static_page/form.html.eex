@@ -9,8 +9,8 @@
   <%= text_input f, :name, disabled: true %>
   <%= error_tag f, :name %>
 
-  <%= label f, :content %>
-  <%= textarea f, :content %>
+  <%= label f, :content, for: "content_textarea" %>
+  <%= textarea f, :content, id: "content_textarea" %>
   <%= error_tag f, :content %>
 
   <div>
@@ -18,6 +18,4 @@
   </div>
 <% end %>
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-<script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-<script>var simplemde = new SimpleMDE();</script>
+<%= markdown_editor("content_textarea") %>
