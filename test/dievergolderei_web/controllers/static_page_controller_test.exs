@@ -15,31 +15,7 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
   describe "index" do
     test "lists all static_pages", %{conn: conn} do
       conn = get(conn, Routes.static_page_path(conn, :index))
-      assert html_response(conn, 200) =~ "Listing Static pages"
-    end
-  end
-
-  describe "new static_page" do
-    test "renders form", %{conn: conn} do
-      conn = get(conn, Routes.static_page_path(conn, :new))
-      assert html_response(conn, 200) =~ "New Static page"
-    end
-  end
-
-  describe "create static_page" do
-    test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.static_page_path(conn, :create), static_page: @create_attrs)
-
-      assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == Routes.static_page_path(conn, :show, id)
-
-      conn = get(conn, Routes.static_page_path(conn, :show, id))
-      assert html_response(conn, 200) =~ "Show Static page"
-    end
-
-    test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.static_page_path(conn, :create), static_page: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New Static page"
+      assert html_response(conn, 200) =~ "Statische Seiteninhalte"
     end
   end
 
@@ -48,7 +24,7 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
 
     test "renders form for editing chosen static_page", %{conn: conn, static_page: static_page} do
       conn = get(conn, Routes.static_page_path(conn, :edit, static_page))
-      assert html_response(conn, 200) =~ "Edit Static page"
+      assert html_response(conn, 200) =~ "Seite bearbeiten"
     end
   end
 
@@ -65,19 +41,7 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, static_page: static_page} do
       conn = put(conn, Routes.static_page_path(conn, :update, static_page), static_page: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Edit Static page"
-    end
-  end
-
-  describe "delete static_page" do
-    setup [:create_static_page]
-
-    test "deletes chosen static_page", %{conn: conn, static_page: static_page} do
-      conn = delete(conn, Routes.static_page_path(conn, :delete, static_page))
-      assert redirected_to(conn) == Routes.static_page_path(conn, :index)
-      assert_error_sent 404, fn ->
-        get(conn, Routes.static_page_path(conn, :show, static_page))
-      end
+      assert html_response(conn, 200) =~ "Seite bearbeiten"
     end
   end
 

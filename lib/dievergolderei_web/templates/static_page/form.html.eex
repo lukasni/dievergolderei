@@ -1,12 +1,12 @@
 <%= form_for @changeset, @action, fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      <p>Formular enthält Fehler und konnte nicht gespeichert werden.</p>
     </div>
   <% end %>
 
   <%= label f, :name %>
-  <%= text_input f, :name %>
+  <%= text_input f, :name, disabled: true %>
   <%= error_tag f, :name %>
 
   <%= label f, :content %>
@@ -14,7 +14,7 @@
   <%= error_tag f, :content %>
 
   <div>
-    <%= submit "Save" %>
+    <%= submit "Speichern" %>
   </div>
 <% end %>
 

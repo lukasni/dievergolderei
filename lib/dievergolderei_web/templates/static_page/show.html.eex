@@ -1,18 +1,12 @@
-<h1>Show Static page</h1>
+<h1>Seitenvorschau</h1>
 
-<ul>
+<p>
+<strong>Name:</strong>
+<%= @static_page.name %>
+</p>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @static_page.name %>
-  </li>
+<span><%= link "Bearbeiten", to: Routes.static_page_path(@conn, :edit, @static_page), class: "button button-outline button-small" %></span>
+<span><%= link "Zurück", to: Routes.static_page_path(@conn, :index), class: "button button-outline button-small" %></span>
 
-  <li>
-    <strong>Content:</strong>
-    <%= @static_page.content %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.static_page_path(@conn, :edit, @static_page) %></span>
-<span><%= link "Back", to: Routes.static_page_path(@conn, :index) %></span>
+<hr>
+<%= raw Earmark.as_html!(@static_page.content) %>

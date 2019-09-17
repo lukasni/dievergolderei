@@ -1,10 +1,10 @@
-<h1>Listing Static pages</h1>
+<h1>Statische Seiteninhalte</h1>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th>Content</th>
+      <th>Inhaltsvorschau</th>
 
       <th></th>
     </tr>
@@ -13,16 +13,13 @@
 <%= for static_page <- @static_pages do %>
     <tr>
       <td><%= static_page.name %></td>
-      <td><%= static_page.content %></td>
+      <td><%= String.slice(static_page.content, 0..120) <> "..." %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.static_page_path(@conn, :show, static_page) %></span>
-        <span><%= link "Edit", to: Routes.static_page_path(@conn, :edit, static_page) %></span>
-        <span><%= link "Delete", to: Routes.static_page_path(@conn, :delete, static_page), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Vorschau", to: Routes.static_page_path(@conn, :show, static_page), class: "button button-outline button-small mb-0" %></span>
+        <span><%= link "Bearbeiten", to: Routes.static_page_path(@conn, :edit, static_page), class: "button button-outline button-small mb-0" %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Static page", to: Routes.static_page_path(@conn, :new) %></span>

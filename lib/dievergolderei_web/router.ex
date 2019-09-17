@@ -29,7 +29,7 @@ defmodule DievergoldereiWeb.Router do
 
     resources "/hours", HoursController, only: [:index, :new, :create, :edit, :update, :delete]
     resources "/posts", PostController
-    resources "/pages", StaticPageController
+    resources "/pages", StaticPageController, only: [:index, :create, :edit, :update, :show]
   end
 
   # Other scopes may use custom stacks.
