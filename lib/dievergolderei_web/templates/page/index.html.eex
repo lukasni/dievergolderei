@@ -1,9 +1,7 @@
 <div class="row">
     <section class="column responsive column-67">
         <article>
-            <h2>Herzlich Willkommen</h2>
-            <p>Das Rahmenatelier „Die Vergolderei“ ist ihr Werkstattladen für individuelle Bilderrahmen, Einrahmungen und Spiegel in Rheinfelden.</p>
-            <p>Dazu führe ich eine kleine, feine Auswahl an Künstlerbedarf.</p>
+            <%= raw Earmark.as_html!(@static_content) %>
         </article>
         <%= if length(@posts) > 0 do %>
         <h2>Aktuell</h2>

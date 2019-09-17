@@ -12,6 +12,7 @@
 alias Dievergolderei.Repo
 alias Dievergolderei.Blog.Post
 alias Dievergolderei.OpeningHours.Hours
+alias Dievergolderei.Pages.StaticPage
 
 Repo.insert!(%Hours{label: "Montag", times: "geschlossen", active: true, list_position: 0})
 
@@ -44,3 +45,64 @@ for _ <- 1..10 do
     slug: Slugger.slugify_downcase(title) |> Slugger.truncate_slug(16)
   })
 end
+
+index_page = """
+## Herzlich Willkommen
+
+Das Rahmenatelier „Die Vergolderei“ ist ihr Werkstattladen für individuelle Bilderrahmen, Einrahmungen und Spiegel in Rheinfelden.
+
+Dazu führe ich eine kleine, feine Auswahl an Künstlerbedarf.
+"""
+
+Repo.insert!(%StaticPage{
+  name: "index",
+  content: index_page
+})
+
+contact_page = """
+## Kontakt
+<address>Die Vergolderei
+Brodlaube 9
+CH-4310 Rheinfelden
+Schweiz</address>
+
+[061 831 14 84](https://dievergolderei.ch/)
+
+[regula.stindt@dievergolderei.ch](/test/)
+
+"""
+
+Repo.insert!(%StaticPage{
+  name: "contact",
+  content: contact_page
+})
+
+history_page = """
+## Geschichte
+
+Im Dezember 1986 übernahm ich die Vergolderei an der Brodlaube 29.
+
+Gestartet habe ich mit klassischer Rahmenvergolderei, Einrahmungen und Restaurationen.
+
+------
+
+Vor 1990 grosser Umzug an den Obertorplatz 9. Hier baue ich als zweites Standbein den Künstlerbedarf auf.
+Da arbeite ich mit den Firmen Talens und Lascaux zusammen.
+
+------
+
+Seit Sommer 2001 bin ich an der Brodlaube 9 im schönen Lokal im Haus der Familie Thurnheer.
+
+Neu dazu führe ich ein kleine Auswahl von Kunst, Acrylbilder und Kunstdrucke nach Wahl auf Bestellung.
+
+------
+
+Am 2. September 2016 durfte ich zusammen mit meiner Kundschaft, Freunden und Familie im Rahmen der Usestuhlete meinen 30. Geschäftsgeburtstag feiern.
+
+*VIELEN DANK*
+"""
+
+Repo.insert!(%StaticPage{
+  name: "history",
+  content: history_page
+})
