@@ -1,4 +1,8 @@
-# Dievergolderei
+# Die Vergolderei
+
+Beta release v0.1.0, editing hours and creating basic Blogs supported. No support yet for adding images.
+
+## Phoenix
 
 To start your Phoenix server:
 

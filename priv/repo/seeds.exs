@@ -32,15 +32,17 @@ Repo.insert!(%Hours{
   list_position: 4
 })
 
-for _ <- 1..10 do
-  title = Faker.Lorem.words(2..5) |> Enum.join(" ") |> String.capitalize()
-  publish_on = Faker.Date.backward(365 * 3)
-  content = Faker.Lorem.paragraphs() |> Enum.join("\n\n")
+if Code.ensure_compiled?(Faker) do
+  for _ <- 1..10 do
+    title = Faker.Lorem.words(2..5) |> Enum.join(" ") |> String.capitalize()
+    publish_on = Faker.Date.backward(365 * 3)
+    content = Faker.Lorem.paragraphs() |> Enum.join("\n\n")
 
-  Repo.insert!(%Post{
-    title: title,
-    publish_on: publish_on,
-    content: content,
-    slug: Slugger.slugify_downcase(title) |> Slugger.truncate_slug(16)
-  })
+    Repo.insert!(%Post{
+      title: title,
+      publish_on: publish_on,
+      content: content,
+      slug: Slugger.slugify_downcase(title) |> Slugger.truncate_slug(16)
+    })
+  end
 end
