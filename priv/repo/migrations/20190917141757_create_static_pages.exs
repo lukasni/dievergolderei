@@ -8,6 +8,5 @@ defmodule Dievergolderei.Repo.Migrations.CreateStaticPages do
 
       timestamps()
     end
-
   end
 end

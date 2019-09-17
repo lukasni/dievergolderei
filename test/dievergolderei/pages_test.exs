@@ -41,7 +41,10 @@ defmodule Dievergolderei.PagesTest do
 
     test "update_static_page/2 with valid data updates the static_page" do
       static_page = static_page_fixture()
-      assert {:ok, %StaticPage{} = static_page} = Pages.update_static_page(static_page, @update_attrs)
+
+      assert {:ok, %StaticPage{} = static_page} =
+               Pages.update_static_page(static_page, @update_attrs)
+
       assert static_page.content == "some updated content"
       assert static_page.name == "some updated name"
     end

@@ -49,7 +49,7 @@ defmodule Dievergolderei.Pages do
     StaticPage
     |> where([q], q.name == ^name)
     |> select([q], q.content)
-    |> Repo.one!
+    |> Repo.one!()
   end
 
   @doc """

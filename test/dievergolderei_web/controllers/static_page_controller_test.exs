@@ -32,7 +32,9 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
     setup [:create_static_page]
 
     test "redirects when data is valid", %{conn: conn, static_page: static_page} do
-      conn = put(conn, Routes.static_page_path(conn, :update, static_page), static_page: @update_attrs)
+      conn =
+        put(conn, Routes.static_page_path(conn, :update, static_page), static_page: @update_attrs)
+
       assert redirected_to(conn) == Routes.static_page_path(conn, :show, static_page)
 
       conn = get(conn, Routes.static_page_path(conn, :show, static_page))
@@ -40,7 +42,9 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, static_page: static_page} do
-      conn = put(conn, Routes.static_page_path(conn, :update, static_page), static_page: @invalid_attrs)
+      conn =
+        put(conn, Routes.static_page_path(conn, :update, static_page), static_page: @invalid_attrs)
+
       assert html_response(conn, 200) =~ "Seite bearbeiten"
     end
   end
