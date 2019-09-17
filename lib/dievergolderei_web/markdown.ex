@@ -1,6 +1,7 @@
 defmodule DievergoldereiWeb.Markdown do
   @options %Earmark.Options{
     breaks: true,
+    gfm: true,
     smartypants: true
   }
 
