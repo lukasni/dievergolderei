@@ -1,0 +1,26 @@
+<div class="row">
+    <section class="column responsive column-67">
+        <article>
+            <h2>Herzlich Willkommen</h2>
+            <p>Das Rahmenatelier „Die Vergolderei“ ist ihr Werkstattladen für individuelle Bilderrahmen, Einrahmungen und Spiegel in Rheinfelden.</p>
+            <p>Dazu führe ich eine kleine, feine Auswahl an Künstlerbedarf.</p>
+        </article>
+        <%= if length(@posts) > 0 do %>
+        <h2>Aktuell</h2>
+        <% end %>
+        <%= for post <- @posts do %>
+          <%= render DievergoldereiWeb.PostView, "post.html", post: post %>
+        <% end %>
+    </section>
+    <aside class="column responsive column-33">
+    <h2>Öffnungszeiten</h2>
+    <dl class="hours">
+    <%= for hour <- @hours do %>
+    <div class="row">
+        <dt class="column"><%= hour.label %></dt>
+        <dd class="column"><%= hour.times %></dd>
+    </div>
+    <% end %>
+    </dl>
+    </aside>
+</div>

@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap');
+
+@media (max-width: 40rem) {
+    .row .column.responsive[class*=" column-"] {
+        margin-left: 0;
+        max-width: 100%;
+    }
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    color: $text;
+    font-family: 'Lato', sans-serif;
+}
+
+body::before {
+    // background-image: url("/images/background_1.webp");
+    // background-position: bottom right;
+    // background-repeat: no-repeat;
+    background-image: url("/images/bg.png");
+    background-size: cover;
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 0.20;
+    filter: blur(5px);
+}
+
+// main {
+//     background: $main-bg;
+// }
+
+a {
+    color: $links;
+}
+
+address {
+    font-style: inherit;
+}
+
+hr {
+    border-color: $light
+}
