@@ -1,0 +1,28 @@
+<h1>Listing Static pages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Content</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for static_page <- @static_pages do %>
+    <tr>
+      <td><%= static_page.name %></td>
+      <td><%= static_page.content %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.static_page_path(@conn, :show, static_page) %></span>
+        <span><%= link "Edit", to: Routes.static_page_path(@conn, :edit, static_page) %></span>
+        <span><%= link "Delete", to: Routes.static_page_path(@conn, :delete, static_page), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Static page", to: Routes.static_page_path(@conn, :new) %></span>
