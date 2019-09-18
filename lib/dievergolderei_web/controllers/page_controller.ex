@@ -25,6 +25,8 @@ defmodule DievergoldereiWeb.PageController do
   end
 
   def admin(conn, _params) do
-    render(conn, "admin.html", title: "Admin — ")
+    post_statistics = Dievergolderei.Blog.statistics()
+
+    render(conn, "admin.html", blog_statistics: post_statistics, title: "Admin — ")
   end
 end

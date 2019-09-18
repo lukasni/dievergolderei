@@ -5,6 +5,17 @@
         <li><%= link "Neu", to: Routes.post_path(@conn, :new), class: "button w-75" %></li>
         <li><%= link "Übersicht", to: Routes.post_path(@conn, :index), class: "button button-outline w-75" %></li>
     </ul>
+    <h3>Statistik</h3>
+    <table>
+        <tr>
+            <th>Neuster Beitrag:</th>
+            <td><%= @blog_statistics.latest %></td>
+        </tr>
+        <tr>
+            <th>Total Beitr&auml;ge</th>
+            <td><%= @blog_statistics.count %></td>
+        </tr>
+    </table>
     </section>
     <section class="column">
     <h2>Öffnungszeiten</h2>
