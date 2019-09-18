@@ -23,4 +23,10 @@ defmodule DievergoldereiWeb.PageController do
     content = Pages.get_content_by_name!("history")
     render(conn, "history.html", title: "Geschichte — ", static_content: content)
   end
+
+  def admin(conn, _params) do
+    post_statistics = Dievergolderei.Blog.statistics()
+
+    render(conn, "admin.html", blog_statistics: post_statistics, title: "Admin — ")
+  end
 end
