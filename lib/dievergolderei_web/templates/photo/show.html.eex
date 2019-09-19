@@ -1,0 +1,20 @@
+<h1>Show Photo</h1>
+
+<ul>
+
+  <li>
+    <strong>Uuid:</strong>
+    <%= @photo.uuid %>
+  </li>
+
+  <li>
+    <strong>In gallery:</strong>
+    <%= @photo.in_gallery %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.photo_path(@conn, :edit, @photo) %></span>
+<span><%= link "Back", to: Routes.photo_path(@conn, :index) %></span>
+
+<%= Dievergolderei.Photo.url({@photo.photo, @photo}) |> img_tag() %>

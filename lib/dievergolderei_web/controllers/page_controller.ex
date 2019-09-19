@@ -16,7 +16,8 @@ defmodule DievergoldereiWeb.PageController do
   end
 
   def gallery(conn, _params) do
-    render(conn, "gallery.html", title: "Impressionen — ")
+    photos = Dievergolderei.Gallery.list_gallery_photos()
+    render(conn, "gallery.html", photos: photos, title: "Impressionen — ")
   end
 
   def history(conn, _params) do

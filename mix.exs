@@ -46,6 +46,8 @@ defmodule Dievergolderei.MixProject do
       {:earmark, "~> 1.4.0"},
       {:slugger, ">= 0.3.0"},
       {:html_sanitize_ex, "~> 1.3.0"},
+      {:arc, "~> 0.11.0"},
+      {:arc_ecto, "~> 0.11.2"},
       {:faker, "~> 0.12.0", only: [:dev, :test]}
     ]
   end

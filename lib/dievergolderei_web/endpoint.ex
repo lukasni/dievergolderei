@@ -17,6 +17,11 @@ defmodule DievergoldereiWeb.Endpoint do
       ~w(css fonts images videos js favicon.ico robots.txt android-chrome-192x192.png android-chrome-512x512.png
       apple-touch-icon.png browserconfig.xml favicon-16x16.png favicon-32x32.ong mstile-150x150.png safari-pinned-tab.svg site.webmanifest)
 
+  plug Plug.Static,
+    at: "/uploads",
+    from: Path.expand("./uploads"),
+    gzip: false
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do

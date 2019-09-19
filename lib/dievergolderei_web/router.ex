@@ -22,6 +22,7 @@ defmodule DievergoldereiWeb.Router do
     get "/geschichte", PageController, :history
     get "/blog", PostController, :blog
     get "/blog/:month", PostController, :list
+    get "/photos/:id", PhotoController, :render
   end
 
   scope "/admin", DievergoldereiWeb do
@@ -31,6 +32,7 @@ defmodule DievergoldereiWeb.Router do
     resources "/hours", HoursController, only: [:index, :new, :create, :edit, :update, :delete]
     resources "/posts", PostController
     resources "/pages", StaticPageController, only: [:index, :create, :edit, :update, :show]
+    resources "/photos", PhotoController
   end
 
   # Other scopes may use custom stacks.

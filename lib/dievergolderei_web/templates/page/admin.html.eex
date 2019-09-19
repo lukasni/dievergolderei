@@ -24,6 +24,14 @@
     </ul>
     </section>
     <section class="column">
+    <h2>Gallerie</h2>
+    <ul style="list-style: none;">
+        <li><%= link "Übersicht", to: Routes.photo_path(@conn, :index), class: "button button-outline w-75" %></li>
+    </ul>
+    </section>
+</div>
+<div class="row">
+    <section class="column column-33">
     <h2>Statische Seiten</h2>
     <ul style="list-style: none;">
         <li><%= link "Übersicht", to: Routes.static_page_path(@conn, :index), class: "button button-outline w-75" %></li>
