@@ -1,8 +1,8 @@
 defmodule Dievergolderei.Photo do
-  use Arc.Definition
+  use Waffle.Definition
 
-  # Include ecto support (requires package arc_ecto installed):
-  use Arc.Ecto.Definition
+  # Include ecto support (requires package waffle_ecto installed):
+  use Waffle.Ecto.Definition
 
   @extension_whitelist ~w(.jpg .jpeg .gif .png)
   @thumbnail_size %{w: 150, h: 150}

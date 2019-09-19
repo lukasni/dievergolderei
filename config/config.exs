@@ -28,7 +28,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 # Arc uses local storage
-config :arc, storage: Arc.Storage.Local
+config :waffle, storage: Waffle.Storage.Local
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
