@@ -17,4 +17,4 @@
 <span><%= link "Edit", to: Routes.photo_path(@conn, :edit, @photo) %></span>
 <span><%= link "Back", to: Routes.photo_path(@conn, :index) %></span>
 
-<%= Dievergolderei.Photo.url({@photo.photo, @photo}) |> img_tag() %>
+<%= Dievergolderei.Photo.url({@photo.photo, @photo}, :big) |> img_tag() %>

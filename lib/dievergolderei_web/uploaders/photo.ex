@@ -6,8 +6,9 @@ defmodule Dievergolderei.Photo do
 
   @extension_whitelist ~w(.jpg .jpeg .gif .png)
   @thumbnail_size %{w: 150, h: 150}
+  @big_size %{w: 1080, h: 1080}
 
-  @versions [:original, :thumb]
+  @versions [:original, :thumb, :big]
 
   # Override the bucket on a per definition basis:
   # def bucket do
@@ -26,6 +27,11 @@ defmodule Dievergolderei.Photo do
      "-strip -thumbnail #{@thumbnail_size.w}x#{@thumbnail_size.h}^ -gravity center -extent #{
        @thumbnail_size.w
      }x#{@thumbnail_size.h} -format png", :png}
+  end
+
+  # Define a thumbnail transformation:
+  def transform(:big, _) do
+    {:convert, "-strip -resize #{@big_size.w}x#{@big_size.h}>"}
   end
 
   # Override the persisted filenames:

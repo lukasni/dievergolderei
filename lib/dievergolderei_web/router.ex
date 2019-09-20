@@ -19,7 +19,8 @@ defmodule DievergoldereiWeb.Router do
 
     get "/", PageController, :index
     get "/kontakt", PageController, :contact
-    get "/impressionen", PageController, :gallery
+    #get "/impressionen", PageController, :gallery
+    live "/impressionen", GalleryLive
     get "/geschichte", PageController, :history
     get "/blog", PostController, :blog
     get "/blog/:month", PostController, :list
