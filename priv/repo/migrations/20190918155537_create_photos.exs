@@ -5,6 +5,9 @@ defmodule Dievergolderei.Repo.Migrations.CreatePhotos do
     create table(:photos) do
       add :photo, :string
       add :uuid, :uuid
+      add :description, :text
+      add :title, :string
+      add :slug, :string
       add :in_gallery, :boolean, default: true, null: false
 
       timestamps()

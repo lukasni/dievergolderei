@@ -8,15 +8,24 @@ defmodule Dievergolderei.Gallery.Photo do
     field :photo, Dievergolderei.Photo.Type
     field :uuid, Ecto.UUID
 
+    field :description, :string
+    field :title, :string
+    field :slug, :string
+
     timestamps()
   end
 
   @doc false
   def changeset(photo, attrs) do
     photo
-    |> Map.update(:uuid, Ecto.UUID.generate(), fn val -> val || Ecto.UUID.generate() end)
-    |> cast(attrs, [:in_gallery])
+    |> generate_uuid()
+    |> cast(attrs, [:in_gallery, :description])
     |> cast_attachments(attrs, [:photo])
     |> validate_required([:photo])
+  end
+
+  defp generate_uuid(photo) do
+    photo
+    |> Map.update(:uuid, Ecto.UUID.generate(), fn val -> val || Ecto.UUID.generate() end)
   end
 end

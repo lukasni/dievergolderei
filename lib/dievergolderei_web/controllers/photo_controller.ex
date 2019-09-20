@@ -33,7 +33,7 @@ defmodule DievergoldereiWeb.PhotoController do
 
   def render(conn, %{"id" => id}) do
     photo = Gallery.get_photo!(id)
-    redirect(conn, to: Dievergolderei.Photo.url({photo.photo, photo}))
+    redirect(conn, to: Dievergolderei.Photo.url({photo.photo, photo}, :big))
   end
 
   def edit(conn, %{"id" => id}) do
