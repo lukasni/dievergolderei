@@ -5,6 +5,8 @@ defmodule DievergoldereiWeb.Endpoint do
     websocket: true,
     longpoll: false
 
+  socket "/live", Phoenix.LiveView.Socket
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phx.digest
@@ -15,7 +17,7 @@ defmodule DievergoldereiWeb.Endpoint do
     gzip: true,
     only:
       ~w(css fonts images videos js favicon.ico robots.txt android-chrome-192x192.png android-chrome-512x512.png
-      apple-touch-icon.png browserconfig.xml favicon-16x16.png favicon-32x32.ong mstile-150x150.png safari-pinned-tab.svg site.webmanifest)
+      apple-touch-icon.png browserconfig.xml favicon-16x16.png favicon-32x32.png mstile-150x150.png safari-pinned-tab.svg site.webmanifest)
 
   plug Plug.Static,
     at: "/uploads",
