@@ -63,12 +63,10 @@ Repo.insert!(%StaticPage{
 
 contact_page = """
 ## Kontakt
-<address>Die Vergolderei
-Brodlaube 9
-CH-4310 Rheinfelden
-Schweiz
-
-</address>
+> Die Vergolderei
+> Brodlaube 9
+> CH-4310 Rheinfelden
+> Schweiz
 
 [061 831 14 84](tel:+41618311484)
 [regula.stindt@dievergolderei.ch](mailto:regula.stindt@dievergolderei.ch)
