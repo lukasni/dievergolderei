@@ -46,6 +46,36 @@ defmodule DievergoldereiWeb.HoursController do
     end
   end
 
+  def reorder(conn, %{"id" => id, "direction" => "up"}) do
+    hours = OpeningHours.get_hours!(id)
+
+    case OpeningHours.change_order(hours, :up) do
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, "Hours updated successfully")
+        |> redirect(to: Routes.hours_path(conn, :index))
+      {:error, _} ->
+        conn
+        |> put_flash(:error, "Error changing list order")
+        |> redirect(to: Routes.hours_path(conn, :index))
+    end
+  end
+
+  def reorder(conn, %{"id" => id, "direction" => "down"}) do
+    hours = OpeningHours.get_hours!(id)
+
+    case OpeningHours.change_order(hours, :down) do
+      {:ok, _} ->
+        conn
+        |> put_flash(:info, "Hours updated successfully")
+        |> redirect(to: Routes.hours_path(conn, :index))
+      {:error, _} ->
+        conn
+        |> put_flash(:error, "Error changing list order")
+        |> redirect(to: Routes.hours_path(conn, :index))
+    end
+  end
+
   def delete(conn, %{"id" => id}) do
     hours = OpeningHours.get_hours!(id)
     {:ok, _hours} = OpeningHours.delete_hours(hours)

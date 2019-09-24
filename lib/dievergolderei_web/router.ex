@@ -32,6 +32,7 @@ defmodule DievergoldereiWeb.Router do
 
     get "/", PageController, :admin
     resources "/hours", HoursController, only: [:index, :new, :create, :edit, :update, :delete]
+    get "/hours/reorder", HoursController, :reorder
     resources "/posts", PostController
     resources "/pages", StaticPageController, only: [:index, :create, :edit, :update, :show]
     resources "/photos", PhotoController
