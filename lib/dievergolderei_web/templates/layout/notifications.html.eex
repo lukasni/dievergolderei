@@ -1,0 +1,10 @@
+<%= if info = get_flash(@conn, :info) do %>
+    <div class="alert alert-info">
+    <p><%= info %></p>
+    </div>
+<% end %>
+<%= if error = get_flash(@conn, :error) do %>
+    <div class="alert alert-danger">
+    <p><%= error %></p>
+    </div>
+<% end %>

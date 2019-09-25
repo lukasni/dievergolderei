@@ -2,7 +2,6 @@ defmodule DievergoldereiWeb.StaticPageController do
   use DievergoldereiWeb, :controller
 
   alias Dievergolderei.Pages
-  alias Dievergolderei.Pages.StaticPage
 
   def index(conn, _params) do
     static_pages = Pages.list_static_pages()
@@ -26,7 +25,7 @@ defmodule DievergoldereiWeb.StaticPageController do
     case Pages.update_static_page(static_page, static_page_params) do
       {:ok, static_page} ->
         conn
-        |> put_flash(:info, "Static page updated successfully.")
+        |> put_flash(:info, "Statische seite erfolgreich angepasst.")
         |> redirect(to: Routes.static_page_path(conn, :show, static_page))
 
       {:error, %Ecto.Changeset{} = changeset} ->

@@ -14,12 +14,16 @@ defmodule DievergoldereiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :admin do
+    plug :put_layout, {DievergoldereiWeb.LayoutView, "admin.html"}
+  end
+
   scope "/", DievergoldereiWeb do
     pipe_through :browser
 
     get "/", PageController, :index
     get "/kontakt", PageController, :contact
-    #get "/impressionen", PageController, :gallery
+    # get "/impressionen", PageController, :gallery
     live "/impressionen", GalleryLive
     get "/geschichte", PageController, :history
     get "/blog", PostController, :blog
@@ -28,11 +32,11 @@ defmodule DievergoldereiWeb.Router do
   end
 
   scope "/admin", DievergoldereiWeb do
-    pipe_through :browser
+    pipe_through [:browser, :admin]
 
     get "/", PageController, :admin
+    post "/hours/reorder", HoursController, :reorder
     resources "/hours", HoursController, only: [:index, :new, :create, :edit, :update, :delete]
-    get "/hours/reorder", HoursController, :reorder
     resources "/posts", PostController
     resources "/pages", StaticPageController, only: [:index, :create, :edit, :update, :show]
     resources "/photos", PhotoController

@@ -34,7 +34,7 @@ defmodule DievergoldereiWeb.PostController do
     case Blog.create_post(post_params) do
       {:ok, post} ->
         conn
-        |> put_flash(:info, "Post created successfully.")
+        |> put_flash(:info, "Eintrag erfolgreich erstellt.")
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -59,7 +59,7 @@ defmodule DievergoldereiWeb.PostController do
     case Blog.update_post(post, post_params) do
       {:ok, post} ->
         conn
-        |> put_flash(:info, "Post updated successfully.")
+        |> put_flash(:info, "Eintrag erfolgreich angepasst.")
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -72,7 +72,7 @@ defmodule DievergoldereiWeb.PostController do
     {:ok, _post} = Blog.delete_post(post)
 
     conn
-    |> put_flash(:info, "Post deleted successfully.")
+    |> put_flash(:info, "Eintrag erfolgreich gelöscht.")
     |> redirect(to: Routes.post_path(conn, :index))
   end
 end

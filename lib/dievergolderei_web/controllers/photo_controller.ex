@@ -18,7 +18,7 @@ defmodule DievergoldereiWeb.PhotoController do
     case Gallery.create_photo(photo_params) do
       {:ok, photo} ->
         conn
-        |> put_flash(:info, "Photo created successfully.")
+        |> put_flash(:info, "Foto erfolgreich hochgeladen.")
         |> redirect(to: Routes.photo_path(conn, :show, photo))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -48,7 +48,7 @@ defmodule DievergoldereiWeb.PhotoController do
     case Gallery.update_photo(photo, photo_params) do
       {:ok, photo} ->
         conn
-        |> put_flash(:info, "Photo updated successfully.")
+        |> put_flash(:info, "Foto erfolgreich angepasst.")
         |> redirect(to: Routes.photo_path(conn, :show, photo))
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -61,7 +61,7 @@ defmodule DievergoldereiWeb.PhotoController do
     {:ok, _photo} = Gallery.delete_photo(photo)
 
     conn
-    |> put_flash(:info, "Photo deleted successfully.")
+    |> put_flash(:info, "Foto erfolgreich gelöscht.")
     |> redirect(to: Routes.photo_path(conn, :index))
   end
 end

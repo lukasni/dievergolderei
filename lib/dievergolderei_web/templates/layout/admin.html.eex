@@ -15,9 +15,9 @@
       <section class="main-nav">
         <%= render "navigation.html", assigns %>
       </section>
-      <img src="<%= Routes.static_path(@conn, "/images/header.svg") %>" alt="Logo Die Vergolderei">
     </header>
     <main role="main" class="container">
+      <%= render "notifications.html", assigns %>
       <%= render @view_module, @view_template, assigns %>
     </main>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
