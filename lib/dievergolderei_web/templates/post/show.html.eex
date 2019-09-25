@@ -1,3 +1,5 @@
+<%= breadcrumbs [@conn, :post, @post] %>
+
 <h1>Vorschau</h1>
 
 <ul>

@@ -1,3 +1,5 @@
+<%= breadcrumbs [@conn, :hours] %>
+
 <h1>Öffnungszeiten</h1>
 
 <table>

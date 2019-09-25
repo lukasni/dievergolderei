@@ -1,3 +1,5 @@
+<%= breadcrumbs [@conn, :static_page, @static_page] %>
+
 <h1>Seitenvorschau</h1>
 
 <p>
