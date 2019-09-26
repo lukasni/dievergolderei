@@ -1,3 +1,5 @@
+<%= breadcrumbs [@conn, :static_page, @static_page] %>
+
 <h1>Seitenvorschau</h1>
 
 <p>
@@ -6,7 +8,6 @@
 </p>
 
 <span><%= link "Bearbeiten", to: Routes.static_page_path(@conn, :edit, @static_page), class: "button button-outline button-small" %></span>
-<span><%= link "Zurück", to: Routes.static_page_path(@conn, :index), class: "button button-outline button-small" %></span>
 
 <hr>
 <%= markdown @static_page.content %>

@@ -128,12 +128,13 @@ defmodule Dievergolderei.OpeningHours do
       |> order_by(desc: :list_position)
       |> limit(1)
       |> Repo.one()
-      |> IO.inspect()
 
     case prev do
-      nil -> {:ok, :no_change}
+      nil ->
+        {:ok, :no_change}
+
       prev ->
-        Multi.new
+        Multi.new()
         |> Multi.update(:new, Hours.changeset(hours, %{list_position: prev.list_position}))
         |> Multi.update(:prev, Hours.changeset(prev, %{list_position: prev.list_position + 1}))
         |> Repo.transaction()
@@ -147,12 +148,13 @@ defmodule Dievergolderei.OpeningHours do
       |> order_by(asc: :list_position)
       |> limit(1)
       |> Repo.one()
-      |> IO.inspect()
 
     case prev do
-      nil -> {:ok, :no_change}
+      nil ->
+        {:ok, :no_change}
+
       prev ->
-        Multi.new
+        Multi.new()
         |> Multi.update(:prev, Hours.changeset(prev, %{list_position: hours.list_position}))
         |> Multi.update(:new, Hours.changeset(hours, %{list_position: hours.list_position + 1}))
         |> Repo.transaction()

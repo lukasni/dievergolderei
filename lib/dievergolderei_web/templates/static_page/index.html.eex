@@ -1,3 +1,5 @@
+<%= breadcrumbs [@conn, :static_pages] %>
+
 <h1>Statische Seiteninhalte</h1>
 
 <table>

@@ -89,3 +89,23 @@
     margin-top: -1.5rem;
     margin-bottom: 1.5rem;
 }
+
+.breadcrumbs {
+    list-style-type: none
+}
+
+.breadcrumbs li {
+    display: inline;
+}
+
+.breadcrumbs a {
+    text-decoration: underline;
+}
+
+.breadcrumbs li::after {
+    content: " / ";
+}
+
+.breadcrumbs li:last-child::after {
+    content: ""
+}
