@@ -29,6 +29,13 @@ defmodule Dievergolderei.OpeningHoursTest do
       assert OpeningHours.list_hours() == [hours]
     end
 
+    test "list_active_hours/0 only returns entries with active=true" do
+      active = hours_fixture()
+      _inactive = hours_fixture(active: false)
+
+      assert OpeningHours.list_active_hours() == [active]
+    end
+
     test "get_hours!/1 returns the hours with given id" do
       hours = hours_fixture()
       assert OpeningHours.get_hours!(hours.id) == hours
@@ -70,6 +77,26 @@ defmodule Dievergolderei.OpeningHoursTest do
     test "change_hours/1 returns a hours changeset" do
       hours = hours_fixture()
       assert %Ecto.Changeset{} = OpeningHours.change_hours(hours)
+    end
+
+    test "change_order(hours, :up) decreases list_position by one for the current item" do
+      _first = hours_fixture(label: "first", list_position: 0)
+      second = hours_fixture(label: "second", list_position: 1)
+
+      {:ok, %{new: second, prev: first}} = OpeningHours.change_order(second, :up)
+
+      assert first.list_position == 1
+      assert second.list_position == 0
+    end
+
+    test "change_order(hours, :down) increases list_position by one for the current item" do
+      first = hours_fixture(label: "first", list_position: 0)
+      _second = hours_fixture(label: "second", list_position: 1)
+
+      {:ok, %{new: first, prev: second}} = OpeningHours.change_order(first, :down)
+
+      assert first.list_position == 1
+      assert second.list_position == 0
     end
   end
 end
