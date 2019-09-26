@@ -24,6 +24,14 @@ defmodule DievergoldereiWeb.Breadcrumbs do
     [{"Neu", hours_path(conn, :new)} | crumbs(conn, :hours)]
   end
 
+  def crumbs(conn, :photos) do
+    [{"Gallerie", photo_path(conn, :index)} | crumbs(conn, :root)]
+  end
+
+  def crumbs(conn, :photo_new) do
+    [{"Neu", photo_path(conn, :index)} | crumbs(conn, :photos)]
+  end
+
   def crumbs(conn, :static_pages) do
     [{"Statische Seiten", static_page_path(conn, :index)} | crumbs(conn, :root)]
   end
@@ -38,6 +46,14 @@ defmodule DievergoldereiWeb.Breadcrumbs do
 
   def crumbs(conn, :hours, %Dievergolderei.OpeningHours.Hours{} = hours) do
     [{hours.label, hours_path(conn, :edit, hours)} | crumbs(conn, :hours)]
+  end
+
+  def crumbs(conn, :photo, %Dievergolderei.Gallery.Photo{} = photo) do
+    [{photo.id, photo_path(conn, :show, photo)} | crumbs(conn, :photos)]
+  end
+
+  def crumbs(conn, :photo_edit, %Dievergolderei.Gallery.Photo{} = photo) do
+    [{"Bearbeiten", photo_path(conn, :edit, photo)} | crumbs(conn, :photo, photo)]
   end
 
   def crumbs(conn, :static_page, %Dievergolderei.Pages.StaticPage{} = page) do

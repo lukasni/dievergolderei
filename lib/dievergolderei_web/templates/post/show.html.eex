@@ -17,6 +17,5 @@
 </ul>
 
 <span><%= link "Bearbeiten", to: Routes.post_path(@conn, :edit, @post), class: "button button-outline button-small" %></span>
-<span><%= link "Zurück", to: Routes.post_path(@conn, :index), class: "button button-outline button-small" %></span>
 <hr>
 <%= render @view_module, "post.html", post: @post %>

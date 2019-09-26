@@ -1,4 +1,8 @@
-<h1>Listing Photos</h1>
+<%= breadcrumbs [@conn, :photos] %>
+
+<h1>Fotogallerie</h1>
+
+<span><%= link "Bild hochladen", to: Routes.photo_path(@conn, :new), class: "button button-primary" %></span>
 
 <table>
   <thead>
@@ -16,13 +20,11 @@
       <td><%= photo.in_gallery %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.photo_path(@conn, :show, photo) %></span>
-        <span><%= link "Edit", to: Routes.photo_path(@conn, :edit, photo) %></span>
-        <span><%= link "Delete", to: Routes.photo_path(@conn, :delete, photo), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Vorschau", to: Routes.photo_path(@conn, :show, photo), class: "button button-outline button-small" %></span>
+        <span><%= link "Bearbeiten", to: Routes.photo_path(@conn, :edit, photo), class: "button button-outline button-small" %></span>
+        <span><%= link "Löschen", to: Routes.photo_path(@conn, :delete, photo), method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-danger button-small" %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Photo", to: Routes.photo_path(@conn, :new) %></span>
