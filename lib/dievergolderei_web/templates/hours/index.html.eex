@@ -5,9 +5,9 @@
 <table>
   <thead>
     <tr>
+      <th>Aktiv</th>
       <th>Tag</th>
       <th>Zeit</th>
-      <th>Aktiv</th>
       <th>Sortierung</th>
       <th></th>
     </tr>
@@ -15,16 +15,16 @@
   <tbody>
 <%= for hours <- @hours do %>
     <tr>
+      <td style="font-size: 150%;"><%= if hours.active, do: "☑", else: "☐" %></td>
       <td><%= hours.label %></td>
       <td style="white-space: pre-line"><%= hours.times %></td>
-      <td><%= checkbox :active, :active, value: hours.active, disabled: true %></td>
       <td>
         <%= link "🡅", to: Routes.hours_path(@conn, :reorder, %{"id" => hours.id, "direction" => "up"}), method: :post, class: "button button-outline mb-0" %>
         <%= link "🡇", to: Routes.hours_path(@conn, :reorder, %{"id" => hours.id, "direction" => "down"}), method: :post, class: "button button-outline mb-0" %>
       </td>
       <td>
         <span><%= link "Bearbeiten", to: Routes.hours_path(@conn, :edit, hours), class: "button button-outline mb-0" %></span>
-        <span><%= link "Löschen", to: Routes.hours_path(@conn, :delete, hours), method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-outline mb-0" %></span>
+        <span><%= link "Löschen", to: Routes.hours_path(@conn, :delete, hours), method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-danger mb-0" %></span>
       </td>
     </tr>
 <% end %>

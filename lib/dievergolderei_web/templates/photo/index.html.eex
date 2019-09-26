@@ -7,8 +7,8 @@
 <table>
   <thead>
     <tr>
-      <th>Photo</th>
-      <th>In gallery</th>
+      <th>Foto</th>
+      <th>In Impressionen</th>
 
       <th></th>
     </tr>
@@ -17,7 +17,7 @@
 <%= for photo <- @photos do %>
     <tr>
       <td><%= Dievergolderei.Photo.url({photo.photo, photo}, :thumb) |> img_tag() %></td>
-      <td><%= photo.in_gallery %></td>
+      <td style="font-size: 150%;"><%= if photo.in_gallery, do: "☑", else: "☐" %></td>
 
       <td>
         <span><%= link "Vorschau", to: Routes.photo_path(@conn, :show, photo), class: "button button-outline button-small" %></span>

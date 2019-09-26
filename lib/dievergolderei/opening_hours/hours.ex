@@ -20,7 +20,7 @@ defmodule Dievergolderei.OpeningHours.Hours do
     |> validate_required([:label, :times, :active])
   end
 
-  def set_default_list_position(%{list_position: nil} = hours) do
+  defp set_default_list_position(%{list_position: nil} = hours) do
     max = __MODULE__
     |> order_by(desc: :list_position)
     |> limit(1)
@@ -31,7 +31,7 @@ defmodule Dievergolderei.OpeningHours.Hours do
     |> Map.update(:list_position, max + 1, fn val -> val || max + 1 end)
   end
 
-  def set_default_list_position(hours) do
+  defp set_default_list_position(hours) do
     hours
   end
 end
