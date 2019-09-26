@@ -21,9 +21,11 @@ defmodule DievergoldereiWeb.GalleryLive do
   end
 
   def mount(_session, socket) do
-    socket = socket
-    |> assign(:photos, Gallery.list_gallery_photos())
-    |> assign(:selected_photo, nil)
+    socket =
+      socket
+      |> assign(:photos, Gallery.list_gallery_photos())
+      |> assign(:selected_photo, nil)
+
     {:ok, socket}
   end
 

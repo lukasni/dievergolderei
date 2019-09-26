@@ -83,10 +83,10 @@ defmodule DievergoldereiWeb.Breadcrumbs do
   end
 
   defp render_crumb({text, _path}, :current) do
-    content_tag :li, do: text
+    content_tag(:li, do: text)
   end
 
   defp render_crumb({text, path}) do
-    content_tag :li, do: link(text, to: path)
+    content_tag(:li, do: link(text, to: path))
   end
 end

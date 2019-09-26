@@ -38,7 +38,10 @@ defmodule DievergoldereiWeb.PostController do
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset, title: "Übersicht Öffnungszeiten — Admin — ")
+        render(conn, "new.html",
+          changeset: changeset,
+          title: "Übersicht Öffnungszeiten — Admin — "
+        )
     end
   end
 
@@ -50,7 +53,12 @@ defmodule DievergoldereiWeb.PostController do
   def edit(conn, %{"id" => id}) do
     post = Blog.get_post!(id)
     changeset = Blog.change_post(post)
-    render(conn, "edit.html", post: post, changeset: changeset, title: "Blogeintrag bearbeiten — Admin — ")
+
+    render(conn, "edit.html",
+      post: post,
+      changeset: changeset,
+      title: "Blogeintrag bearbeiten — Admin — "
+    )
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
@@ -63,7 +71,11 @@ defmodule DievergoldereiWeb.PostController do
         |> redirect(to: Routes.post_path(conn, :show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", post: post, changeset: changeset, title: "Blogeintrag bearbeiten — Admin — ")
+        render(conn, "edit.html",
+          post: post,
+          changeset: changeset,
+          title: "Blogeintrag bearbeiten — Admin — "
+        )
     end
   end
 

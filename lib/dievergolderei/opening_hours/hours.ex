@@ -21,11 +21,12 @@ defmodule Dievergolderei.OpeningHours.Hours do
   end
 
   defp set_default_list_position(%{list_position: nil} = hours) do
-    max = __MODULE__
-    |> order_by(desc: :list_position)
-    |> limit(1)
-    |> select([q], q.list_position)
-    |> Dievergolderei.Repo.one()
+    max =
+      __MODULE__
+      |> order_by(desc: :list_position)
+      |> limit(1)
+      |> select([q], q.list_position)
+      |> Dievergolderei.Repo.one()
 
     hours
     |> Map.update(:list_position, max + 1, fn val -> val || max + 1 end)

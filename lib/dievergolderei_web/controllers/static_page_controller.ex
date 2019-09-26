@@ -10,13 +10,22 @@ defmodule DievergoldereiWeb.StaticPageController do
 
   def show(conn, %{"id" => id}) do
     static_page = Pages.get_static_page!(id)
-    render(conn, "show.html", static_page: static_page, title: "Vorschau #{static_page.name} — Admin — ")
+
+    render(conn, "show.html",
+      static_page: static_page,
+      title: "Vorschau #{static_page.name} — Admin — "
+    )
   end
 
   def edit(conn, %{"id" => id}) do
     static_page = Pages.get_static_page!(id)
     changeset = Pages.change_static_page(static_page)
-    render(conn, "edit.html", static_page: static_page, changeset: changeset, title: "Bearbeiten #{static_page.name} — Admin — ")
+
+    render(conn, "edit.html",
+      static_page: static_page,
+      changeset: changeset,
+      title: "Bearbeiten #{static_page.name} — Admin — "
+    )
   end
 
   def update(conn, %{"id" => id, "static_page" => static_page_params}) do
