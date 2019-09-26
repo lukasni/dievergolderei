@@ -10,7 +10,14 @@ defmodule Dievergolderei.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -49,7 +56,8 @@ defmodule Dievergolderei.MixProject do
       {:html_sanitize_ex, "~> 1.3.0"},
       {:waffle, ">= 0.0.3"},
       {:waffle_ecto, ">= 0.0.2"},
-      {:faker, "~> 0.12.0", only: [:dev, :test]}
+      {:faker, "~> 0.12.0", only: [:dev, :test]},
+      {:excoveralls, "~> 0.11.2", only: :test}
     ]
   end
 
