@@ -1,7 +1,7 @@
 <nav role="navigation" class="row">
     <div class="column"><a href="<%= Routes.page_path(@conn, :index) %>">Start</a></div>
     <div class="column"><a href="<%= Routes.page_path(@conn, :contact) %>">Kontakt</a></div>
-    <div class="column"><a href="<%= Routes.live_path(@conn, DievergoldereiWeb.GalleryLive) %>">Impressionen</a></div>
+    <div class="column"><a href="<%= Routes.page_path(@conn, :gallery) %>">Impressionen</a></div>
     <div class="column"><a href="<%= Routes.page_path(@conn, :history) %>">Geschichte</a></div>
     <div class="column"><a href="<%= Routes.post_path(@conn, :blog) %>">Blog</a></div>
 </nav>

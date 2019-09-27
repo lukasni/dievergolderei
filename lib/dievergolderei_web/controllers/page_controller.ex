@@ -15,9 +15,10 @@ defmodule DievergoldereiWeb.PageController do
     render(conn, "contact.html", title: "Kontakt — ", static_content: content)
   end
 
-  def gallery(conn, _params) do
-    photos = Dievergolderei.Gallery.list_gallery_photos()
-    render(conn, "gallery.html", photos: photos, title: "Impressionen — ")
+  def gallery(conn, _) do
+    conn
+    |> assign(:title, "Impressionen — ")
+    |> Phoenix.LiveView.Controller.live_render(DievergoldereiWeb.GalleryLive, session: %{})
   end
 
   def history(conn, _params) do
