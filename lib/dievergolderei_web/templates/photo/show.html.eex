@@ -5,8 +5,18 @@
 <ul>
 
   <li>
+    <strong>Titel:</strong>
+    <%= @photo.title %>
+  </li>
+
+  <li>
+    <strong>Beschreibung:</strong>
+    <%= @photo.description %>
+  </li>
+
+  <li>
     <strong>In Impressionen:</strong>
-    <%= @photo.in_gallery %>
+    <%= if @photo.in_gallery, do: "☑", else: "☐" %>
   </li>
 
 </ul>

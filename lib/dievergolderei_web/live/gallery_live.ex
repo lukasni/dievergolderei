@@ -13,10 +13,18 @@ defmodule DievergoldereiWeb.GalleryLive do
         </div>
       <% end %>
     </div>
-
     <%= if @selected_photo do %>
     <hr>
-    <img src="<%= photo_url(@selected_photo, :big) %>">
+    <div class="row">
+      <%= if @selected_photo.title || @selected_photo.description do %>
+      <div class="column responsive column-33">
+        <h3><%= @selected_photo.title %></h3>
+        <p><%= @selected_photo.description %></p>
+      </div>
+      <% end %>
+      <div class="column">
+        <img src="<%= photo_url(@selected_photo, :big) %>">
+      </div>
     <% end %>
     """
   end

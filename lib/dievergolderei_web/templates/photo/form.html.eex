@@ -9,6 +9,14 @@
   <%= file_input f, :photo %>
   <%= error_tag f, :photo %>
 
+  <%= label f, :title, "Titel" %>
+  <%= text_input f, :title, placeholder: "Optional" %>
+  <%= error_tag f, :title %>
+
+  <%= label f, :description, "Beschreibung" %>
+  <%= textarea f, :description, placeholder: "Optional" %>
+  <%= error_tag f, :description %>
+
   <%= label f, :in_gallery, "In Impressionen" %>
   <%= checkbox f, :in_gallery %>
   <%= error_tag f, :in_gallery %>
