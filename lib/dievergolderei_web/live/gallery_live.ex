@@ -19,4 +19,8 @@ defmodule DievergoldereiWeb.GalleryLive do
     photo = Gallery.get_photo!(id)
     {:noreply, assign(socket, :selected_photo, photo)}
   end
+
+  def handle_event("show-video", _, socket) do
+    {:noreply, assign(socket, :selected_photo, nil)}
+  end
 end
