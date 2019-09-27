@@ -57,7 +57,8 @@ defmodule Dievergolderei.MixProject do
       {:waffle, ">= 0.0.3"},
       {:waffle_ecto, ">= 0.0.2"},
       {:faker, "~> 0.12.0", only: [:dev, :test]},
-      {:excoveralls, "~> 0.11.2", only: :test}
+      {:excoveralls, "~> 0.11.2", only: :test},
+      {:floki, ">= 0.0.0", only: :test}
     ]
   end
 

@@ -5,6 +5,7 @@ defmodule DievergoldereiWeb.GalleryLive do
 
   def render(assigns) do
     ~L"""
+    <h2>Impressionen</h2>
     <div class="row">
       <%= for photo <- @photos do %>
         <div class="column" phx-click="show" phx-value-id="<%= photo.id %>">
