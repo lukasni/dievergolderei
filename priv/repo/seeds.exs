@@ -63,10 +63,11 @@ Repo.insert!(%StaticPage{
 
 contact_page = """
 ## Kontakt
-> Die Vergolderei
-> Brodlaube 9
-> CH-4310 Rheinfelden
-> Schweiz
+<address>Die Vergolderei
+Brodlaube 9
+CH-4310 Rheinfelden
+Schweiz
+</address>
 
 [061 831 14 84](tel:+41618311484)
 [regula.stindt@dievergolderei.ch](mailto:regula.stindt@dievergolderei.ch)
@@ -88,11 +89,18 @@ Gestartet habe ich mit klassischer Rahmenvergolderei, Einrahmungen und Restaurat
 ------
 
 Vor 1990 grosser Umzug an den Obertorplatz 9. Hier baue ich als zweites Standbein den Künstlerbedarf auf.
+
 Da arbeite ich mit den Firmen Talens und Lascaux zusammen.
 
 ------
 
 Seit Sommer 2001 bin ich an der Brodlaube 9 im schönen Lokal im Haus der Familie Thurnheer.
+
+<div class="row">
+<div class="column"><img src="/photos/4"></div>
+<div class="column"><img src="/photos/5"></div>
+<div class="column"><img src="/photos/6"></div>
+</div>
 
 Neu dazu führe ich ein kleine Auswahl von Kunst, Acrylbilder und Kunstdrucke nach Wahl auf Bestellung.
 

@@ -8,7 +8,7 @@ defmodule DievergoldereiWeb.Markdown do
   def markdown(content) do
     content
     |> Earmark.as_html!(@options)
-    |> HtmlSanitizeEx.markdown_html()
+    |> Dievergolderei.Sanitizer.sanitize()
     |> Phoenix.HTML.raw()
   end
 

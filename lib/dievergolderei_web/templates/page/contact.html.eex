@@ -1,5 +1,5 @@
 <div class="row">
-    <section class="column column-33">
+    <section class="column responsive column-33">
         <%= markdown @static_content %>
     </section>
     <section class="column">

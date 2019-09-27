@@ -14,6 +14,7 @@ html {
 body {
     color: $text;
     font-family: 'Lato', sans-serif;
+    font-weight: 400;
 }
 
 body::before {
@@ -45,6 +46,11 @@ a {
 address {
     font-style: inherit;
     white-space: pre-line;
+    border-left: 0.3rem solid $dv-blue;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 2rem;
+    padding: 1rem 1.5rem;
 }
 
 hr {

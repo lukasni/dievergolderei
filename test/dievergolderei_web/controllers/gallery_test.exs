@@ -6,6 +6,6 @@ defmodule DievergoldereiWeb.GalleryTest do
     conn = get(conn, "/impressionen")
     assert html_response(conn, 200) =~ "<h2>Impressionen</h2>"
 
-    {:ok, view, html} = live(conn)
+    {:ok, _view, _html} = live(conn)
   end
 end
