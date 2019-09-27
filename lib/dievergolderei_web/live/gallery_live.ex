@@ -1,24 +1,9 @@
 defmodule DievergoldereiWeb.GalleryLive do
   use Phoenix.LiveView
-  alias DievergoldereiWeb.Router.Helpers, as: Routes
   alias Dievergolderei.Gallery
 
   def render(assigns) do
-    ~L"""
-    <h2>Impressionen</h2>
-    <div class="row">
-      <%= for photo <- @photos do %>
-        <div class="column" phx-click="show" phx-value-id="<%= photo.id %>">
-          <img src="<%= photo_url(photo, :thumb) %>">
-        </div>
-      <% end %>
-    </div>
-
-    <%= if @selected_photo do %>
-    <hr>
-    <img src="<%= photo_url(@selected_photo, :big) %>">
-    <% end %>
-    """
+    DievergoldereiWeb.PageView.render("gallery.html", assigns)
   end
 
   def mount(_session, socket) do
@@ -35,7 +20,7 @@ defmodule DievergoldereiWeb.GalleryLive do
     {:noreply, assign(socket, :selected_photo, photo)}
   end
 
-  defp photo_url(photo, version) do
-    Dievergolderei.Photo.url({photo.photo, photo}, version)
+  def handle_event("show-video", _, socket) do
+    {:noreply, assign(socket, :selected_photo, nil)}
   end
 end

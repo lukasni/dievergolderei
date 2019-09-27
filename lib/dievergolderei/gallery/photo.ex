@@ -19,7 +19,7 @@ defmodule Dievergolderei.Gallery.Photo do
   def changeset(photo, attrs) do
     photo
     |> generate_uuid()
-    |> cast(attrs, [:in_gallery, :description])
+    |> cast(attrs, [:in_gallery, :description, :title])
     |> cast_attachments(attrs, [:photo])
     |> validate_required([:photo])
   end
