@@ -29,6 +29,21 @@ defmodule DievergoldereiWeb.PostControllerTest do
     end
   end
 
+  describe "blog" do
+    setup [:create_post]
+
+    test "lists posts", %{conn: conn, post: post} do
+      conn = get(conn, Routes.post_path(conn, :blog))
+      assert html_response(conn, 200) =~ post.title
+    end
+
+    test "filter posts by month", %{conn: conn, post: post} do
+      %{year: year, month: month} = post.publish_on
+      conn = get(conn, Routes.post_path(conn, :list, "#{year}-#{month}"))
+      assert html_response(conn, 200) =~ post.title
+    end
+  end
+
   describe "new post" do
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.post_path(conn, :new))
