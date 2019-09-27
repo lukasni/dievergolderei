@@ -73,6 +73,20 @@ defmodule DievergoldereiWeb.HoursControllerTest do
     end
   end
 
+  describe "reorder hours" do
+    setup [:create_orderable_hours]
+
+    test "reorders hours up successfully" , %{conn: conn, second: second} do
+      conn = post(conn, Routes.hours_path(conn, :reorder, id: second.id, direction: "up"))
+      assert redirected_to(conn) == Routes.hours_path(conn, :index)
+    end
+
+    test "reorders hours down successfully" , %{conn: conn, first: first} do
+      conn = post(conn, Routes.hours_path(conn, :reorder, id: first.id, direction: "down"))
+      assert redirected_to(conn) == Routes.hours_path(conn, :index)
+    end
+  end
+
   describe "delete hours" do
     setup [:create_hours]
 
@@ -85,5 +99,12 @@ defmodule DievergoldereiWeb.HoursControllerTest do
   defp create_hours(_) do
     hours = fixture(:hours)
     {:ok, hours: hours}
+  end
+
+  defp create_orderable_hours(_) do
+    {:ok, first} = OpeningHours.create_hours(%{@create_attrs | list_position: 0})
+    {:ok, second} = OpeningHours.create_hours(%{@create_attrs | list_position: 1 })
+
+    {:ok, first: first, second: second}
   end
 end

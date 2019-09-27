@@ -26,7 +26,7 @@ defmodule Dievergolderei.OpeningHours.Hours do
       |> order_by(desc: :list_position)
       |> limit(1)
       |> select([q], q.list_position)
-      |> Dievergolderei.Repo.one()
+      |> Dievergolderei.Repo.one() || -1
 
     hours
     |> Map.update(:list_position, max + 1, fn val -> val || max + 1 end)
