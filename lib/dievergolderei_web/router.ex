@@ -8,6 +8,7 @@ defmodule DievergoldereiWeb.Router do
     plug Phoenix.LiveView.Flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug DievergoldereiWeb.Auth
   end
 
   pipeline :api do
@@ -16,6 +17,7 @@ defmodule DievergoldereiWeb.Router do
 
   pipeline :admin do
     plug :put_layout, {DievergoldereiWeb.LayoutView, "admin.html"}
+    plug DievergoldereiWeb.RequireLogin
   end
 
   scope "/", DievergoldereiWeb do
@@ -29,6 +31,7 @@ defmodule DievergoldereiWeb.Router do
     get "/blog", PostController, :blog
     get "/blog/:month", PostController, :list
     get "/photos/:id", PhotoController, :render
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
 
   scope "/admin", DievergoldereiWeb do
@@ -40,6 +43,7 @@ defmodule DievergoldereiWeb.Router do
     resources "/posts", PostController
     resources "/pages", StaticPageController, only: [:index, :create, :edit, :update, :show]
     resources "/photos", PhotoController
+    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.
