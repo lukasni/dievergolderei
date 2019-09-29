@@ -41,6 +41,13 @@ defmodule Dievergolderei.Blog do
     |> Repo.all()
   end
 
+  def statistics() do
+    Post
+    |> filter_publish_on_in_past()
+    |> select([p], %{latest: max(p.publish_on), count: count()})
+    |> Repo.one()
+  end
+
   @doc """
   List blog posts published in a given month, sorted by publish date in descending order
 

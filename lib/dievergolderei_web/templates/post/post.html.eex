@@ -1,4 +1,4 @@
 <article class="blogpost">
     <h3><%= @post.title %></h3>
-    <div class="post-content"><%= raw Earmark.as_html!(@post.content) %></div>
+    <div class="post-content"><%= markdown @post.content %></div>
 </article>

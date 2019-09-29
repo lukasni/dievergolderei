@@ -1,5 +1,5 @@
+<%= breadcrumbs [@conn, :post_new] %>
+
 <h1>Neuen Beitrag erstellen</h1>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.post_path(@conn, :create)) %>
-
-<span><%= link "Zurück", to: Routes.post_path(@conn, :index), class: "button button-outline", data: [confirm: "Wirklich zurück? Änderungen werden nicht gespeichert"] %></span>

@@ -1,3 +1,5 @@
+<%= breadcrumbs [@conn, :posts] %>
+
 <h1>Blogbeiträge</h1>
 
 <span><%= link "Neuen Beitrag erstellen", to: Routes.post_path(@conn, :new), class: "button" %></span>

@@ -1,0 +1,30 @@
+<%= breadcrumbs [@conn, :photos] %>
+
+<h1>Fotogallerie</h1>
+
+<span><%= link "Bild hochladen", to: Routes.photo_path(@conn, :new), class: "button button-primary" %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>Foto</th>
+      <th>In Impressionen</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for photo <- @photos do %>
+    <tr>
+      <td><%= Dievergolderei.Photo.url({photo.photo, photo}, :thumb) |> img_tag() %></td>
+      <td style="font-size: 150%;"><%= if photo.in_gallery, do: "☑", else: "☐" %></td>
+
+      <td>
+        <span><%= link "Vorschau", to: Routes.photo_path(@conn, :show, photo), class: "button button-outline button-small" %></span>
+        <span><%= link "Bearbeiten", to: Routes.photo_path(@conn, :edit, photo), class: "button button-outline button-small" %></span>
+        <span><%= link "Löschen", to: Routes.photo_path(@conn, :delete, photo), method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-danger button-small" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

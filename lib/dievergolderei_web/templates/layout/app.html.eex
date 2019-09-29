@@ -4,19 +4,16 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <%= render "favicons.html", assigns %>
+    
     <title><%= assigns[:title] || "" %>Die Vergolderei</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>
     <header class="container">
       <section class="main-nav">
-        <nav role="navigation" class="row">
-            <div class="column"><a href="<%= Routes.page_path(@conn, :index) %>">Start</a></div>
-            <div class="column"><a href="<%= Routes.page_path(@conn, :contact) %>">Kontakt</a></div>
-            <div class="column"><a href="<%= Routes.page_path(@conn, :gallery) %>">Impressionen</a></div>
-            <div class="column"><a href="<%= Routes.page_path(@conn, :history) %>">Geschichte</a></div>
-            <div class="column"><a href="<%= Routes.post_path(@conn, :blog) %>">Blog</a></div>
-        </nav>
+        <%= render "navigation.html", assigns %>
       </section>
       <img src="<%= Routes.static_path(@conn, "/images/header.svg") %>" alt="Logo Die Vergolderei">
     </header>

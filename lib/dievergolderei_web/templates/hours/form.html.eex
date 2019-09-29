@@ -17,10 +17,6 @@
   <%= checkbox f, :active %>
   <%= error_tag f, :active %>
 
-  <%= label f, :list_position, "Sortierung" %>
-  <%= number_input f, :list_position %>
-  <%= error_tag f, :list_position %>
-
   <div>
     <%= submit "Save" %>
   </div>

@@ -1,0 +1,26 @@
+<%= breadcrumbs [@conn, :photo, @photo] %>
+
+<h1>Bildvorschau</h1>
+
+<ul>
+
+  <li>
+    <strong>Titel:</strong>
+    <%= @photo.title %>
+  </li>
+
+  <li>
+    <strong>Beschreibung:</strong>
+    <%= @photo.description %>
+  </li>
+
+  <li>
+    <strong>In Impressionen:</strong>
+    <%= if @photo.in_gallery, do: "☑", else: "☐" %>
+  </li>
+
+</ul>
+
+<span><%= link "Bearbeiten", to: Routes.photo_path(@conn, :edit, @photo), class: "button button-outline" %></span>
+
+<%= Dievergolderei.Photo.url({@photo.photo, @photo}, :big) |> img_tag() %>

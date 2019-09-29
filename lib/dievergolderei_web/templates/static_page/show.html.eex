@@ -1,0 +1,13 @@
+<%= breadcrumbs [@conn, :static_page, @static_page] %>
+
+<h1>Seitenvorschau</h1>
+
+<p>
+<strong>Name:</strong>
+<%= @static_page.name %>
+</p>
+
+<span><%= link "Bearbeiten", to: Routes.static_page_path(@conn, :edit, @static_page), class: "button button-outline button-small" %></span>
+
+<hr>
+<%= markdown @static_page.content %>

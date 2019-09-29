@@ -34,6 +34,46 @@ defmodule Dievergolderei.BlogTest do
       assert Blog.list_posts() == [post]
     end
 
+    test "list_most_recent_published_posts/0 returns three most recent posts in descending order" do
+      posts = [post_fixture(publish_on: ~D[2019-09-01])]
+      posts = [post_fixture(publish_on: ~D[2019-09-02]) | posts]
+      posts = [post_fixture(publish_on: ~D[2019-09-03]) | posts]
+
+      assert Blog.list_most_recent_published_posts() == posts
+    end
+
+    test "list_most_recent_published_posts/1 returns n most recent posts in descending order" do
+      posts = [post_fixture(publish_on: ~D[2019-09-01])]
+      posts = [post_fixture(publish_on: ~D[2019-09-02]) | posts]
+      posts = [post_fixture(publish_on: ~D[2019-09-03]) | posts]
+
+      assert Blog.list_most_recent_published_posts(2) == Enum.take(posts, 2)
+    end
+
+    test "statistics/0 returns date of most recent post and total count of published posts" do
+      post = post_fixture()
+
+      assert Blog.statistics()[:latest] == post.publish_on
+      assert Blog.statistics()[:count] == 1
+    end
+
+    test "list_posts_published_in_month/2 returns all posts for a month/year" do
+      may_posts = [
+        post_fixture(publish_on: ~D[2018-05-15]),
+        post_fixture(publish_on: ~D[2018-05-05])
+      ]
+      post_fixture(publish_on: ~D[2018-06-05])
+
+      assert Blog.list_posts_published_in_month(05, 2018) == may_posts
+    end
+
+    test "months_with_posts/0 returns a list of months where at least one post was published" do
+      post_fixture(publish_on: ~D[2018-05-05])
+      post_fixture(publish_on: ~D[2018-06-05])
+
+      assert Blog.months_with_posts() == [~D[2018-06-01], ~D[2018-05-01]]
+    end
+
     test "get_post!/1 returns the post with given id" do
       post = post_fixture()
       assert Blog.get_post!(post.id) == post

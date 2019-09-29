@@ -4,13 +4,20 @@ defmodule Dievergolderei.MixProject do
   def project do
     [
       app: :dievergolderei,
-      version: "0.1.0",
-      elixir: "~> 1.5",
+      version: "0.2.0",
+      elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -40,12 +47,19 @@ defmodule Dievergolderei.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_view, ">= 0.3.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:earmark, "~> 1.4.0"},
       {:slugger, ">= 0.3.0"},
-      {:faker, "~> 0.12.0", only: [:dev, :test]}
+      {:html_sanitize_ex, "~> 1.3.0"},
+      {:waffle, ">= 0.0.3"},
+      {:waffle_ecto, ">= 0.0.2"},
+      {:argon2_elixir, "~> 2.0"},
+      {:faker, "~> 0.12.0", only: [:dev, :test]},
+      {:excoveralls, "~> 0.11.2", only: :test},
+      {:floki, ">= 0.0.0", only: :test}
     ]
   end
 

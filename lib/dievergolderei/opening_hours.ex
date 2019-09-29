@@ -4,6 +4,7 @@ defmodule Dievergolderei.OpeningHours do
   """
 
   import Ecto.Query, warn: false
+  alias Ecto.Multi
   alias Dievergolderei.Repo
 
   alias Dievergolderei.OpeningHours.Hours
@@ -118,5 +119,45 @@ defmodule Dievergolderei.OpeningHours do
   """
   def change_hours(%Hours{} = hours) do
     Hours.changeset(hours, %{})
+  end
+
+  def change_order(%Hours{} = hours, :up) do
+    prev =
+      Hours
+      |> where([q], q.list_position < ^hours.list_position)
+      |> order_by(desc: :list_position)
+      |> limit(1)
+      |> Repo.one()
+
+    case prev do
+      nil ->
+        {:ok, :no_change}
+
+      prev ->
+        Multi.new()
+        |> Multi.update(:new, Hours.changeset(hours, %{list_position: prev.list_position}))
+        |> Multi.update(:prev, Hours.changeset(prev, %{list_position: prev.list_position + 1}))
+        |> Repo.transaction()
+    end
+  end
+
+  def change_order(%Hours{} = hours, :down) do
+    prev =
+      Hours
+      |> where([q], q.list_position > ^hours.list_position)
+      |> order_by(asc: :list_position)
+      |> limit(1)
+      |> Repo.one()
+
+    case prev do
+      nil ->
+        {:ok, :no_change}
+
+      prev ->
+        Multi.new()
+        |> Multi.update(:prev, Hours.changeset(prev, %{list_position: hours.list_position}))
+        |> Multi.update(:new, Hours.changeset(hours, %{list_position: hours.list_position + 1}))
+        |> Repo.transaction()
+    end
   end
 end
