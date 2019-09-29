@@ -27,6 +27,8 @@ defmodule DievergoldereiWeb.Auth do
   end
 
   def logout(conn) do
-    configure_session(conn, drop: true)
+    conn
+    |> assign(:current_user, :nil)
+    |> configure_session(drop: true)
   end
 end
