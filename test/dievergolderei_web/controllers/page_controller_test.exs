@@ -40,6 +40,14 @@ defmodule DievergoldereiWeb.PageControllerTest do
     end
   end
 
+  describe "admin" do
+    test "redirects unauthenticated user", %{conn: conn} do
+      conn = get(conn, Routes.page_path(conn, :admin))
+      assert html_response(conn, 302)
+      assert conn.halted
+    end
+  end
+
   def setup_index(_) do
     page = fixture("index")
     {:ok, page: page}

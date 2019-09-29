@@ -6,18 +6,18 @@ defmodule Dievergolderei.AccountsTest do
   describe "users" do
     alias Dievergolderei.Accounts.User
 
-    @valid_attrs %{display_name: "some display_name", email: "some email", password_hash: "some password_hash"}
-    @update_attrs %{display_name: "some updated display_name", email: "some updated email", password_hash: "some updated password_hash"}
+    @valid_attrs %{display_name: "some display_name", email: "some email", password: "some password"}
+    @update_attrs %{display_name: "some updated display_name", email: "some updated email", password: "some updated password"}
     @invalid_attrs %{display_name: nil, email: nil, password_hash: nil}
 
-    def user_fixture(attrs \\ %{}) do
-      {:ok, user} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Accounts.create_user()
+    # def user_fixture(attrs \\ %{}) do
+    #   {:ok, user} =
+    #     attrs
+    #     |> Enum.into(@valid_attrs)
+    #     |> Accounts.create_user()
 
-      user
-    end
+    #   user
+    # end
 
     test "list_users/0 returns all users" do
       user = user_fixture()
@@ -33,7 +33,6 @@ defmodule Dievergolderei.AccountsTest do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
       assert user.display_name == "some display_name"
       assert user.email == "some email"
-      assert user.password_hash == "some password_hash"
     end
 
     test "create_user/1 with invalid data returns error changeset" do
@@ -45,7 +44,6 @@ defmodule Dievergolderei.AccountsTest do
       assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
       assert user.display_name == "some updated display_name"
       assert user.email == "some updated email"
-      assert user.password_hash == "some updated password_hash"
     end
 
     test "update_user/2 with invalid data returns error changeset" do

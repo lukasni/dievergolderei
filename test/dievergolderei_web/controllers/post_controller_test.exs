@@ -22,7 +22,25 @@ defmodule DievergoldereiWeb.PostControllerTest do
     post
   end
 
+  test "requires authentication on all admin actions", %{conn: conn} do
+    Enum.each([
+      get(conn, Routes.post_path(conn, :index)),
+      get(conn, Routes.post_path(conn, :new)),
+      get(conn, Routes.post_path(conn, :show, "123")),
+      get(conn, Routes.post_path(conn, :edit, "123")),
+      put(conn, Routes.post_path(conn, :update, "123"), hours: %{}),
+      post(conn, Routes.post_path(conn, :create), hours: %{}),
+      delete(conn, Routes.post_path(conn, :delete, "123"))
+    ], fn conn ->
+      assert html_response(conn, 302)
+      assert conn.halted
+    end)
+  end
+
   describe "index" do
+    setup [:login_user]
+
+    @tag login_as: "test@example.com"
     test "lists all posts", %{conn: conn} do
       conn = get(conn, Routes.post_path(conn, :index))
       assert html_response(conn, 200) =~ "Blogbeiträge"
@@ -45,6 +63,9 @@ defmodule DievergoldereiWeb.PostControllerTest do
   end
 
   describe "new post" do
+    setup [:login_user]
+
+    @tag login_as: "test@example.com"
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.post_path(conn, :new))
       assert html_response(conn, 200) =~ "Neuen Beitrag erstellen"
@@ -52,16 +73,20 @@ defmodule DievergoldereiWeb.PostControllerTest do
   end
 
   describe "create post" do
-    test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.post_path(conn, :create), post: @create_attrs)
+    setup [:login_user]
 
-      assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == Routes.post_path(conn, :show, id)
+    @tag login_as: "test@example.com"
+    test "redirects to show when data is valid", %{conn: conn} do
+      create_conn = post(conn, Routes.post_path(conn, :create), post: @create_attrs)
+
+      assert %{id: id} = redirected_params(create_conn)
+      assert redirected_to(create_conn) == Routes.post_path(create_conn, :show, id)
 
       conn = get(conn, Routes.post_path(conn, :show, id))
       assert html_response(conn, 200) =~ "Vorschau"
     end
 
+    @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.post_path(conn, :create), post: @invalid_attrs)
       assert html_response(conn, 200) =~ "Neuen Beitrag erstellen"
@@ -69,8 +94,9 @@ defmodule DievergoldereiWeb.PostControllerTest do
   end
 
   describe "edit post" do
-    setup [:create_post]
+    setup [:create_post, :login_user]
 
+    @tag login_as: "test@example.com"
     test "renders form for editing chosen post", %{conn: conn, post: post} do
       conn = get(conn, Routes.post_path(conn, :edit, post))
       assert html_response(conn, 200) =~ "Beitrag bearbeiten"
@@ -78,16 +104,18 @@ defmodule DievergoldereiWeb.PostControllerTest do
   end
 
   describe "update post" do
-    setup [:create_post]
+    setup [:create_post, :login_user]
 
+    @tag login_as: "test@example.com"
     test "redirects when data is valid", %{conn: conn, post: post} do
-      conn = put(conn, Routes.post_path(conn, :update, post), post: @update_attrs)
-      assert redirected_to(conn) == Routes.post_path(conn, :show, post)
+      update_conn = put(conn, Routes.post_path(conn, :update, post), post: @update_attrs)
+      assert redirected_to(update_conn) == Routes.post_path(update_conn, :show, post)
 
       conn = get(conn, Routes.post_path(conn, :show, post))
       assert html_response(conn, 200) =~ "some updated content"
     end
 
+    @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn, post: post} do
       conn = put(conn, Routes.post_path(conn, :update, post), post: @invalid_attrs)
       assert html_response(conn, 200) =~ "Beitrag bearbeiten"
@@ -95,11 +123,12 @@ defmodule DievergoldereiWeb.PostControllerTest do
   end
 
   describe "delete post" do
-    setup [:create_post]
+    setup [:create_post, :login_user]
 
+    @tag login_as: "test@example.com"
     test "deletes chosen post", %{conn: conn, post: post} do
-      conn = delete(conn, Routes.post_path(conn, :delete, post))
-      assert redirected_to(conn) == Routes.post_path(conn, :index)
+      delete_conn = delete(conn, Routes.post_path(conn, :delete, post))
+      assert redirected_to(delete_conn) == Routes.post_path(delete_conn, :index)
 
       assert_error_sent 404, fn ->
         get(conn, Routes.post_path(conn, :show, post))
