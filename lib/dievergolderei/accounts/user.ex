@@ -21,6 +21,7 @@ defmodule Dievergolderei.Accounts.User do
     user
     |> cast(attrs, [:display_name, :email, :password])
     |> validate_required([:display_name, :email])
+    |> unique_constraint(:email)
     |> validate_length(:password, @password_length)
     |> put_password_hash()
   end
