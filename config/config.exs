@@ -10,6 +10,9 @@ import Config
 config :dievergolderei,
   ecto_repos: [Dievergolderei.Repo]
 
+config :dievergolderei, Dievergolderei.Accounts.User,
+  password_length: [min: 8, max: 256]
+
 config :dievergolderei, DievergoldereiWeb.Gettext, default_locale: "de"
 
 # Configures the endpoint

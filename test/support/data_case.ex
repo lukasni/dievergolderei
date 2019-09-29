@@ -22,6 +22,7 @@ defmodule Dievergolderei.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Dievergolderei.DataCase
+      import Dievergolderei.TestHelpers
     end
   end
 

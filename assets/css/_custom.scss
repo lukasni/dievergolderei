@@ -109,3 +109,9 @@
 .breadcrumbs li:last-child::after {
     content: ""
 }
+
+.user-options {
+    position: absolute;
+    right: 1rem;
+    text-align: right;
+}
