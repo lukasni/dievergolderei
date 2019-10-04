@@ -27,7 +27,7 @@ lv_signing_salt =
   System.get_env("LIVEVIEW_SIGNING_SALT") ||
     raise """
     environment variable LIVEVIEW_SIGNING_SALT is missing.
-    You can generate one by calling mix phx.gen.secret
+    You can generate one by calling mix phx.gen.secret 32
     """
 
 config :dievergolderei, DievergoldereiWeb.Endpoint,
@@ -37,6 +37,13 @@ config :dievergolderei, DievergoldereiWeb.Endpoint,
     signing_salt: lv_signing_salt
   ]
 
+upload_directory =
+  System.get_env("UPLOAD_DIRECTORY") ||
+    raise """
+    environment variable UPLOAD_DIRECTORY is missing.
+    """
+
+config :dievergolderei, Dievergolderei.Photo, upload_directory: upload_directory
 # ## Using releases (Elixir v1.9+)
 #
 # If you are doing OTP releases, you need to instruct Phoenix

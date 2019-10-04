@@ -41,7 +41,9 @@ defmodule Dievergolderei.Photo do
 
   # Override the storage directory:
   def storage_dir(_version, {_file, _scope}) do
-    "uploads/photos/"
+    Application.get_env(:dievergolderei, Dievergolderei.Photo, [])
+    |> Keyword.get(:upload_directory)
+    |> Kernel.<>("photos/")
   end
 
   # Provide a default URL if there hasn't been a file uploaded
