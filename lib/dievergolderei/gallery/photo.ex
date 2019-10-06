@@ -4,7 +4,7 @@ defmodule Dievergolderei.Gallery.Photo do
   import Ecto.Changeset
 
   schema "photos" do
-    field :in_gallery, :boolean, default: false
+    field :in_gallery, :boolean, default: true
     field :photo, Dievergolderei.Photo.Type
     field :uuid, Ecto.UUID
 
