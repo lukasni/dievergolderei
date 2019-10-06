@@ -2,7 +2,8 @@ defmodule Dievergolderei.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @password_length Application.get_env(:dievergolderei, __MODULE__, []) |> Keyword.get(:password_length)
+  @password_length Application.get_env(:dievergolderei, __MODULE__, [])
+                   |> Keyword.get(:password_length)
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -10,7 +11,7 @@ defmodule Dievergolderei.Accounts.User do
     field :display_name, :string
     field :email, :string
 
-    field :password, :string, virtual: :true
+    field :password, :string, virtual: true
     field :password_hash, :string
 
     timestamps()

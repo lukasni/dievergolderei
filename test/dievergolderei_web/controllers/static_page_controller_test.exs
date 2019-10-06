@@ -13,15 +13,18 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
   end
 
   test "requires authentication on all actions", %{conn: conn} do
-    Enum.each([
-      get(conn, Routes.static_page_path(conn, :index)),
-      get(conn, Routes.static_page_path(conn, :show, "123")),
-      get(conn, Routes.static_page_path(conn, :edit, "123")),
-      put(conn, Routes.static_page_path(conn, :update, "123"), hours: %{})
-    ], fn conn ->
-      assert html_response(conn, 302)
-      assert conn.halted
-    end)
+    Enum.each(
+      [
+        get(conn, Routes.static_page_path(conn, :index)),
+        get(conn, Routes.static_page_path(conn, :show, "123")),
+        get(conn, Routes.static_page_path(conn, :edit, "123")),
+        put(conn, Routes.static_page_path(conn, :update, "123"), hours: %{})
+      ],
+      fn conn ->
+        assert html_response(conn, 302)
+        assert conn.halted
+      end
+    )
   end
 
   describe "index" do
@@ -52,7 +55,8 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
       create_conn =
         put(conn, Routes.static_page_path(conn, :update, static_page), static_page: @update_attrs)
 
-      assert redirected_to(create_conn) == Routes.static_page_path(create_conn, :show, static_page)
+      assert redirected_to(create_conn) ==
+               Routes.static_page_path(create_conn, :show, static_page)
 
       conn = get(conn, Routes.static_page_path(conn, :show, static_page))
       assert html_response(conn, 200) =~ "some updated content"

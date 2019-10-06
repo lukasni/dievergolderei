@@ -62,6 +62,7 @@ defmodule Dievergolderei.BlogTest do
         post_fixture(publish_on: ~D[2018-05-15]),
         post_fixture(publish_on: ~D[2018-05-05])
       ]
+
       post_fixture(publish_on: ~D[2018-06-05])
 
       assert Blog.list_posts_published_in_month(05, 2018) == may_posts

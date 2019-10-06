@@ -3,8 +3,16 @@ defmodule DievergoldereiWeb.UserControllerTest do
 
   alias Dievergolderei.Accounts
 
-  @create_attrs %{display_name: "some display_name", email: "email@example.com", password: "some password"}
-  @update_attrs %{display_name: "some updated display_name", email: "newemail@example.com", password: "some updated password"}
+  @create_attrs %{
+    display_name: "some display_name",
+    email: "email@example.com",
+    password: "some password"
+  }
+  @update_attrs %{
+    display_name: "some updated display_name",
+    email: "newemail@example.com",
+    password: "some updated password"
+  }
   @invalid_attrs %{display_name: nil, email: nil, password_hash: nil}
 
   def fixture(:user) do
@@ -13,18 +21,21 @@ defmodule DievergoldereiWeb.UserControllerTest do
   end
 
   test "requires authentication on all actions", %{conn: conn} do
-    Enum.each([
-      get(conn, Routes.user_path(conn, :index)),
-      get(conn, Routes.user_path(conn, :new)),
-      get(conn, Routes.user_path(conn, :show, "123")),
-      get(conn, Routes.user_path(conn, :edit, "123")),
-      put(conn, Routes.user_path(conn, :update, "123"), hours: %{}),
-      post(conn, Routes.user_path(conn, :create), hours: %{}),
-      delete(conn, Routes.user_path(conn, :delete, "123"))
-    ], fn conn ->
-      assert html_response(conn, 302)
-      assert conn.halted
-    end)
+    Enum.each(
+      [
+        get(conn, Routes.user_path(conn, :index)),
+        get(conn, Routes.user_path(conn, :new)),
+        get(conn, Routes.user_path(conn, :show, "123")),
+        get(conn, Routes.user_path(conn, :edit, "123")),
+        put(conn, Routes.user_path(conn, :update, "123"), hours: %{}),
+        post(conn, Routes.user_path(conn, :create), hours: %{}),
+        delete(conn, Routes.user_path(conn, :delete, "123"))
+      ],
+      fn conn ->
+        assert html_response(conn, 302)
+        assert conn.halted
+      end
+    )
   end
 
   describe "index" do
@@ -104,6 +115,7 @@ defmodule DievergoldereiWeb.UserControllerTest do
     test "deletes chosen user", %{conn: conn, user: user} do
       delete_conn = delete(conn, Routes.user_path(conn, :delete, user))
       assert redirected_to(delete_conn) == Routes.user_path(delete_conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.user_path(conn, :show, user))
       end

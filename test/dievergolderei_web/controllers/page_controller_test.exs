@@ -4,7 +4,9 @@ defmodule DievergoldereiWeb.PageControllerTest do
   alias Dievergolderei.Pages
 
   def fixture(name) do
-    {:ok, page} = Pages.create_static_page(%{name: name, content: "#{String.capitalize(name)} Page"})
+    {:ok, page} =
+      Pages.create_static_page(%{name: name, content: "#{String.capitalize(name)} Page"})
+
     page
   end
 
