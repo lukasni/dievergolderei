@@ -8,7 +8,7 @@
 </div>
 <div class="row">
     <div class="column" style="overflow-x: scroll; overflow-y: hidden; white-space: nowrap;">
-        <img src="<%= Routes.static_path(DievergoldereiWeb.Endpoint, "/videos/video_thumbnail.webp") %>" style="height: 100px;"  phx-click="show-video">
+        <img src="<%= Routes.static_path(DievergoldereiWeb.Endpoint, "/uploads/videos/video_thumbnail.webp") %>" style="height: 100px;"  phx-click="show-video">
     <%= for photo <- @photos do %>
         <img src="<%= photo_url(photo, :thumb) %>" style="height: 100px;" phx-click="show" phx-value-id="<%= photo.id %>">
     <% end %>
@@ -28,9 +28,9 @@
 <% else %>
 
 <div class="column">
-    <video poster="<%= Routes.static_path(DievergoldereiWeb.Endpoint, "/videos/video_thumbnail.webp") %>" controls style="width: 100%;">
-        <source src="<%= Routes.static_path(DievergoldereiWeb.Endpoint, "/videos/dievergolderei.webm") %>" type="video/webm; codecs=vp9,vorbis">
-        <source src="<%= Routes.static_path(DievergoldereiWeb.Endpoint, "/videos/dievergolderei.mp4") %>" type="video/mp4">
+    <video poster="<%= Routes.static_path(DievergoldereiWeb.Endpoint, "/uploads/videos/video_thumbnail.webp") %>" controls style="width: 100%;">
+        <source src="<%= Routes.static_path(DievergoldereiWeb.Endpoint, "/uploads/videos/dievergolderei.webm") %>" type="video/webm; codecs=vp9,vorbis">
+        <source src="<%= Routes.static_path(DievergoldereiWeb.Endpoint, "/uploads/videos/dievergolderei.mp4") %>" type="video/mp4">
     </video>
 </div>
 <% end %>
