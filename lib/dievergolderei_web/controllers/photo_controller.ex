@@ -31,9 +31,12 @@ defmodule DievergoldereiWeb.PhotoController do
     render(conn, "show.html", photo: photo)
   end
 
-  def render(conn, %{"id" => id}) do
-    photo = Gallery.get_photo!(id)
-    redirect(conn, to: Dievergolderei.Photo.url({photo.photo, photo}, :big))
+  def serve(conn, %{"id" => id}) do
+    upload = Gallery.get_photo!(id)
+
+    conn
+    |> put_resp_content_type(upload.content_type)
+    |> send_file(200, Photo.local_path(upload))
   end
 
   def edit(conn, %{"id" => id}) do

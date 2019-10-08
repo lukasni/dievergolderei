@@ -16,7 +16,7 @@
   <tbody>
 <%= for photo <- @photos do %>
     <tr>
-      <td><%= Dievergolderei.Photo.url({photo.photo, photo}, :thumb) |> img_tag() %></td>
+      <td><%= upload_img_tag(@conn, photo, width: "150") %></td>
       <td style="font-size: 150%;"><%= if photo.in_gallery, do: "☑", else: "☐" %></td>
 
       <td>

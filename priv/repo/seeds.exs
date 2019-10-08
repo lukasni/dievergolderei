@@ -33,7 +33,7 @@ Repo.insert!(%Hours{
   list_position: 4
 })
 
-if Code.ensure_compiled?(Faker) do
+if Mix.env() == :dev do
   for _ <- 1..10 do
     title = Faker.Lorem.words(2..5) |> Enum.join(" ") |> String.capitalize()
     publish_on = Faker.Date.backward(365 * 3)

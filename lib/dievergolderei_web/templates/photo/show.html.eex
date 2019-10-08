@@ -23,4 +23,4 @@
 
 <span><%= link "Bearbeiten", to: Routes.photo_path(@conn, :edit, @photo), class: "button button-outline" %></span>
 
-<%= Dievergolderei.Photo.url({@photo.photo, @photo}, :big) |> img_tag() %>
+<%= upload_img_tag(@conn, @photo) %>

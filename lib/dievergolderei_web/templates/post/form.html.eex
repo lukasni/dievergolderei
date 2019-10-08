@@ -1,4 +1,4 @@
-<%= form_for @changeset, @action, fn f -> %>
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Das Formular entält fehler, bitte unten überprüfen.</p>
@@ -12,6 +12,9 @@
   <%= label f, :slug, "Slug" %>
   <%= text_input f, :slug %>
   <%= error_tag f, :slug %>
+
+  <%= label f, :upload, "Bild" %>
+  <%= file_input f, :upload %>
 
   <%= label f, :content, "Inhalt", for: "content_textarea" %>
   <%= textarea f, :content, id: "content_textarea" %>
