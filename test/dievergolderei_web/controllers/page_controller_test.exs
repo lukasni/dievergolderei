@@ -33,6 +33,14 @@ defmodule DievergoldereiWeb.PageControllerTest do
     end
   end
 
+  describe "gallery" do
+    test "shows static gallery content", %{conn: conn} do
+      conn = get(conn, Routes.page_path(conn, :gallery))
+      assert html_response(conn, 200) =~ "Impressionen"
+      assert html_response(conn, 200) =~ "<video"
+    end
+  end
+
   describe "history" do
     setup [:setup_history]
 

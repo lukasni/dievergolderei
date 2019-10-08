@@ -18,10 +18,4 @@ defmodule Dievergolderei.Blog.Post do
     |> cast(attrs, [:title, :slug, :content, :publish_on, :photo_id])
     |> validate_required([:title, :content, :publish_on])
   end
-
-  def changeset_assoc(post, attrs) do
-    post
-    |> changeset(attrs)
-    |> cast_assoc(:photo, required: false)
-  end
 end

@@ -21,7 +21,7 @@ defmodule Dievergolderei.Gallery.Photo do
   def changeset(photo, attrs) do
     photo
     |> cast(attrs, [:in_gallery, :description, :title, :filename, :hash, :content_type, :size])
-    |> validate_required([:filename, :hash, :content_type, :size])
+    |> validate_required([:filename, :hash, :content_type, :size, :in_gallery])
     |> validate_number(:size, greater_than: 0)
   end
 

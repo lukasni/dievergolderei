@@ -21,7 +21,7 @@ defmodule DievergoldereiWeb.PageController do
   #   |> Phoenix.LiveView.Controller.live_render(DievergoldereiWeb.GalleryLive, session: %{})
   # end
   def gallery(conn, _) do
-    photos = Dievergolderei.Gallery.list_gallery_photos() |> Enum.shuffle()
+    photos = Dievergolderei.Gallery.list_gallery_photos()
     render(conn, "gallery.html", title: "Impressionen — ", photos: photos)
   end
 

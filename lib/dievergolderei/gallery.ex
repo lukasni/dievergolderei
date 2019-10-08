@@ -18,15 +18,20 @@ defmodule Dievergolderei.Gallery do
 
   """
   def list_photos do
-    Repo.all(Photo)
+    Photo
+    |> order_by(desc: :inserted_at, desc: :id)
+    |> Repo.all()
   end
 
   @doc """
-  Return list of gallery photos
+  Return list of `count` most recent gallery photos
   """
-  def list_gallery_photos do
+  def list_gallery_photos(count \\ 15) do
     Photo
     |> where([q], q.in_gallery)
+    # order by desc: :id to solve issues with photos created in the same second
+    |> order_by(desc: :inserted_at, desc: :id)
+    |> limit(^count)
     |> Repo.all()
   end
 
@@ -59,9 +64,14 @@ defmodule Dievergolderei.Gallery do
 
   """
   def create_photo(attrs \\ %{}) do
-    %Photo{}
-    |> Photo.changeset(attrs)
-    |> Repo.insert()
+    case Map.get(attrs, "photo", :error) do
+      %Plug.Upload{} = upload ->
+        create_photo_from_plug_upload(upload, attrs)
+
+      _ ->
+        Photo.changeset(%Photo{}, attrs)
+        |> Ecto.Changeset.apply_action(:insert)
+    end
   end
 
   @doc """
@@ -117,24 +127,25 @@ defmodule Dievergolderei.Gallery do
 
     Repo.transaction(fn ->
       with {:ok, %File.Stat{size: size}} <- File.stat(plug.path),
-           {:ok, upload} <-
-             %Photo{}
-             |> Photo.changeset(
-               %{
-                 "filename" => plug.filename,
-                 "content_type" => plug.content_type,
-                 "hash" => hash,
-                 "size" => size
-               }
-               |> Enum.into(attrs)
-             )
-             |> Repo.insert(),
-           :ok <-
-             File.cp(plug.path, Photo.local_path(upload)) do
+           {:ok, upload} <- create_changeset(plug, hash, size, attrs) |> Repo.insert(),
+           :ok <- File.cp(plug.path, Photo.local_path(upload)) do
         upload
       else
         {:error, reason} -> Repo.rollback(reason)
       end
     end)
+  end
+
+  defp create_changeset(plug, hash, size, attrs) do
+    %Photo{}
+    |> Photo.changeset(
+      %{
+        "filename" => plug.filename,
+        "content_type" => plug.content_type,
+        "hash" => hash,
+        "size" => size
+      }
+      |> Enum.into(attrs)
+    )
   end
 end

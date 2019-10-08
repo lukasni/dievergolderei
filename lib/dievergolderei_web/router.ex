@@ -30,7 +30,6 @@ defmodule DievergoldereiWeb.Router do
     get "/geschichte", PageController, :history
     get "/blog", PostController, :blog
     get "/blog/:month", PostController, :list
-    get "/photos/:id", PhotoController, :render
     get "/uploads/:id", PhotoController, :serve
     resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
