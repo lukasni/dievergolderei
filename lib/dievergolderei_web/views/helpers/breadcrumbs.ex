@@ -1,4 +1,21 @@
 defmodule DievergoldereiWeb.Breadcrumbs do
+  @moduledoc """
+  Breadcrumb helpers
+
+  Breadcrumbs are defined as nested calls of crumbs/2.
+
+  A first-level breadcrumb, right off the root, would be defined as follows:
+
+      def crumbs(conn, :first) do
+        [{"First", url} | crumbs(conn, :root)]
+      end
+
+  A second-level breadcrumb off :first can then call the previously defined crumbs/2 clause:
+
+      def crumbs(conn, :second) do
+        [{"Second", url} | crumbs(conn, :first)]
+      end
+  """
   use Phoenix.HTML
   import DievergoldereiWeb.Router.Helpers
 

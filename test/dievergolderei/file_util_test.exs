@@ -9,13 +9,13 @@ defmodule Dievergolderei.FilesTest do
     }
 
     test "SHA-256 hash gets calculated correctly" do
-      hash = Dievergolderei.File.hash(@test_file.path, :sha256)
+      hash = Dievergolderei.FileUtil.hash(@test_file.path, :sha256)
 
       assert @test_file.sha256 == hash
     end
 
     test "MD5 hash gets calculated correctly" do
-      hash = Dievergolderei.File.hash(@test_file.path, :md5)
+      hash = Dievergolderei.FileUtil.hash(@test_file.path, :md5)
 
       assert @test_file.md5 == hash
     end

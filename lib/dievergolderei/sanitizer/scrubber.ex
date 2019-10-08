@@ -1,4 +1,7 @@
 defmodule Dievergolderei.Sanitizer.Scrubber do
+  @moduledoc """
+  Custom HTML scrubber definition to allow some tags not covered by any of the defaults
+  """
   require HtmlSanitizeEx.Scrubber.Meta
   alias HtmlSanitizeEx.Scrubber.Meta
 

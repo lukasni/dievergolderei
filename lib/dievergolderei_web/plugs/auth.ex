@@ -1,4 +1,7 @@
 defmodule DievergoldereiWeb.Auth do
+  @moduledoc """
+  Module plug for logging users in and out
+  """
   import Plug.Conn
 
   alias Dievergolderei.Accounts

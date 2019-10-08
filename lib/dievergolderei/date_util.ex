@@ -1,4 +1,7 @@
-defmodule Dievergolderei.Util do
+defmodule Dievergolderei.DateUtil do
+  @moduledoc """
+  Date utility functions for displaying dates in unusual formats
+  """
   @months %{
     1 => "Januar",
     2 => "Februar",

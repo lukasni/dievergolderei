@@ -1,4 +1,9 @@
 defmodule Dievergolderei.TestHelpers do
+  @moduledoc """
+  Test helpers for conn cases.
+
+  TODO: Move other generic fixtures like photo in here to reduce copy-pasting in tests
+  """
   alias Dievergolderei.Accounts
 
   def user_fixture(attrs \\ %{}) do

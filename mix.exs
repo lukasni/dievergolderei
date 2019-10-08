@@ -59,7 +59,8 @@ defmodule Dievergolderei.MixProject do
       {:argon2_elixir, "~> 2.0"},
       {:faker, "~> 0.12.0", only: [:dev, :test]},
       {:excoveralls, "~> 0.11.2", only: :test},
-      {:floki, ">= 0.0.0", only: :test}
+      {:floki, ">= 0.0.0", only: :test},
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end
 

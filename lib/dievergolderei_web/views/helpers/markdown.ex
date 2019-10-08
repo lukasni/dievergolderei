@@ -1,4 +1,7 @@
 defmodule DievergoldereiWeb.Markdown do
+  @moduledoc """
+  Helper functions for editing and rendering markdown content
+  """
   @options %Earmark.Options{
     breaks: true,
     gfm: true,

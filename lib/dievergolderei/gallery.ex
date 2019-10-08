@@ -123,7 +123,7 @@ defmodule Dievergolderei.Gallery do
   end
 
   def create_photo_from_plug_upload(%Plug.Upload{} = plug, attrs \\ %{}) do
-    hash = Dievergolderei.File.hash(plug.path, :sha256)
+    hash = Dievergolderei.FileUtil.hash(plug.path, :sha256)
 
     Repo.transaction(fn ->
       with {:ok, %File.Stat{size: size}} <- File.stat(plug.path),

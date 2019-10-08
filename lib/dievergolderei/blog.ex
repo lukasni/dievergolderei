@@ -7,7 +7,7 @@ defmodule Dievergolderei.Blog do
   require Date
   alias Dievergolderei.Repo
 
-  alias Dievergolderei.Util
+  alias Dievergolderei.DateUtil
   alias Dievergolderei.Gallery
   alias Dievergolderei.Blog.Post
 
@@ -95,7 +95,7 @@ defmodule Dievergolderei.Blog do
     |> filter_publish_on_in_past()
     |> select([p], p.publish_on)
     |> Repo.all()
-    |> Enum.map(&Util.first_day_of_month/1)
+    |> Enum.map(&DateUtil.first_day_of_month/1)
     |> MapSet.new()
     |> MapSet.to_list()
     |> Enum.sort(fn a, b -> Date.compare(a, b) == :gt end)
