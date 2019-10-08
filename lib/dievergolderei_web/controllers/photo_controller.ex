@@ -15,14 +15,21 @@ defmodule DievergoldereiWeb.PhotoController do
   end
 
   def create(conn, %{"photo" => photo_params}) do
-    case Gallery.create_photo(photo_params) do
-      {:ok, photo} ->
-        conn
-        |> put_flash(:info, "Foto erfolgreich hochgeladen.")
-        |> redirect(to: Routes.photo_path(conn, :show, photo))
-
+    with %Plug.Upload{} = upload <- Map.get(photo_params, "photo"),
+         {:ok, photo} <- Gallery.create_photo_from_plug_upload(upload, photo_params) do
+      conn
+      |> put_flash(:info, "Foto erfolgreich hochgeladen.")
+      |> redirect(to: Routes.photo_path(conn, :show, photo))
+    else
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
+
+      _ ->
+        changeset = %Photo{} |> Gallery.change_photo()
+
+        conn
+        |> put_flash(:error, "Kein Bild ausgewählt")
+        |> render("new.html", changeset: changeset)
     end
   end
 
@@ -31,9 +38,12 @@ defmodule DievergoldereiWeb.PhotoController do
     render(conn, "show.html", photo: photo)
   end
 
-  def render(conn, %{"id" => id}) do
-    photo = Gallery.get_photo!(id)
-    redirect(conn, to: Dievergolderei.Photo.url({photo.photo, photo}, :big))
+  def serve(conn, %{"id" => id}) do
+    upload = Gallery.get_photo!(id)
+
+    conn
+    |> put_resp_content_type(upload.content_type)
+    |> send_file(200, Photo.local_path(upload))
   end
 
   def edit(conn, %{"id" => id}) do

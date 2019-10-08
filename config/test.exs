@@ -1,6 +1,6 @@
 import Config
 
-config :dievergolderei, Dievergolderei.Photo, upload_directory: "uploads/"
+config :dievergolderei, Dievergolderei.Photo, upload_directory: "/tmp/dv_uploads"
 
 # Configure your database
 config :dievergolderei, Dievergolderei.Repo,

@@ -5,12 +5,14 @@ defmodule Dievergolderei.Gallery.Photo do
 
   schema "photos" do
     field :in_gallery, :boolean, default: true
-    field :photo, Dievergolderei.Photo.Type
-    field :uuid, Ecto.UUID
-
     field :description, :string
     field :title, :string
     field :slug, :string
+
+    field :content_type, :string
+    field :filename, :string
+    field :hash, :string
+    field :size, :integer
 
     timestamps()
   end
@@ -18,14 +20,19 @@ defmodule Dievergolderei.Gallery.Photo do
   @doc false
   def changeset(photo, attrs) do
     photo
-    |> generate_uuid()
-    |> cast(attrs, [:in_gallery, :description, :title])
-    |> cast_attachments(attrs, [:photo])
-    |> validate_required([:photo])
+    |> cast(attrs, [:in_gallery, :description, :title, :filename, :hash, :content_type, :size])
+    |> validate_required([:filename, :hash, :content_type, :size])
+    |> validate_number(:size, greater_than: 0)
   end
 
-  defp generate_uuid(photo) do
-    photo
-    |> Map.update(:uuid, Ecto.UUID.generate(), fn val -> val || Ecto.UUID.generate() end)
+  def local_path(%{id: id, filename: filename}) do
+    [upload_directory(), "#{id}-#{filename}"]
+    |> Path.join()
+  end
+
+  def upload_directory do
+    Application.get_env(:dievergolderei, Dievergolderei.Photo, [])
+    |> Keyword.get(:upload_directory)
+    |> Path.join("photos")
   end
 end

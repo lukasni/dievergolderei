@@ -7,6 +7,7 @@ defmodule Dievergolderei.Blog.Post do
     field :publish_on, :date
     field :slug, :string
     field :title, :string
+    belongs_to :photo, Dievergolderei.Gallery.Photo
 
     timestamps()
   end
@@ -14,7 +15,13 @@ defmodule Dievergolderei.Blog.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :slug, :content, :publish_on])
-    |> validate_required([:title, :slug, :content, :publish_on])
+    |> cast(attrs, [:title, :slug, :content, :publish_on, :photo_id])
+    |> validate_required([:title, :content, :publish_on])
+  end
+
+  def changeset_assoc(post, attrs) do
+    post
+    |> changeset(attrs)
+    |> cast_assoc(:photo, required: false)
   end
 end

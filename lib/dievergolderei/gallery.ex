@@ -95,7 +95,7 @@ defmodule Dievergolderei.Gallery do
 
   """
   def delete_photo(%Photo{} = photo) do
-    Dievergolderei.Photo.delete({photo.photo, photo})
+    photo |> Photo.local_path() |> File.rm()
     Repo.delete(photo)
   end
 
@@ -110,5 +110,31 @@ defmodule Dievergolderei.Gallery do
   """
   def change_photo(%Photo{} = photo) do
     Photo.changeset(photo, %{})
+  end
+
+  def create_photo_from_plug_upload(%Plug.Upload{} = plug, attrs \\ %{}) do
+    hash = Dievergolderei.File.hash(plug.path, :sha256)
+
+    Repo.transaction(fn ->
+      with {:ok, %File.Stat{size: size}} <- File.stat(plug.path),
+           {:ok, upload} <-
+             %Photo{}
+             |> Photo.changeset(
+               %{
+                 "filename" => plug.filename,
+                 "content_type" => plug.content_type,
+                 "hash" => hash,
+                 "size" => size
+               }
+               |> Enum.into(attrs)
+             )
+             |> Repo.insert(),
+           :ok <-
+             File.cp(plug.path, Photo.local_path(upload)) do
+        upload
+      else
+        {:error, reason} -> Repo.rollback(reason)
+      end
+    end)
   end
 end

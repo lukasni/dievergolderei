@@ -27,6 +27,7 @@ defmodule Dievergolderei.BlogTest do
         |> Blog.create_post()
 
       post
+      |> Dievergolderei.Repo.preload(:photo)
     end
 
     test "list_posts/0 returns all posts" do
