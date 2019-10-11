@@ -1,6 +1,5 @@
 defmodule Dievergolderei.Gallery.Photo do
   use Ecto.Schema
-  use Waffle.Ecto.Schema
   import Ecto.Changeset
 
   schema "photos" do

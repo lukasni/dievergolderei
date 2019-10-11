@@ -16,6 +16,8 @@ config :dievergolderei, DievergoldereiWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :dievergolderei, Dievergolderei.Photo, upload_directory: "/var/dievergolderei/uploads/"
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

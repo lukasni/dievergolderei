@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/lukasni/dievergolderei.svg?branch=master)](https://travis-ci.org/lukasni/dievergolderei)
 [![Coverage Status](https://coveralls.io/repos/github/lukasni/dievergolderei/badge.svg?branch=master)](https://coveralls.io/github/lukasni/dievergolderei?branch=master)
 
-Beta release v0.2.0, feature complete. Still could do with a cleaner way to add photos to blog posts.
+First production-ready release, feature complete with redesigned gallery.
 
 ## Phoenix
 
