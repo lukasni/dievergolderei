@@ -4,7 +4,7 @@ defmodule Dievergolderei.MixProject do
   def project do
     [
       app: :dievergolderei,
-      version: "1.0.0",
+      version: "1.1.0",
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -55,6 +55,7 @@ defmodule Dievergolderei.MixProject do
       {:html_sanitize_ex, "~> 1.3.0"},
       {:argon2_elixir, "~> 2.0"},
       {:slugger, ">= 0.3.0"},
+      {:mogrify, "~> 0.7.3"},
       {:faker, "~> 0.12.0", only: [:dev, :test]},
       {:excoveralls, "~> 0.11.2", only: :test},
       {:floki, ">= 0.0.0", only: :test},

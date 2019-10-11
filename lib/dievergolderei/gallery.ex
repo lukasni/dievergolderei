@@ -6,7 +6,7 @@ defmodule Dievergolderei.Gallery do
   import Ecto.Query, warn: false
   alias Dievergolderei.Repo
 
-  alias Dievergolderei.Gallery.Photo
+  alias Dievergolderei.Gallery.{Image, Photo}
 
   @doc """
   Returns the list of photos.
@@ -128,7 +128,7 @@ defmodule Dievergolderei.Gallery do
     Repo.transaction(fn ->
       with {:ok, %File.Stat{size: size}} <- File.stat(plug.path),
            {:ok, upload} <- create_changeset(plug, hash, size, attrs) |> Repo.insert(),
-           :ok <- File.cp(plug.path, Photo.local_path(upload)) do
+           {:ok, _} <- Image.reduce_and_save(plug.path, Photo.local_path(upload)) do
         upload
       else
         {:error, reason} -> Repo.rollback(reason)
