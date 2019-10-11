@@ -1,4 +1,7 @@
 defmodule Dievergolderei.Release do
+  @moduledoc """
+  Release tasks for migrating and seeding the database in production
+  """
   @app :dievergolderei
 
   def migrate do

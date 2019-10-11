@@ -6,7 +6,9 @@ defmodule Dievergolderei.SanitizeTest do
   end
 
   test "allows basic formatting tags" do
-    input = "<h1>Title</h1>\n<p>Paragraph with <em>emphasized</em> and <strong>strongly emphasized</strong> text</p>"
+    input =
+      "<h1>Title</h1>\n<p>Paragraph with <em>emphasized</em> and <strong>strongly emphasized</strong> text</p>"
+
     expected = input
 
     assert expected == sanitize(input)
@@ -69,14 +71,18 @@ defmodule Dievergolderei.SanitizeTest do
   end
 
   test "allow local images" do
-    input = ~s(<img src="/photos/3" width="300" height="150" alt="Image description" title="Image title" />)
+    input =
+      ~s(<img src="/photos/3" width="300" height="150" alt="Image description" title="Image title" />)
+
     expected = input
 
     assert expected == sanitize(input)
   end
 
   test "allow http and https images" do
-    input = ~s(<img src="http://example.com/insecure.png" /><img src="https://example.com/secure.png" />)
+    input =
+      ~s(<img src="http://example.com/insecure.png" /><img src="https://example.com/secure.png" />)
+
     expected = input
 
     assert expected == sanitize(input)
@@ -112,6 +118,7 @@ defmodule Dievergolderei.SanitizeTest do
     <del cite="/explanation.html" datetime="2019-07-08T14:55:21Z">Deleted</del>
     <ins cite="/explanation.html" datetime="2019-07-08T15:02:12Z">Inserted</ins>
     """
+
     expected = input
 
     assert expected == sanitize(input)
@@ -123,6 +130,7 @@ defmodule Dievergolderei.SanitizeTest do
     <span style="text-decoration: underline">More text</span>
     </div>
     """
+
     expected = input
 
     assert expected == sanitize(input)
@@ -147,6 +155,7 @@ defmodule Dievergolderei.SanitizeTest do
     <tbody><tr><td>Table data</td></tr></tbody>
     </table>
     """
+
     expected = input
 
     assert expected == sanitize(input)

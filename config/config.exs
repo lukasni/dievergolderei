@@ -10,8 +10,7 @@ import Config
 config :dievergolderei,
   ecto_repos: [Dievergolderei.Repo]
 
-config :dievergolderei, Dievergolderei.Accounts.User,
-  password_length: [min: 8, max: 256]
+config :dievergolderei, Dievergolderei.Accounts.User, password_length: [min: 8, max: 256]
 
 config :dievergolderei, DievergoldereiWeb.Gettext, default_locale: "de"
 
@@ -32,9 +31,6 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
-
-# Arc uses local storage
-config :waffle, storage: Waffle.Storage.Local
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

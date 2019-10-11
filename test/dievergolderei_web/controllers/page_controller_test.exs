@@ -4,7 +4,9 @@ defmodule DievergoldereiWeb.PageControllerTest do
   alias Dievergolderei.Pages
 
   def fixture(name) do
-    {:ok, page} = Pages.create_static_page(%{name: name, content: "#{String.capitalize(name)} Page"})
+    {:ok, page} =
+      Pages.create_static_page(%{name: name, content: "#{String.capitalize(name)} Page"})
+
     page
   end
 
@@ -28,6 +30,14 @@ defmodule DievergoldereiWeb.PageControllerTest do
     test "lists contact page content", %{conn: conn, page: page} do
       conn = get(conn, Routes.page_path(conn, :contact))
       assert html_response(conn, 200) =~ page.content
+    end
+  end
+
+  describe "gallery" do
+    test "shows static gallery content", %{conn: conn} do
+      conn = get(conn, Routes.page_path(conn, :gallery))
+      assert html_response(conn, 200) =~ "Impressionen"
+      assert html_response(conn, 200) =~ "<video"
     end
   end
 

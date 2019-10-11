@@ -27,22 +27,33 @@ lv_signing_salt =
   System.get_env("LIVEVIEW_SIGNING_SALT") ||
     raise """
     environment variable LIVEVIEW_SIGNING_SALT is missing.
-    You can generate one by calling mix phx.gen.secret
+    You can generate one by calling mix phx.gen.secret 32
     """
 
 config :dievergolderei, DievergoldereiWeb.Endpoint,
-  http: [:inet6, port: String.to_integer(System.get_env("PORT") || "4000")],
+  http: [:inet6, port: String.to_integer(System.get_env("PORT") || "80")],
+  url: [host: "dievergolderei.ch", port: 443, scheme: "https"],
   secret_key_base: secret_key_base,
+  server: true,
   live_view: [
     signing_salt: lv_signing_salt
+  ],
+  force_ssl: [hsts: true],
+  https: [
+    :inet6,
+    port: 443,
+    cipher_suite: :compatible,
+    keyfile: System.get_env("SSL_KEY_FILE"),
+    certfile: System.get_env("SSL_CERT_FILE"),
+    cacertfile: System.get_env("SSL_CACERT_FILE"),
+    dhfile: System.get_env("SSL_DHPARAM_FILE")
   ]
 
-# ## Using releases (Elixir v1.9+)
-#
-# If you are doing OTP releases, you need to instruct Phoenix
-# to start each relevant endpoint:
-#
-config :dievergolderei, DievergoldereiWeb.Endpoint, server: true
-#
-# Then you can assemble a release by calling `mix release`.
-# See `mix help release` for more information.
+upload_directory =
+  System.get_env("UPLOAD_DIRECTORY") ||
+    raise """
+    environment variable UPLOAD_DIRECTORY is missing.
+    """
+
+config :dievergolderei, Dievergolderei.Photo, upload_directory: upload_directory
+

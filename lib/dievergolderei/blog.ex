@@ -7,7 +7,8 @@ defmodule Dievergolderei.Blog do
   require Date
   alias Dievergolderei.Repo
 
-  alias Dievergolderei.Util
+  alias Dievergolderei.DateUtil
+  alias Dievergolderei.Gallery
   alias Dievergolderei.Blog.Post
 
   @doc """
@@ -22,6 +23,7 @@ defmodule Dievergolderei.Blog do
   def list_posts do
     Post
     |> order_by_published()
+    |> preload([:photo])
     |> Repo.all()
   end
 
@@ -38,6 +40,7 @@ defmodule Dievergolderei.Blog do
     |> filter_publish_on_in_past()
     |> order_by_published()
     |> limit(^count)
+    |> preload([:photo])
     |> Repo.all()
   end
 
@@ -64,6 +67,7 @@ defmodule Dievergolderei.Blog do
     |> where([p], p.publish_on >= ^start_date)
     |> where([p], p.publish_on < ^end_date)
     |> order_by_published()
+    |> preload([:photo])
     |> Repo.all()
   end
 
@@ -91,7 +95,7 @@ defmodule Dievergolderei.Blog do
     |> filter_publish_on_in_past()
     |> select([p], p.publish_on)
     |> Repo.all()
-    |> Enum.map(&Util.first_day_of_month/1)
+    |> Enum.map(&DateUtil.first_day_of_month/1)
     |> MapSet.new()
     |> MapSet.to_list()
     |> Enum.sort(fn a, b -> Date.compare(a, b) == :gt end)
@@ -111,7 +115,10 @@ defmodule Dievergolderei.Blog do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id) do
+    Repo.get!(Post, id)
+    |> Repo.preload([:photo])
+  end
 
   @doc """
   Creates a post.
@@ -125,7 +132,22 @@ defmodule Dievergolderei.Blog do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_post(attrs \\ %{}) do
+  def create_post(attrs \\ %{})
+
+  def create_post(%{"upload" => %Plug.Upload{} = upload} = attrs) do
+    Repo.transaction(fn ->
+      with {:ok, upload} <- Gallery.create_photo_from_plug_upload(upload),
+           {:ok, post} <-
+             Map.put(attrs, "photo_id", upload.id) |> Map.delete("upload") |> create_post() do
+        post
+      else
+        {:error, reason} ->
+          Repo.rollback(reason)
+      end
+    end)
+  end
+
+  def create_post(attrs) do
     %Post{}
     |> Post.changeset(attrs)
     |> Repo.insert()

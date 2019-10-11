@@ -1,4 +1,7 @@
 defmodule DievergoldereiWeb.Auth do
+  @moduledoc """
+  Module plug for logging users in and out
+  """
   import Plug.Conn
 
   alias Dievergolderei.Accounts
@@ -28,7 +31,7 @@ defmodule DievergoldereiWeb.Auth do
 
   def logout(conn) do
     conn
-    |> assign(:current_user, :nil)
+    |> assign(:current_user, nil)
     |> configure_session(drop: true)
   end
 end

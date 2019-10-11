@@ -1,4 +1,7 @@
 <article class="blogpost">
     <h3><%= @post.title %></h3>
     <div class="post-content"><%= markdown @post.content %></div>
+    <%= if @post.photo do %>
+        <%= upload_img_tag(@conn, @post.photo) %>
+    <% end %>
 </article>

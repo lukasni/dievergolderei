@@ -1,6 +1,9 @@
 # Die Vergolderei
 
-Beta release v0.1.0, editing hours and creating basic Blogs supported. No support yet for adding images.
+[![Build Status](https://travis-ci.org/lukasni/dievergolderei.svg?branch=master)](https://travis-ci.org/lukasni/dievergolderei)
+[![Coverage Status](https://coveralls.io/repos/github/lukasni/dievergolderei/badge.svg?branch=master)](https://coveralls.io/github/lukasni/dievergolderei?branch=master)
+
+First production-ready release, feature complete with redesigned gallery.
 
 ## Phoenix
 
@@ -15,10 +18,3 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix

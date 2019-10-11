@@ -1,4 +1,7 @@
 defmodule DievergoldereiWeb.RequireLogin do
+  @moduledoc """
+  Module plug for requiring a logged-in user
+  """
   import Plug.Conn
 
   alias DievergoldereiWeb.Router.Helpers, as: Routes

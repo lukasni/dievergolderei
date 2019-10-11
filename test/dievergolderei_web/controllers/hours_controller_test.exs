@@ -18,18 +18,21 @@ defmodule DievergoldereiWeb.HoursControllerTest do
   end
 
   test "requires authentication on all actions", %{conn: conn} do
-    Enum.each([
-      get(conn, Routes.hours_path(conn, :index)),
-      get(conn, Routes.hours_path(conn, :new)),
-      get(conn, Routes.hours_path(conn, :edit, "123")),
-      put(conn, Routes.hours_path(conn, :update, "123"), hours: %{}),
-      post(conn, Routes.hours_path(conn, :reorder, id: "123", direction: "up")),
-      post(conn, Routes.hours_path(conn, :create), hours: %{}),
-      delete(conn, Routes.hours_path(conn, :delete, "123"))
-    ], fn conn ->
-      assert html_response(conn, 302)
-      assert conn.halted
-    end)
+    Enum.each(
+      [
+        get(conn, Routes.hours_path(conn, :index)),
+        get(conn, Routes.hours_path(conn, :new)),
+        get(conn, Routes.hours_path(conn, :edit, "123")),
+        put(conn, Routes.hours_path(conn, :update, "123"), hours: %{}),
+        post(conn, Routes.hours_path(conn, :reorder, id: "123", direction: "up")),
+        post(conn, Routes.hours_path(conn, :create), hours: %{}),
+        delete(conn, Routes.hours_path(conn, :delete, "123"))
+      ],
+      fn conn ->
+        assert html_response(conn, 302)
+        assert conn.halted
+      end
+    )
   end
 
   describe "index" do
@@ -105,13 +108,13 @@ defmodule DievergoldereiWeb.HoursControllerTest do
     setup [:create_orderable_hours, :login_user]
 
     @tag login_as: "test@example.com"
-    test "reorders hours up successfully" , %{conn: conn, second: second} do
+    test "reorders hours up successfully", %{conn: conn, second: second} do
       conn = post(conn, Routes.hours_path(conn, :reorder, id: second.id, direction: "up"))
       assert redirected_to(conn) == Routes.hours_path(conn, :index)
     end
 
     @tag login_as: "test@example.com"
-    test "reorders hours down successfully" , %{conn: conn, first: first} do
+    test "reorders hours down successfully", %{conn: conn, first: first} do
       conn = post(conn, Routes.hours_path(conn, :reorder, id: first.id, direction: "down"))
       assert redirected_to(conn) == Routes.hours_path(conn, :index)
     end
@@ -134,7 +137,7 @@ defmodule DievergoldereiWeb.HoursControllerTest do
 
   defp create_orderable_hours(_) do
     {:ok, first} = OpeningHours.create_hours(%{@create_attrs | list_position: 0})
-    {:ok, second} = OpeningHours.create_hours(%{@create_attrs | list_position: 1 })
+    {:ok, second} = OpeningHours.create_hours(%{@create_attrs | list_position: 1})
 
     {:ok, first: first, second: second}
   end

@@ -6,8 +6,16 @@ defmodule Dievergolderei.AccountsTest do
   describe "users" do
     alias Dievergolderei.Accounts.User
 
-    @valid_attrs %{display_name: "some display_name", email: "some email", password: "some password"}
-    @update_attrs %{display_name: "some updated display_name", email: "some updated email", password: "some updated password"}
+    @valid_attrs %{
+      display_name: "some display_name",
+      email: "some email",
+      password: "some password"
+    }
+    @update_attrs %{
+      display_name: "some updated display_name",
+      email: "some updated email",
+      password: "some updated password"
+    }
     @invalid_attrs %{display_name: nil, email: nil, password_hash: nil}
 
     # def user_fixture(attrs \\ %{}) do

@@ -31,7 +31,10 @@ defmodule DievergoldereiWeb.SessionControllerTest do
     end
 
     test "rejects incorrect password", %{conn: conn, user: user} do
-      conn = post(conn, Routes.session_path(conn, :create), session: %{email: user.email, password: "incorrect"})
+      conn =
+        post(conn, Routes.session_path(conn, :create),
+          session: %{email: user.email, password: "incorrect"}
+        )
 
       assert nil == conn.assigns[:current_user]
       assert html_response(conn, 200) =~ "Invalid username/password combination"

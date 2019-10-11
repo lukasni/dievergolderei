@@ -45,6 +45,7 @@ defmodule DievergoldereiWeb do
       import DievergoldereiWeb.Gettext
       import DievergoldereiWeb.Markdown
       import DievergoldereiWeb.Breadcrumbs
+      import DievergoldereiWeb.UploadHelpers
       alias DievergoldereiWeb.Router.Helpers, as: Routes
     end
   end
