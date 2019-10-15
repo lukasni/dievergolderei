@@ -16,7 +16,12 @@ alias Dievergolderei.Pages.StaticPage
 
 Repo.insert!(%Hours{label: "Montag", times: "geschlossen", active: true, list_position: 0})
 
-Repo.insert!(%Hours{label: "Dienstag – Freitag", times: "09:00 – 12:30\n14:00 – 18:00", active: true, list_position: 1})
+Repo.insert!(%Hours{
+  label: "Dienstag – Freitag",
+  times: "09:00 – 12:30\n14:00 – 18:00",
+  active: true,
+  list_position: 1
+})
 
 Repo.insert!(%Hours{label: "Samstag", times: "09:00 – 12:30", active: true, list_position: 2})
 Repo.insert!(%Hours{label: "Sonntag", times: "geschlossen", active: true, list_position: 3})
