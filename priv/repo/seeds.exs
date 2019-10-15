@@ -34,12 +34,9 @@ if Mix.env() == :dev do
     publish_on = Faker.Date.backward(365 * 3)
     content = Faker.Lorem.paragraphs() |> Enum.join("\n\n")
 
-    Repo.insert!(%Post{
-      title: title,
-      publish_on: publish_on,
-      content: content,
-      slug: Slugger.slugify_downcase(title) |> Slugger.truncate_slug(16)
-    })
+    %Post{}
+    |> Post.changeset(%{title: title, publish_on: publish_on, content: content})
+    |> Repo.insert!()
   end
 end
 
