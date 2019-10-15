@@ -132,6 +132,13 @@ defmodule Dievergolderei.BlogTest do
       assert post.title == "some updated title"
     end
 
+    test "update_post/2 with upload creates upload and updates the post" do
+      post = post_fixture()
+      assert {:ok, %Post{} = post} = Blog.update_post(post, %{"upload" => @upload})
+      assert post.title == "some title"
+      assert post.title >= 1
+    end
+
     test "update_post/2 with title but no slug regenerates slug" do
       post = post_fixture()
       assert {:ok, %Post{} = post} = Blog.update_post(post, %{title: "New Title!"})

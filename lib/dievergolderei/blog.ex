@@ -137,8 +137,7 @@ defmodule Dievergolderei.Blog do
   def create_post(%{"upload" => %Plug.Upload{} = upload} = attrs) do
     Repo.transaction(fn ->
       with {:ok, upload} <- Gallery.create_photo_from_plug_upload(upload),
-           {:ok, post} <-
-             Map.put(attrs, "photo_id", upload.id) |> Map.delete("upload") |> create_post() do
+           {:ok, post} <- replace_photo_and_run(&create_post/1, upload, attrs) do
         post
       else
         {:error, reason} ->
@@ -165,6 +164,18 @@ defmodule Dievergolderei.Blog do
       {:error, %Ecto.Changeset{}}
 
   """
+  def update_post(%Post{} = post, %{"upload" => %Plug.Upload{} = upload} = attrs) do
+    Repo.transaction(fn ->
+      with {:ok, upload} <- Gallery.create_photo_from_plug_upload(upload),
+           {:ok, post} <- replace_photo_and_run(fn a -> update_post(post, a) end, upload, attrs) do
+        post
+      else
+        {:error, reason} ->
+          Repo.rollback(reason)
+      end
+    end)
+  end
+
   def update_post(%Post{} = post, attrs) do
     post
     |> Post.changeset(attrs)
@@ -198,5 +209,12 @@ defmodule Dievergolderei.Blog do
   """
   def change_post(%Post{} = post) do
     Post.changeset(post, %{})
+  end
+
+  defp replace_photo_and_run(f, upload, attrs) do
+    attrs
+    |> Map.put("photo_id", upload.id)
+    |> Map.delete("upload")
+    |> f.()
   end
 end
