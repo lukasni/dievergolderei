@@ -112,6 +112,13 @@ defmodule Dievergolderei.BlogTest do
       assert post.title == "some title"
     end
 
+    test "create_post/1 with title and no slug generates correct slug" do
+      attrs = Map.delete(@valid_attrs, "slug")
+      assert {:ok, %Post{} = post} = Blog.create_post(attrs)
+      assert post.title == "some title"
+      assert post.slug == "some-title"
+    end
+
     test "create_post/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Blog.create_post(@invalid_attrs)
     end
@@ -123,6 +130,12 @@ defmodule Dievergolderei.BlogTest do
       assert post.publish_on == ~D[2011-05-18]
       assert post.slug == "some updated slug"
       assert post.title == "some updated title"
+    end
+
+    test "update_post/2 with title but no slug regenerates slug" do
+      post = post_fixture()
+      assert {:ok, %Post{} = post} = Blog.update_post(post, %{title: "New Title!"})
+      assert post.slug == "new-title"
     end
 
     test "update_post/2 with invalid data returns error changeset" do
