@@ -56,4 +56,3 @@ upload_directory =
     """
 
 config :dievergolderei, Dievergolderei.Photo, upload_directory: upload_directory
-
