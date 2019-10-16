@@ -23,7 +23,6 @@ defmodule DievergoldereiWeb do
 
       import Plug.Conn
       import DievergoldereiWeb.Gettext
-      import Phoenix.LiveView.Controller, only: [live_render: 3]
       alias DievergoldereiWeb.Router.Helpers, as: Routes
     end
   end
@@ -36,7 +35,6 @@ defmodule DievergoldereiWeb do
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
-      import Phoenix.LiveView, only: [live_render: 2, live_render: 3, live_link: 1, live_link: 2]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -55,7 +53,6 @@ defmodule DievergoldereiWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
-      import Phoenix.LiveView.Router
     end
   end
 
@@ -70,6 +67,8 @@ defmodule DievergoldereiWeb do
   When used, dispatch to the appropriate controller/view/etc.
   """
   defmacro __using__(which) when is_atom(which) do
+    # coveralls-ignore-start
     apply(__MODULE__, which, [])
+    # coveralls-ignore-stop
   end
 end

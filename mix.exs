@@ -4,7 +4,7 @@ defmodule Dievergolderei.MixProject do
   def project do
     [
       app: :dievergolderei,
-      version: "1.1.0",
+      version: "1.2.0",
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -47,7 +47,6 @@ defmodule Dievergolderei.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, ">= 0.3.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},

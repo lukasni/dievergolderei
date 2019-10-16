@@ -19,10 +19,7 @@ config :dievergolderei, DievergoldereiWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "GbGHdYKslelLVH8Bv1STveMW3vK//AHVQt8YL4t8sooPjaFGa+vpCo5ZtRFcamXB",
   render_errors: [view: DievergoldereiWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Dievergolderei.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [
-    signing_salt: "WL42N5UNOYEc2v0m7pVyx8f+chokWkGw"
-  ]
+  pubsub: [name: Dievergolderei.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,

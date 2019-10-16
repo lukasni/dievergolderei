@@ -6,7 +6,9 @@ defmodule DievergoldereiWeb.RequireLogin do
 
   alias DievergoldereiWeb.Router.Helpers, as: Routes
 
+  # coveralls-ignore-start
   def init(opts), do: opts
+  # coveralls-ignore-stop
 
   def call(conn, _opts) do
     case conn.assigns[:current_user] do
