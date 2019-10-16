@@ -60,7 +60,6 @@ required by `config/releases.exs`
 DATABASE_URL=ecto://user:password@host:port/database
 POOL_SIZE=10
 SECRET_KEY_BASE=secret key generated with mix phx.gen.secret
-LIVEVIEW_SIGNING_SALT=salt generated with mix phx.gen.secret 32
 PORT=80
 SSL_KEY_FILE=/etc/letsencrypt/live/domain.tld/privkey.pem
 SSL_CACERT_FILE=/etc/letsencrypt/live/domain.tld/chain.pem
