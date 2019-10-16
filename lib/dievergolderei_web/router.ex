@@ -11,10 +11,6 @@ defmodule DievergoldereiWeb.Router do
     plug Clacks
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   pipeline :admin do
     plug :put_layout, {DievergoldereiWeb.LayoutView, "admin.html"}
     plug DievergoldereiWeb.RequireLogin

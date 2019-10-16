@@ -6,7 +6,9 @@ defmodule DievergoldereiWeb.Auth do
 
   alias Dievergolderei.Accounts
 
+  # coveralls-ignore-start
   def init(opts), do: opts
+  # coveralls-ignore-stop
 
   def call(conn, _opts) do
     user_id = get_session(conn, :user_id)
