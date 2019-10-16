@@ -9,6 +9,7 @@ defmodule DievergoldereiWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug DievergoldereiWeb.Auth
+    plug Clacks
   end
 
   pipeline :api do
