@@ -45,6 +45,7 @@ defmodule Dievergolderei.MixProject do
       {:phoenix_ecto, "~> 4.0"},
       {:ecto_sql, "~> 3.1"},
       {:postgrex, ">= 0.0.0"},
+      {:db_connection, "~> 2.2", override: true},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
@@ -58,7 +59,8 @@ defmodule Dievergolderei.MixProject do
       {:faker, "~> 0.12.0", only: [:dev, :test]},
       {:excoveralls, "~> 0.11.2", only: :test},
       {:floki, ">= 0.0.0", only: :test},
-      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.9", only: :dev}
     ]
   end
 
