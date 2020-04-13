@@ -13,6 +13,5 @@ defmodule Dievergolderei.Repo.Migrations.CreateItems do
 
       timestamps()
     end
-
   end
 end
