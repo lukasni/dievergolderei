@@ -1,0 +1,21 @@
+<div class="row">
+    <section class="column">
+        <article>
+            <%= markdown @static_content %>
+        </article>
+    </section>
+</div>
+
+<div class="centered">
+    <ul class="cards">
+        <%= for item <- @items do %>
+            <li class="card">
+                <h4 class="card-title">
+                    <%= item.title %><br>
+                    <%= item.price |> format_chf() %>
+                    </h4>
+                <%= upload_img_tag(@conn, item, style: "align-self: center") %>
+            </li>
+        <% end %>
+    </ul>
+</div>

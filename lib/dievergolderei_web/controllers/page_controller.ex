@@ -15,6 +15,12 @@ defmodule DievergoldereiWeb.PageController do
     render(conn, "contact.html", title: "Kontakt — ", static_content: content)
   end
 
+  def shop(conn, _params) do
+    content = Pages.get_content_by_name!("shop")
+    items = Dievergolderei.Shop.list_items()
+    render(conn, "shop.html", title: "Shop -", static_content: content, items: items)
+  end
+
   def gallery(conn, _) do
     photos = Dievergolderei.Gallery.list_gallery_photos()
     render(conn, "gallery.html", title: "Impressionen — ", photos: photos)
