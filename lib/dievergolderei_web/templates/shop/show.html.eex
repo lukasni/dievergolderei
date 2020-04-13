@@ -1,0 +1,26 @@
+<%= breadcrumbs [@conn, :shop_item, @item] %>
+
+<h1>Shopartikel</h1>
+
+<ul>
+
+  <li>
+    <strong>Titel:</strong>
+    <%= @item.title %>
+  </li>
+
+  <li>
+    <strong>Preis:</strong>
+    <%= @item.price |> format_chf() %>
+  </li>
+
+  <li>
+    <strong>Reserviert:</strong>
+    <%= if @item.reserved, do: "☑", else: "☐" %>
+  </li>
+
+</ul>
+
+<span><%= link "Bearbeiten", to: Routes.shop_path(@conn, :edit, @item), class: "button button-outline" %></span>
+
+<%= upload_img_tag(@conn, @item) %>

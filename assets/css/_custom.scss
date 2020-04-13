@@ -140,6 +140,28 @@ ul.photo-panel {
     flex-grow: 10;
 }
 
+ul.cards {
+    list-style: none;
+}
+
+@media (min-width: 40em) {
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .card {
+        flex: 0 1 calc(50% - 1em);
+    }
+}
+
+@media (min-width: 60em) {
+    .card {
+        flex: 0 1 calc(33% - 1em);
+    }
+}
+
 @media (max-aspect-ratio: 1/1) {
     .photo-panel li {
         height: 30vh;

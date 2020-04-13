@@ -1,0 +1,31 @@
+<%= breadcrumbs [@conn, :shop_items] %>
+
+<h1>Shop-Artikel</h1>
+
+<span><%= link "Neuen Artikel erstellen", to: Routes.shop_path(@conn, :new), class: "button" %></span>
+
+<table>
+  <thead>
+    <tr>
+      <th>Bild</th>
+      <th>Titel</th>
+      <th>Preis</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for item <- @items do %>
+    <tr>
+      <td><%= upload_img_tag(@conn, item, width: "150") %></td>
+      <td><%= item.title %></td>
+      <td><%= item.price |> format_chf() %></td>
+
+      <td>
+        <span><%= link "Bearbeiten", to: Routes.shop_path(@conn, :edit, item), class: "button button-outline button-small mb-0" %></span>
+        <span><%= link "Löschen", to: Routes.shop_path(@conn, :delete, item), method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-danger button-small mb-0" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
