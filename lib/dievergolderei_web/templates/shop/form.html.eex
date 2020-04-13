@@ -1,0 +1,27 @@
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Das Formular enthält Fehler, bitte unten überprüfen.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :photo, "Bild" %>
+  <%= file_input f, :photo %>
+  <%= error_tag f, :hash %>
+
+  <%= label f, :title, "Titel" %>
+  <%= text_input f, :title, placeholder: "Optional" %>
+  <%= error_tag f, :title %>
+
+  <%= label f, :price, "Preis" %>
+  <%= number_input f, :price, placeholder: "Optional", step: "0.05" %>
+  <%= error_tag f, :price %>
+
+  <%= label f, :reserved, "Reserviert" %>
+  <%= checkbox f, :reserved %>
+  <%= error_tag f, :reserved %>
+
+  <div>
+    <%= submit "Speichern" %>
+  </div>
+<% end %>

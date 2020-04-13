@@ -1,4 +1,4 @@
-defmodule DievergoldereiWeb.PageView do
+defmodule DievergoldereiWeb.ShopView do
   use DievergoldereiWeb, :view
 
   alias Decimal, as: D

@@ -29,8 +29,16 @@ defmodule DievergoldereiWeb.Breadcrumbs do
     [{"Blog", post_path(conn, :index)} | crumbs(conn, :root)]
   end
 
+  def crumbs(conn, :shop_items) do
+    [{"Shop", shop_path(conn, :index)} | crumbs(conn, :root)]
+  end
+
   def crumbs(conn, :post_new) do
     [{"Neu", post_path(conn, :new)} | crumbs(conn, :posts)]
+  end
+
+  def crumbs(conn, :shop_item_new) do
+    [{"Neu", shop_path(conn, :new)} | crumbs(conn, :shop_items)]
   end
 
   def crumbs(conn, :hours) do
@@ -69,8 +77,20 @@ defmodule DievergoldereiWeb.Breadcrumbs do
     [{photo.id, photo_path(conn, :show, photo)} | crumbs(conn, :photos)]
   end
 
+  def crumbs(conn, :shop_item, %Dievergolderei.Shop.Item{} = item) do
+    [{item.id, shop_path(conn, :show, item)} | crumbs(conn, :shop_items)]
+  end
+
   def crumbs(conn, :photo_edit, %Dievergolderei.Gallery.Photo{} = photo) do
     [{"Bearbeiten", photo_path(conn, :edit, photo)} | crumbs(conn, :photo, photo)]
+  end
+
+  def crumbs(conn, :shop_item_edit, %Dievergolderei.Shop.Item{} = item) do
+    [{"Bearbeiten", shop_path(conn, :edit, item)} | crumbs(conn, :shop_item, item)]
+  end
+
+  def crumbs(conn, :shop_edit, %Dievergolderei.Shop.Item{} = item) do
+    [{"Bearbeiten", shop_path(conn, :edit, item)} | crumbs(conn, :shop, item)]
   end
 
   def crumbs(conn, :static_page, %Dievergolderei.Pages.StaticPage{} = page) do

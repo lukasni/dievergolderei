@@ -21,11 +21,13 @@ defmodule DievergoldereiWeb.Router do
 
     get "/", PageController, :index
     get "/kontakt", PageController, :contact
+    get "/shop", PageController, :shop
     get "/impressionen", PageController, :gallery
     get "/geschichte", PageController, :history
     get "/blog", PostController, :blog
     get "/blog/:month", PostController, :list
     get "/uploads/:id", PhotoController, :serve
+    get "/uploads/shop/:id", ShopController, :serve
     resources "/sessions", SessionController, only: [:new, :create, :delete]
   end
 
@@ -38,6 +40,7 @@ defmodule DievergoldereiWeb.Router do
     resources "/posts", PostController
     resources "/pages", StaticPageController, only: [:index, :create, :edit, :update, :show]
     resources "/photos", PhotoController
+    resources "/shop", ShopController
     resources "/users", UserController
   end
 
