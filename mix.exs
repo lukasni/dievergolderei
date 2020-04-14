@@ -4,7 +4,7 @@ defmodule Dievergolderei.MixProject do
   def project do
     [
       app: :dievergolderei,
-      version: "1.3.0",
+      version: "1.3.2",
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -74,7 +74,8 @@ defmodule Dievergolderei.MixProject do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      pkg: ["cmd ./bin/build_container"]
     ]
   end
 end

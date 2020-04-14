@@ -1,8 +1,8 @@
 language: elixir
 elixir:
-  - 1.9
+  - 1.10.2
 otp_release:
-  - 21.0
+  - 22.2.8
 services: postgresql
 env:
   - MIX_ENV=test
