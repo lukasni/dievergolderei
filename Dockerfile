@@ -40,7 +40,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 # install erlang
-ENV ERLANG_VERSION 22.0.7
+ENV ERLANG_VERSION 22.2.8
 RUN asdf install erlang ${ERLANG_VERSION} \
  && asdf global erlang ${ERLANG_VERSION}
 
