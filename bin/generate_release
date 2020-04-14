@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+podman run -v $(pwd):/opt/build:Z --rm -it dievergolderei:latest /opt/build/bin/build

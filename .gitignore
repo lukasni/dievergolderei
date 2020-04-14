@@ -38,3 +38,6 @@ npm-debug.log
 
 # We can ignore content in the uploads directory
 /uploads/*
+
+# We're ignoring /rel/artifacts/, that's where built releases are saved
+/rel/artifacts/
