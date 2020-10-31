@@ -63,7 +63,7 @@ config :dievergolderei, DievergoldereiWeb.Endpoint,
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/dievergolderei_web/{live,views}/.*(ex)$",
+      ~r"lib/dievergolderei_web/(live|views)/.*(ex)$",
       ~r"lib/dievergolderei_web/templates/.*(eex)$"
     ]
   ]
