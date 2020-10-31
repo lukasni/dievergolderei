@@ -10,6 +10,10 @@ defmodule Dievergolderei.Application do
     children = [
       # Start the Ecto repository
       Dievergolderei.Repo,
+      # Start the Telemetry supervisor
+      DievergoldereiWeb.Telemetry,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Dievergolderei.PubSub},
       # Start the endpoint when the application starts
       DievergoldereiWeb.Endpoint
       # Starts a worker by calling: Dievergolderei.Worker.start_link(arg)
