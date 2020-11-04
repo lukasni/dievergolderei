@@ -1,21 +1,16 @@
-<div class="row">
-    <section class="column">
-        <article>
-            <%= markdown @static_content %>
-        </article>
-    </section>
-</div>
 
-<div class="centered">
-    <ul class="cards">
-        <%= for item <- @items do %>
-            <li class="card">
-                <h4 class="card-title">
-                    <%= item.title %><br>
-                    <%= item.price |> format_chf() %>
-                    </h4>
-                <%= upload_img_tag(@conn, item, style: "align-self: center") %>
-            </li>
-        <% end %>
-    </ul>
-</div>
+<article class="prose">
+    <%= markdown @static_content %>
+</article>
+
+<ul class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+    <%= for item <- @items do %>
+        <li class="flex flex-col">
+            <div class="flex justify-between items-center">
+                <h4 class="text-xl font-light"><%= item.title %></h4>
+                <h5 class="text-md"><%= item.price |> format_chf() %></h5>
+            </div>
+            <%= upload_img_tag(@conn, item, class: "flex-grow object-cover") %>
+        </li>
+    <% end %>
+</ul>

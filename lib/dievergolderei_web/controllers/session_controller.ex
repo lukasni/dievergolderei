@@ -1,8 +1,6 @@
 defmodule DievergoldereiWeb.SessionController do
   use DievergoldereiWeb, :controller
 
-  plug :put_layout, {DievergoldereiWeb.LayoutView, "admin.html"}
-
   def new(conn, _params) do
     render(conn, "new.html")
   end

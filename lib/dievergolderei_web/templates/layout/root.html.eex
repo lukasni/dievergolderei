@@ -11,33 +11,35 @@
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
-    <header class="container">
-      <section class="main-nav">
-        <%= render "navigation.html", assigns %>
-      </section>
-      <%= if @current_user do %>
-        <div class="user-options">
-          <%= @current_user.display_name %><br>
-          <%= link "Adminbereich", to: Routes.page_path(@conn, :admin) %><br>
-          <%= link "Ausloggen", to: Routes.session_path(@conn, :delete, @current_user), method: "delete" %>
-        </div>
-      <% end %>
-      <%= unless assigns[:hide_logo] == true do %>
-      <img src="<%= Routes.static_path(@conn, "/images/header.svg") %>" alt="Logo Die Vergolderei">
-      <% end %>
-    </header>
-    <main role="main" class="container">
-      <%= if info = get_flash(@conn, :info) do %>
-        <div class="alert alert-info">
-        <p><%= info %></p>
-        </div>
-      <% end %>
-      <%= if error = get_flash(@conn, :error) do %>
-        <div class="alert alert-danger">
-        <p><%= error %></p>
-        </div>
-      <% end %>
-      <%= @inner_content %>
-    </main>
+    <div class="container mx-auto px-4 py-4">
+      <header class="">
+        <section class="main-nav">
+          <%= render "navigation.html", assigns %>
+        </section>
+        <%= if false && @current_user do %>
+          <div class="">
+            <%= @current_user.display_name %><br>
+            <%= link "Adminbereich", to: Routes.page_path(@conn, :admin) %><br>
+            <%= link "Ausloggen", to: Routes.session_path(@conn, :delete, @current_user), method: "delete" %>
+          </div>
+        <% end %>
+        <%= unless assigns[:hide_logo] == true do %>
+        <img class="block lg:h-64 mt-4 mx-auto" src="<%= Routes.static_path(@conn, "/images/header.svg") %>" alt="Logo Die Vergolderei">
+        <% end %>
+      </header>
+      <main role="main" class="mt-8">
+        <%= if info = get_flash(@conn, :info) do %>
+          <div class="alert alert-info">
+          <p><%= info %></p>
+          </div>
+        <% end %>
+        <%= if error = get_flash(@conn, :error) do %>
+          <div class="alert alert-danger">
+          <p><%= error %></p>
+          </div>
+        <% end %>
+        <%= @inner_content %>
+      </main>
+    </div>
   </body>
 </html>

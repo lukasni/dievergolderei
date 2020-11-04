@@ -1,9 +1,45 @@
 /* This file is for your main application css. */
 @import "../node_modules/nprogress/nprogress.css";
+@import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap');
 
 @tailwind base;
 
 @tailwind components;
+
+.small-caps {
+  font-variant: small-caps;
+}
+
+.button {
+  @apply px-4 py-2 border text-center rounded block
+}
+
+.button-dvblue {
+  @apply bg-dvblue-300 border-dvblue-500 text-white
+}
+
+.button-gray {
+  @apply bg-gray-300 border-gray-400
+}
+
+.breadcrumbs {
+  & li {
+    @apply inline;
+  }
+
+  & li:after {
+    content: " / ";
+  }
+
+  & li:last-child:after {
+    content: "";
+  }
+
+  & a {
+    @apply text-dvblue-500;
+  }
+}
 
 @tailwind utilities;
 
@@ -11,7 +47,8 @@ body::before {
     background-image: url("/images/bg.png");
     content: "";
     filter: blur(5px);
-    @apply bg-cover w-screen h-screen block fixed top-0 left-0 opacity-25;
+    z-index: -2;
+    @apply bg-cover w-screen h-screen block fixed top-0 left-0 opacity-25 pointer-events-none;
 }
 
 /* LiveView specific classes for your customizations */
