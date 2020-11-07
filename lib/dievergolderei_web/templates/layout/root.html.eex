@@ -18,7 +18,7 @@
         </section>
         <div class="relative text-right">
           <%= if @current_user do %>
-            <div class="absolute right-0 top-0 mt-1 bg-gray-200 border-gray-400 border p-2 rounded" x-data="{ isOpen: false }">
+            <div class="sm:absolute right-0 top-0 mt-1 bg-opacity-25 bg-dvgold-200 border-dvgold-400 border p-2 rounded" x-data="{ isOpen: false }">
               <div @click="isOpen=!isOpen">
                 <%= @current_user.display_name %>
               </div>

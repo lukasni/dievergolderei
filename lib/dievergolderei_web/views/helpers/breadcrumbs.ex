@@ -104,12 +104,10 @@ defmodule DievergoldereiWeb.Breadcrumbs do
   # Implementation
 
   def breadcrumbs(args) do
-    content_tag :div, class: "row" do
-      content_tag :nav, role: "navigation" do
-        content_tag :ul, class: "breadcrumbs" do
-          apply(__MODULE__, :crumbs, args)
-          |> render()
-        end
+    content_tag :nav, role: "navigation" do
+      content_tag :ul, class: "breadcrumbs" do
+        apply(__MODULE__, :crumbs, args)
+        |> render()
       end
     end
   end
