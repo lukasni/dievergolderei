@@ -61,6 +61,14 @@ defmodule DievergoldereiWeb.Breadcrumbs do
     [{"Statische Seiten", static_page_path(conn, :index)} | crumbs(conn, :root)]
   end
 
+  def crumbs(conn, :users) do
+    [{"Benutzer", user_path(conn, :index)} | crumbs(conn, :root)]
+  end
+
+  def crumbs(conn, :user_new) do
+    [{"Neu", user_path(conn, :index)} | crumbs(conn, :users)]
+  end
+
   def crumbs(conn, :post, %Dievergolderei.Blog.Post{} = post) do
     [{post.slug, post_path(conn, :show, post)} | crumbs(conn, :posts)]
   end
@@ -79,6 +87,10 @@ defmodule DievergoldereiWeb.Breadcrumbs do
 
   def crumbs(conn, :shop_item, %Dievergolderei.Shop.Item{} = item) do
     [{item.id, shop_path(conn, :show, item)} | crumbs(conn, :shop_items)]
+  end
+
+  def crumbs(conn, :user, %Dievergolderei.Accounts.User{} = user) do
+    [{user.display_name, user_path(conn, :edit, user)} | crumbs(conn, :users)]
   end
 
   def crumbs(conn, :photo_edit, %Dievergolderei.Gallery.Photo{} = photo) do
@@ -104,12 +116,10 @@ defmodule DievergoldereiWeb.Breadcrumbs do
   # Implementation
 
   def breadcrumbs(args) do
-    content_tag :div, class: "row" do
-      content_tag :nav, role: "navigation" do
-        content_tag :ul, class: "breadcrumbs" do
-          apply(__MODULE__, :crumbs, args)
-          |> render()
-        end
+    content_tag :nav, role: "navigation" do
+      content_tag :ul, class: "breadcrumbs" do
+        apply(__MODULE__, :crumbs, args)
+        |> render()
       end
     end
   end

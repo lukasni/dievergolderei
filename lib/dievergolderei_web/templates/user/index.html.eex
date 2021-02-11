@@ -1,28 +1,47 @@
-<h1>Listing Users</h1>
+<%= breadcrumbs [@conn, :users] %>
 
-<table>
+<h1 class="text-4xl font-light mt-6">
+    Benutzer
+</h1>
+
+<%= link to: Routes.user_path(@conn, :new), class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
+  <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+  </svg>
+  <span class="ml-1 mr-2">Neu</span>
+<% end %>
+
+<table class="mt-4">
   <thead>
     <tr>
-      <th>Email</th>
-      <th>Display name</th>
+      <th class="p-2 text-left">Email</th>
+      <th class="p-2 text-left">Display name</th>
 
-      <th></th>
+      <th class="p-2 text-left"></th>
     </tr>
   </thead>
   <tbody>
 <%= for user <- @users do %>
     <tr>
-      <td><%= user.email %></td>
-      <td><%= user.display_name %></td>
+      <td class="p-2"><%= user.email %></td>
+      <td class="p-2"><%= user.display_name %></td>
 
-      <td>
-        <span><%= link "Show", to: Routes.user_path(@conn, :show, user) %></span>
-        <span><%= link "Edit", to: Routes.user_path(@conn, :edit, user) %></span>
-        <span><%= link "Delete", to: Routes.user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      <td class="p-2">
+        <div class="flex-none flex">
+        <%= link to: Routes.user_path(@conn, :edit, user), class: "button button-gray inline-block flex-grow rounded-none rounded-l border-r-0" do %>
+          <svg class="h-4 w-4 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+            <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
+          </svg>
+        <% end %>
+        <%= link to: Routes.user_path(@conn, :delete, user), method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-red inline-block flex-grow rounded-none rounded-r" do %>
+          <svg class="h-4 w-4 mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+        <% end %>
+    </div>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New User", to: Routes.user_path(@conn, :new) %></span>

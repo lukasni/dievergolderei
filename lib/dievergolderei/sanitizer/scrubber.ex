@@ -14,7 +14,7 @@ defmodule Dievergolderei.Sanitizer.Scrubber do
   Meta.allow_tag_with_these_attributes("a", ["name", "title"])
   Meta.allow_tag_with_this_attribute_values("a", "target", ["_blank"])
   Meta.allow_tag_with_this_attribute_values("a", "rel", ["noopener", "noreferrer"])
-  Meta.allow_tag_with_these_attributes("address", [])
+  Meta.allow_tag_with_these_attributes("address", ["class"])
   Meta.allow_tag_with_these_attributes("blockquote", ["cite"])
   Meta.allow_tag_with_these_attributes("br", [])
   Meta.allow_tag_with_these_attributes("code", ["class"])

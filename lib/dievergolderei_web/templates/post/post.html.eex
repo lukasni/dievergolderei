@@ -1,5 +1,8 @@
-<article class="blogpost">
-    <h3><%= @post.title %></h3>
+<article class="prose mb-8">
+    <h2 class="flex justify-between items-baseline">
+        <span><%= @post.title %></span>
+        <span class="text-sm text-gray-600"><%= @post.publish_on |> DT.strftime("%d. %b %Y") %></span>
+    </h2>
     <div class="post-content"><%= markdown @post.content %></div>
     <%= if @post.photo do %>
         <%= upload_img_tag(@conn, @post.photo) %>

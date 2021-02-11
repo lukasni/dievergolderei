@@ -93,6 +93,7 @@ defmodule DievergoldereiWeb do
       import DievergoldereiWeb.Markdown
       import DievergoldereiWeb.Breadcrumbs
       import DievergoldereiWeb.UploadHelpers
+      alias DievergoldereiWeb.DateTimeHelpers, as: DT
       alias DievergoldereiWeb.Router.Helpers, as: Routes
     end
   end

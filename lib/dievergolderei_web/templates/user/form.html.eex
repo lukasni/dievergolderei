@@ -5,19 +5,19 @@
     </div>
   <% end %>
 
-  <%= label f, :display_name %>
-  <%= text_input f, :display_name %>
+  <%= label f, :display_name, class: "block mt-4" %>
+  <%= text_input f, :display_name, class: "block rounded" %>
   <%= error_tag f, :display_name %>
 
-  <%= label f, :email %>
-  <%= email_input f, :email %>
+  <%= label f, :email, class: "block mt-4" %>
+  <%= email_input f, :email, class: "block rounded" %>
   <%= error_tag f, :email %>
 
-  <%= label f, :password %>
-  <%= password_input f, :password %>
+  <%= label f, :password, class: "block mt-4" %>
+  <%= password_input f, :password, class: "block rounded" %>
   <%= error_tag f, :password %>
 
   <div>
-    <%= submit "Save" %>
+    <%= submit "Speichern", class: "button button-dvblue mt-4 w-full md:w-64" %>
   </div>
 <% end %>

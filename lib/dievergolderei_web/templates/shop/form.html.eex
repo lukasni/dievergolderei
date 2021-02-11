@@ -5,23 +5,31 @@
     </div>
   <% end %>
 
-  <%= label f, :photo, "Bild" %>
-  <%= file_input f, :photo %>
+<div class="mt-4 md:max-w-md">
+  <%= label f, :photo, "Bild", class: "text-lg block" %>
+  <%= file_input f, :photo, class: "rounded block w-full" %>
   <%= error_tag f, :hash %>
+</div>
 
-  <%= label f, :title, "Titel" %>
-  <%= text_input f, :title, placeholder: "Optional" %>
+<div class="mt-4 md:max-w-md">
+  <%= text_input f, :title, placeholder: "Titel - optional", class: "rounded block w-full" %>
   <%= error_tag f, :title %>
+</div>
 
-  <%= label f, :price, "Preis" %>
-  <%= number_input f, :price, placeholder: "Optional", step: "0.05" %>
+<div class="mt-4 md:max-w-md">
+  <%= number_input f, :price, placeholder: "Preis - optional", step: "0.05", class: "rounded block w-full" %>
   <%= error_tag f, :price %>
+</div>
 
-  <%= label f, :reserved, "Reserviert" %>
-  <%= checkbox f, :reserved %>
-  <%= error_tag f, :reserved %>
+<div class="mt-4 md:max-w-md">
+  <%= label f, :reserved, class: "flex items-center space-x-2" do %>
+    Reserviert
+    <%= checkbox f, :reserved %>
+  <% end %>
+</div>
+
 
   <div>
-    <%= submit "Speichern" %>
+    <%= submit "Speichern", class: "button button-dvblue mt-4 w-full md:w-64" %>
   </div>
 <% end %>

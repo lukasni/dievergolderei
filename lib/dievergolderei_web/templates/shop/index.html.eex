@@ -1,29 +1,34 @@
 <%= breadcrumbs [@conn, :shop_items] %>
 
-<h1>Shop-Artikel</h1>
+<h1 class="text-4xl font-light mt-6">Shop-Artikel</h1>
 
-<span><%= link "Neuen Artikel erstellen", to: Routes.shop_path(@conn, :new), class: "button" %></span>
+<%= link to: Routes.shop_path(@conn, :new), class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
+  <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+  </svg>
+  <span class="ml-1 mr-2">Neu</span>
+<% end %>
 
-<table>
+<table class="w-full pb-16 mt-8">
   <thead>
     <tr>
-      <th>Bild</th>
-      <th>Titel</th>
-      <th>Preis</th>
+      <th class="text-left">Bild</th>
+      <th class="text-left">Titel</th>
+      <th class="text-left">Preis</th>
 
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for item <- @items do %>
-    <tr>
+    <tr class="border-t">
       <td><%= upload_img_tag(@conn, item, width: "150") %></td>
       <td><%= item.title %></td>
       <td><%= item.price |> format_chf() %></td>
 
       <td>
-        <span><%= link "Bearbeiten", to: Routes.shop_path(@conn, :edit, item), class: "button button-outline button-small mb-0" %></span>
-        <span><%= link "Löschen", to: Routes.shop_path(@conn, :delete, item), method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-danger button-small mb-0" %></span>
+        <span><%= link "Bearbeiten", to: Routes.shop_path(@conn, :edit, item), class: "button button-dvblue mb-2" %></span>
+        <span><%= link "Löschen", to: Routes.shop_path(@conn, :delete, item), method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-red" %></span>
       </td>
     </tr>
 <% end %>

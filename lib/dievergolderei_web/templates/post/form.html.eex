@@ -5,23 +5,32 @@
     </div>
   <% end %>
 
-  <%= label f, :title, "Titel" %>
-  <%= text_input f, :title %>
-  <%= error_tag f, :title %>
+  <div class="grid md:grid-cols-3 gap-4 mt-4">
+    <div>
+      <%= label f, :title, "Titel", class: "text-lg block" %>
+      <%= text_input f, :title, class: "rounded block w-full" %>
+      <%= error_tag f, :title %>
+    </div>
 
-  <%= label f, :upload, "Bild" %>
-  <%= file_input f, :upload %>
+    <div>
+      <%= label f, :upload, "Bild", class: "text-lg block" %>
+      <%= file_input f, :upload, class: "rounded" %>
+    </div>
 
-  <%= label f, :content, "Inhalt", for: "content_textarea" %>
-  <%= textarea f, :content, id: "content_textarea" %>
-  <%= error_tag f, :content %>
+    <div>
+      <%= label f, :publish_on, "Veröffentlichungsdatum", class: "text-lg block" %>
+      <%= date_input f, :publish_on, class: "rounded block w-full" %>
+      <%= error_tag f, :publish_on %>
+    </div>
+  </div>
 
-  <%= label f, :publish_on, "Veröffentlichungsdatum" %>
-  <%= date_input f, :publish_on %>
-  <%= error_tag f, :publish_on %>
+  <div class="mt-4">
+    <%= textarea f, :content, id: "content_textarea" %>
+    <%= error_tag f, :content %>
+  </div>
 
   <div>
-    <%= submit "Speichern" %>
+    <%= submit "Speichern", class: "button button-dvblue mt-4 w-full md:w-64" %>
   </div>
 <% end %>
 
