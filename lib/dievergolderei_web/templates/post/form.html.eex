@@ -8,18 +8,18 @@
   <div class="grid md:grid-cols-3 gap-4 mt-4">
     <div>
       <%= label f, :title, "Titel", class: "text-lg block" %>
-      <%= text_input f, :title, class: "form-input block w-full h-12" %>
+      <%= text_input f, :title, class: "rounded block w-full" %>
       <%= error_tag f, :title %>
     </div>
 
     <div>
       <%= label f, :upload, "Bild", class: "text-lg block" %>
-      <%= file_input f, :upload, class: "form-input block w-full h-12" %>
+      <%= file_input f, :upload, class: "rounded" %>
     </div>
 
     <div>
       <%= label f, :publish_on, "Veröffentlichungsdatum", class: "text-lg block" %>
-      <%= date_input f, :publish_on, class: "form-input block w-full h-12" %>
+      <%= date_input f, :publish_on, class: "rounded block w-full" %>
       <%= error_tag f, :publish_on %>
     </div>
   </div>

@@ -1,8 +1,4 @@
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
   purge: [
     "../**/*.html.eex",
     "../**/*.html.leex",
@@ -11,26 +7,26 @@ module.exports = {
     "./js/**/*.js",
   ],
   theme: {
-    typography: (theme) => ({
-      default: {
-        css: {
-          color: theme('colors.gray.900'),
-          h1: {
-            fontWeight: 400
-          },
-          h2: {
-            fontWeight: 400
-          },
-          h3: {
-            fontWeight: 400
-          },
-          h4: {
-            fontWeight: 400
-          },
-        }
-      }
-    }),
     extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.gray.900'),
+            h1: {
+              fontWeight: 400
+            },
+            h2: {
+              fontWeight: 400
+            },
+            h3: {
+              fontWeight: 400
+            },
+            h4: {
+              fontWeight: 400
+            },
+          }
+        }
+      }),
       fontFamily: {
         'sans': ['Raleway', 'sans-serif'],
       },
@@ -69,9 +65,6 @@ module.exports = {
   variants: {},
   plugins: [
     require('@tailwindcss/typography'),
-    require("@tailwindcss/custom-forms")
-  ],
-  experimental: {
-    applyComplexClasses: true
-  }
+    require("@tailwindcss/forms")
+  ]
 }

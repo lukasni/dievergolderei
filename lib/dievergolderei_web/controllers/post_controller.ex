@@ -11,7 +11,12 @@ defmodule DievergoldereiWeb.PostController do
 
   def blog(conn, _params) do
     posts = Dievergolderei.Blog.list_most_recent_published_posts(5)
-    months = Dievergolderei.Blog.months_with_posts()
+    months =
+      Dievergolderei.Blog.months_with_posts()
+      |> Enum.group_by(& &1.year)
+      |> Map.to_list()
+      |> Enum.sort_by(&elem(&1, 0), :desc)
+
     render(conn, "blog.html", title: "Blog — ", posts: posts, months: months)
   end
 

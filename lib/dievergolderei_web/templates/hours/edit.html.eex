@@ -1,5 +1,5 @@
 <%= breadcrumbs [@conn, :hours, @hours] %>
 
-<h1>Öffnungszeiten Bearbeiten</h1>
+<h1 class="text-4xl font-light mt-6">Öffnungszeiten Bearbeiten</h1>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.hours_path(@conn, :update, @hours)) %>

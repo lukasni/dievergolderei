@@ -1,25 +1,19 @@
 <%= breadcrumbs [@conn, :static_pages] %>
 
-<h1>Statische Seiteninhalte</h1>
+<h1 class="text-4xl font-light mt-6">Statische Seiteninhalte</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Inhaltsvorschau</th>
-
-      <th></th>
-    </tr>
-  </thead>
+<table class="w-full pb-16 mt-8">
   <tbody>
 <%= for static_page <- @static_pages do %>
-    <tr>
-      <td><%= static_page.name %></td>
-      <td><%= (String.slice(static_page.content, 0..120) <> "...") |> markdown %></td>
+    <tr class="border-t">
+      <td class="p-2">
+        <div class="prose">
+          <%= (String.slice(static_page.content, 0..120) <> "...") |> markdown %>
+        </div>
+      </td>
 
-      <td>
-        <span><%= link "Vorschau", to: Routes.static_page_path(@conn, :show, static_page), class: "button button-outline button-small mb-0" %></span>
-        <span><%= link "Bearbeiten", to: Routes.static_page_path(@conn, :edit, static_page), class: "button button-outline button-small mb-0" %></span>
+      <td class="p-2">
+        <span><%= link "Bearbeiten", to: Routes.static_page_path(@conn, :edit, static_page), class: "button button-dvblue" %></span>
       </td>
     </tr>
 <% end %>
