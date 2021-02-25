@@ -1,10 +1,10 @@
-<div class="md:flex justify-between">
-    <section class="md:w-2/3 pr-4">
+<div class="grid md:grid-cols-2 gap-4">
+    <section class="">
         <article class="prose prose-lg">
             <%= markdown @static_content %>
         </article>
     </section>
-    <aside class="mt-4 md:mt-0 md:w-1/3">
+    <aside class="md:row-span-2 mt-6 md:mt-0">
         <h2 class="text-2xl">Öffnungszeiten</h2>
         <table class="mt-4 w-full border-t border-dvblue-500">
         <%= for hour <- @hours do %>
@@ -14,15 +14,20 @@
         </tr>
         <% end %>
         </table>
+        <article class="prose">
+            <%= markdown @featured_content %>
+        </article>
     </aside>
-</div>
-<%= if length(@posts) > 0 do %>
-<div class="prose mt-8">
-    <h2 class="">Aktuell</h2>
-    <% end %>
-    <div class="mt-2">
-    <%= for post <- @posts do %>
-    <%= render DievergoldereiWeb.PostView, "post.html", post: post, conn: @conn %>
-    <% end %>
+    <%= if length(@posts) > 0 do %>
+    <div class="">
+        <div class="mt-8 prose">
+            <h2 class="">Aktuell</h2>
+            <% end %>
+            <div class="mt-4">
+            <%= for post <- @posts do %>
+            <%= render DievergoldereiWeb.PostView, "post.html", post: post, conn: @conn %>
+            <% end %>
+            </div>
+        </div>
     </div>
 </div>
