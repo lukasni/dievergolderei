@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 app_name="dievergolderei"
-app_vsn="1.3.2"
+app_vsn="1.4.0"
 
 set -e
 echo "Starting release process..."
