@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%= csrf_meta_tag() %>
+    <%= render "favicons.html", assigns %>
+    <%= live_title_tag assigns[:title] || "", suffix: "Die Vergolderei" %>
+    <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </head>
+  <body>
+    <div class="container mx-auto px-4 py-4">
+      <header class="">
+        <section class="main-nav">
+          <%= render "navigation.html", assigns %>
+        </section>
+        <div class="relative text-right">
+          <%= if @current_user do %>
+            <div class="sm:absolute right-0 top-0 mt-1 bg-opacity-25 bg-dvgold-200 border-dvgold-400 border p-2 rounded" x-data="{ isOpen: false }">
+              <div @click="isOpen=!isOpen">
+                <%= @current_user.display_name %>
+              </div>
+              <div x-show="isOpen">
+              <hr class="my-2">
+              <%= link "Adminbereich", to: Routes.page_path(@conn, :admin), class: "block" %>
+              <%= link "Ausloggen", to: Routes.session_path(@conn, :delete, @current_user), method: "delete", class: "block" %>
+              </div>
+            </div>
+          <% end %>
+          <%= unless assigns[:hide_logo] == true do %>
+          <img class="block lg:h-64 mt-4 mx-auto" src="<%= Routes.static_path(@conn, "/images/header.svg") %>" alt="Logo Die Vergolderei">
+          <% end %>
+        </div>
+      </header>
+      <main role="main" class="mt-8">
+        <%= if info = get_flash(@conn, :info) do %>
+          <div class="alert alert-info">
+          <p><%= info %></p>
+          </div>
+        <% end %>
+        <%= if error = get_flash(@conn, :error) do %>
+          <div class="alert alert-danger">
+          <p><%= error %></p>
+          </div>
+        <% end %>
+        <%= @inner_content %>
+      </main>
+    </div>
+  </body>
+</html>

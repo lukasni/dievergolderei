@@ -1,7 +1,4 @@
-<div class="row">
-    <section class="column">
-        <article>
-            <%= markdown @static_content %>
-        </article>
-    </section>
-</div>
+
+<article class="prose" id="history">
+    <%= markdown @static_content %>
+</article>

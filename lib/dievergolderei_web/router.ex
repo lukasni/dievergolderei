@@ -4,7 +4,8 @@ defmodule DievergoldereiWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    plug :fetch_live_flash
+    plug :put_root_layout, {DievergoldereiWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug DievergoldereiWeb.Auth
@@ -12,8 +13,8 @@ defmodule DievergoldereiWeb.Router do
   end
 
   pipeline :admin do
-    plug :put_layout, {DievergoldereiWeb.LayoutView, "admin.html"}
     plug DievergoldereiWeb.RequireLogin
+    plug :hide_logo
   end
 
   scope "/", DievergoldereiWeb do
@@ -42,6 +43,11 @@ defmodule DievergoldereiWeb.Router do
     resources "/photos", PhotoController
     resources "/shop", ShopController
     resources "/users", UserController
+    live_dashboard "/dashboard", metrics: DievergoldereiWeb.Telemetry
+  end
+
+  def hide_logo(conn, _opts) do
+    Plug.Conn.assign(conn, :hide_logo, true)
   end
 
   # Other scopes may use custom stacks.
