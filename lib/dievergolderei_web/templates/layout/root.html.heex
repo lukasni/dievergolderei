@@ -7,8 +7,8 @@
     <%= csrf_meta_tag() %>
     <%= render "favicons.html", assigns %>
     <%= live_title_tag assigns[:title] || "", suffix: "Die Vergolderei" %>
-    <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <link phx-track-static rel="stylesheet" href={ Routes.static_path(@conn, ~s(/css/app.css)) }/>
+    <script defer phx-track-static type="text/javascript" src={ Routes.static_path(@conn, ~s(/js/app.js)) }></script>
   </head>
   <body>
     <div class="container mx-auto px-4 py-4">
@@ -30,7 +30,7 @@
             </div>
           <% end %>
           <%= unless assigns[:hide_logo] == true do %>
-          <img class="block lg:h-64 mt-4 mx-auto" src="<%= Routes.static_path(@conn, "/images/header.svg") %>" alt="Logo Die Vergolderei">
+          <img class="block lg:h-64 mt-4 mx-auto" src={ Routes.static_path(@conn, ~s(/images/header.svg)) } alt="Logo Die Vergolderei">
           <% end %>
         </div>
       </header>

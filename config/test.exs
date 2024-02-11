@@ -4,8 +4,10 @@ config :dievergolderei, Dievergolderei.Photo, upload_directory: "/tmp/dv_uploads
 
 # Configure your database
 config :dievergolderei, Dievergolderei.Repo,
-  username: "postgres",
-  password: "postgres",
+  # username: "postgres",
+  # password: "postgres",
+  # hostname: "localhost",
+  socket_dir: "/var/run/postgresql",
   database: "dievergolderei_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

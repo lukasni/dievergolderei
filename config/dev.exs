@@ -5,10 +5,11 @@ config :dievergolderei, Dievergolderei.Shop, upload_directory: "uploads/"
 
 # Configure your database
 config :dievergolderei, Dievergolderei.Repo,
-  username: "postgres",
-  password: "postgres",
+  # username: "postgres",
+  # password: "postgres",
+  # hostname: "localhost",
+  socket_dir: "/var/run/postgresql",
   database: "dievergolderei_dev",
-  hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

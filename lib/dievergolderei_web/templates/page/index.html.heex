@@ -22,7 +22,6 @@
     <div class="">
         <div class="mt-8 prose">
             <h2 class="">Aktuell</h2>
-            <% end %>
             <div class="mt-4">
             <%= for post <- @posts do %>
             <%= render DievergoldereiWeb.PostView, "post.html", post: post, conn: @conn %>
@@ -30,4 +29,5 @@
             </div>
         </div>
     </div>
+    <% end %>
 </div>
