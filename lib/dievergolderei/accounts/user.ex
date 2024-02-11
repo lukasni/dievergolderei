@@ -2,8 +2,7 @@ defmodule Dievergolderei.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @password_length Application.get_env(:dievergolderei, __MODULE__, [])
-                   |> Keyword.get(:password_length)
+  @config Application.compile_env(:dievergolderei, __MODULE__, [])
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -23,7 +22,7 @@ defmodule Dievergolderei.Accounts.User do
     |> cast(attrs, [:display_name, :email, :password])
     |> validate_required([:display_name, :email])
     |> unique_constraint(:email)
-    |> validate_length(:password, @password_length)
+    |> validate_length(:password, @config[:password_length])
     |> put_password_hash()
   end
 
@@ -35,6 +34,19 @@ defmodule Dievergolderei.Accounts.User do
 
       _ ->
         changeset
+    end
+  end
+
+  def check_pass(nil, _) do
+    Argon2.no_user_verify()
+    {:error, "invalid user-identifier"}
+  end
+
+  def check_pass(user, password) do
+    if Argon2.verify_pass(password, user.password_hash) do
+      {:ok, user}
+    else
+      {:error, "invalid password"}
     end
   end
 end

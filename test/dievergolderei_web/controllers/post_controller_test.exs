@@ -86,7 +86,7 @@ defmodule DievergoldereiWeb.PostControllerTest do
       assert redirected_to(create_conn) == Routes.post_path(create_conn, :show, id)
 
       conn = get(conn, Routes.post_path(conn, :show, id))
-      assert html_response(conn, 200) =~ "Vorschau"
+      assert html_response(conn, 200) =~ "Beitragsvorschau"
     end
 
     @tag login_as: "test@example.com"

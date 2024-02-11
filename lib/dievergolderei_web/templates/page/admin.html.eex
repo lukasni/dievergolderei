@@ -9,7 +9,7 @@
         <table class="w-full mt-2">
             <tr class="border-b border-gray-400">
                 <th class="font-normal text-left">Neuster Beitrag</th>
-                <td class="text-right"><%= @blog_statistics.latest |> DT.strftime("%d. %b %Y") %></td>
+                <td class="text-right"><%= @blog_statistics.latest && (@blog_statistics.latest |> DT.strftime("%d. %b %Y")) || "N/A" %></td>
             </tr>
             <tr>
                 <th class="font-normal text-left">Total Beiträge</th>

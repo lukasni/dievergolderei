@@ -37,6 +37,8 @@ defmodule Dievergolderei.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  def get_user(id), do: Repo.get(User, id)
+
   @doc """
   Creates a user.
 
@@ -118,6 +120,24 @@ defmodule Dievergolderei.Accounts do
     User
     |> where(email: ^email)
     |> Repo.one()
-    |> Argon2.check_pass(password, hide_user: true)
+    |> User.check_pass(password)
+  end
+
+  def generate_admin_user do
+    alphabet = Enum.to_list(?a..?z) ++ Enum.to_list(?0..?9)
+    length = 12
+
+    user = %{
+      display_name: "Admin",
+      email: "admin@local",
+      password: (for _ <- 1..length, into: "", do: << Enum.random(alphabet) >>)
+    }
+
+    IO.puts("""
+    Created new admin user:
+    #{inspect user}
+    """)
+
+    create_user(user)
   end
 end

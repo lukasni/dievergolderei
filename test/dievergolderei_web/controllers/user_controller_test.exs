@@ -44,7 +44,7 @@ defmodule DievergoldereiWeb.UserControllerTest do
     @tag login_as: "test@example.com"
     test "lists all users", %{conn: conn} do
       conn = get(conn, Routes.user_path(conn, :index))
-      assert html_response(conn, 200) =~ "Listing Users"
+      assert html_response(conn, 200) =~ "test@example.com"
     end
   end
 
@@ -54,7 +54,7 @@ defmodule DievergoldereiWeb.UserControllerTest do
     @tag login_as: "test@example.com"
     test "renders form", %{conn: conn} do
       conn = get(conn, Routes.user_path(conn, :new))
-      assert html_response(conn, 200) =~ "New User"
+      assert html_response(conn, 200) =~ "Neuer Benutzer"
     end
   end
 
@@ -75,7 +75,7 @@ defmodule DievergoldereiWeb.UserControllerTest do
     @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.user_path(conn, :create), user: @invalid_attrs)
-      assert html_response(conn, 200) =~ "New User"
+      assert html_response(conn, 200) =~ "Neuer Benutzer"
     end
   end
 
@@ -85,7 +85,7 @@ defmodule DievergoldereiWeb.UserControllerTest do
     @tag login_as: "test@example.com"
     test "renders form for editing chosen user", %{conn: conn, user: user} do
       conn = get(conn, Routes.user_path(conn, :edit, user))
-      assert html_response(conn, 200) =~ "Edit User"
+      assert html_response(conn, 200) =~ "Benutzer bearbeiten"
     end
   end
 
@@ -104,7 +104,7 @@ defmodule DievergoldereiWeb.UserControllerTest do
     @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn, user: user} do
       conn = put(conn, Routes.user_path(conn, :update, user), user: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Edit User"
+      assert html_response(conn, 200) =~ "Benutzer bearbeiten"
     end
   end
 
