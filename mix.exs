@@ -7,7 +7,7 @@ defmodule Dievergolderei.MixProject do
       version: "1.3.2",
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -61,7 +61,7 @@ defmodule Dievergolderei.MixProject do
       {:slugger, ">= 0.3.0"},
       {:mogrify, "~> 0.7.3"},
       {:faker, "~> 0.12.0", only: [:dev, :test]},
-      {:excoveralls, "~> 0.11.2", only: :test},
+      {:excoveralls, "~> 0.18", only: :test},
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
       {:sobelow, "~> 0.9", only: :dev}
     ]

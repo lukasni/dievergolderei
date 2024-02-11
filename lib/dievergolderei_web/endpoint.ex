@@ -32,7 +32,7 @@ defmodule DievergoldereiWeb.Endpoint do
   plug Plug.Static,
     at: "/uploads",
     from:
-      Application.get_env(:dievergolderei, Dievergolderei.Photo, [])
+      Application.compile_env(:dievergolderei, Dievergolderei.Photo, [])
       |> Keyword.get(:upload_directory)
       |> Path.expand(),
     gzip: false

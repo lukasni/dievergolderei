@@ -11,7 +11,7 @@ defmodule DievergoldereiWeb.PageControllerTest do
   end
 
   describe "index" do
-    setup [:setup_index]
+    setup [:setup_index, :setup_featured]
 
     test "lists hours", %{conn: conn} do
       conn = get(conn, Routes.page_path(conn, :index))
@@ -70,6 +70,11 @@ defmodule DievergoldereiWeb.PageControllerTest do
 
   def setup_history(_) do
     page = fixture("history")
+    {:ok, page: page}
+  end
+
+  def setup_featured(_) do
+    page = fixture("featured")
     {:ok, page: page}
   end
 end

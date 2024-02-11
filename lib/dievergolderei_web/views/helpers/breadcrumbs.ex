@@ -101,10 +101,6 @@ defmodule DievergoldereiWeb.Breadcrumbs do
     [{"Bearbeiten", shop_path(conn, :edit, item)} | crumbs(conn, :shop_item, item)]
   end
 
-  def crumbs(conn, :shop_edit, %Dievergolderei.Shop.Item{} = item) do
-    [{"Bearbeiten", shop_path(conn, :edit, item)} | crumbs(conn, :shop, item)]
-  end
-
   def crumbs(conn, :static_page, %Dievergolderei.Pages.StaticPage{} = page) do
     [{page.name, static_page_path(conn, :show, page)} | crumbs(conn, :static_pages)]
   end

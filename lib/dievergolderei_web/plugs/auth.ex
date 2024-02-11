@@ -18,7 +18,7 @@ defmodule DievergoldereiWeb.Auth do
       _user = conn.assigns[:current_user] ->
         conn
 
-      user = user_id && Accounts.get_user!(user_id) ->
+      user = user_id && Accounts.get_user(user_id) ->
         assign(conn, :current_user, user)
 
       true ->
