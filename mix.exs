@@ -16,6 +16,11 @@ defmodule Dievergolderei.MixProject do
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test
+      ],
+      releases: [
+        dievergolderei: [
+          steps: [:assemble, :tar]
+        ]
       ]
     ]
   end
