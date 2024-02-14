@@ -50,6 +50,15 @@ defmodule Dievergolderei.MixProject do
       {:phoenix_live_view, "~> 0.18.18"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_dashboard, "~> 0.7.2"},
+      {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
+      {:heroicons,
+       github: "tailwindlabs/heroicons",
+       tag: "v2.1.1",
+       sparse: "optimized",
+       app: false,
+       compile: false,
+       depth: 1},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 0.5"},
       {:gettext, "~> 0.11"},
@@ -79,7 +88,8 @@ defmodule Dievergolderei.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      pkg: ["cmd ./bin/build_container"]
+      pkg: ["cmd ./bin/build_container"],
+      "assets.deploy": ["esbuild default --minify", "phx.digest"]
     ]
   end
 end

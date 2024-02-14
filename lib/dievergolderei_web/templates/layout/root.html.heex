@@ -7,8 +7,8 @@
     <%= csrf_meta_tag() %>
     <%= render "favicons.html", assigns %>
     <%= live_title_tag assigns[:title] || "", suffix: "Die Vergolderei" %>
-    <link phx-track-static rel="stylesheet" href={ Routes.static_path(@conn, ~s(/css/app.css)) }/>
-    <script defer phx-track-static type="text/javascript" src={ Routes.static_path(@conn, ~s(/js/app.js)) }></script>
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"}/>
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}></script>
   </head>
   <body>
     <div class="container mx-auto px-4 py-4">
@@ -18,14 +18,14 @@
         </section>
         <div class="relative text-right">
           <%= if @current_user do %>
-            <div class="sm:absolute right-0 top-0 mt-1 bg-opacity-25 bg-dvgold-200 border-dvgold-400 border p-2 rounded" x-data="{ isOpen: false }">
-              <div @click="isOpen=!isOpen">
+            <div class="sm:absolute right-0 top-0 mt-1 bg-opacity-25 bg-dvgold-200 border-dvgold-400 border p-2 rounded">
+              <div>
                 <%= @current_user.display_name %>
               </div>
-              <div x-show="isOpen">
-              <hr class="my-2">
-              <%= link "Adminbereich", to: Routes.page_path(@conn, :admin), class: "block" %>
-              <%= link "Ausloggen", to: Routes.session_path(@conn, :delete, @current_user), method: "delete", class: "block" %>
+              <div>
+                <hr class="my-2">
+                <%= link "Adminbereich", to: Routes.page_path(@conn, :admin), class: "block" %>
+                <%= link "Ausloggen", to: Routes.session_path(@conn, :delete, @current_user), method: "delete", class: "block" %>
               </div>
             </div>
           <% end %>
