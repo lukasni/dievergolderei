@@ -19,7 +19,7 @@ defmodule DievergoldereiWeb.HoursController do
       {:ok, _hours} ->
         conn
         |> put_flash(:info, "Eintrag erfolgreich erstellt.")
-        |> redirect(to: Routes.hours_path(conn, :index))
+        |> redirect(to: ~p"/admin/hours")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset, title: "Neue Öffnungszeiten — Admin — ")
@@ -44,7 +44,7 @@ defmodule DievergoldereiWeb.HoursController do
       {:ok, _hours} ->
         conn
         |> put_flash(:info, "Eintrag erfolgreich angepasst.")
-        |> redirect(to: Routes.hours_path(conn, :index))
+        |> redirect(to: ~p"/admin/hours")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html",
@@ -62,12 +62,12 @@ defmodule DievergoldereiWeb.HoursController do
       {:ok, _} ->
         conn
         |> put_flash(:info, "Eintrag erfolgreich angepasst")
-        |> redirect(to: Routes.hours_path(conn, :index))
+        |> redirect(to: ~p"/admin/hours")
 
       {:error, _} ->
         conn
         |> put_flash(:error, "Fehler beim sortieren")
-        |> redirect(to: Routes.hours_path(conn, :index))
+        |> redirect(to: ~p"/admin/hours")
     end
   end
 
@@ -78,12 +78,12 @@ defmodule DievergoldereiWeb.HoursController do
       {:ok, _} ->
         conn
         |> put_flash(:info, "Eintrag erfolgreich angepasst")
-        |> redirect(to: Routes.hours_path(conn, :index))
+        |> redirect(to: ~p"/admin/hours")
 
       {:error, _} ->
         conn
         |> put_flash(:error, "Fehler beim sortieren")
-        |> redirect(to: Routes.hours_path(conn, :index))
+        |> redirect(to: ~p"/admin/hours")
     end
   end
 
@@ -93,6 +93,6 @@ defmodule DievergoldereiWeb.HoursController do
 
     conn
     |> put_flash(:info, "Eintrag erfolgreich gelöscht.")
-    |> redirect(to: Routes.hours_path(conn, :index))
+    |> redirect(to: ~p"/admin/hours")
   end
 end

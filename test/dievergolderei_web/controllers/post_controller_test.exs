@@ -25,13 +25,13 @@ defmodule DievergoldereiWeb.PostControllerTest do
   test "requires authentication on all admin actions", %{conn: conn} do
     Enum.each(
       [
-        get(conn, Routes.post_path(conn, :index)),
-        get(conn, Routes.post_path(conn, :new)),
-        get(conn, Routes.post_path(conn, :show, "123")),
-        get(conn, Routes.post_path(conn, :edit, "123")),
-        put(conn, Routes.post_path(conn, :update, "123"), hours: %{}),
-        post(conn, Routes.post_path(conn, :create), hours: %{}),
-        delete(conn, Routes.post_path(conn, :delete, "123"))
+        get(conn, ~p"/admin/posts"),
+        get(conn, ~p"/admin/posts/new"),
+        get(conn, ~p"/admin/posts/#{"123"}"),
+        get(conn, ~p"/admin/posts/#{"123"}/edit"),
+        put(conn, ~p"/admin/posts/#{"123"}", post: %{}),
+        post(conn, ~p"/admin/posts/#{"123"}", post: %{}),
+        delete(conn, ~p"/admin/posts/#{"123"}")
       ],
       fn conn ->
         assert html_response(conn, 302)
@@ -45,7 +45,7 @@ defmodule DievergoldereiWeb.PostControllerTest do
 
     @tag login_as: "test@example.com"
     test "lists all posts", %{conn: conn} do
-      conn = get(conn, Routes.post_path(conn, :index))
+      conn = get(conn, ~p"/admin/posts")
       assert html_response(conn, 200) =~ "Blogbeiträge"
     end
   end
@@ -54,13 +54,13 @@ defmodule DievergoldereiWeb.PostControllerTest do
     setup [:create_post]
 
     test "lists posts", %{conn: conn, post: post} do
-      conn = get(conn, Routes.post_path(conn, :blog))
+      conn = get(conn, ~p"/blog")
       assert html_response(conn, 200) =~ post.title
     end
 
     test "filter posts by month", %{conn: conn, post: post} do
       %{year: year, month: month} = post.publish_on
-      conn = get(conn, Routes.post_path(conn, :list, "#{year}-#{month}"))
+      conn = get(conn, ~p"/blog/#{"#{year}-#{month}"}")
       assert html_response(conn, 200) =~ post.title
     end
   end
@@ -70,7 +70,7 @@ defmodule DievergoldereiWeb.PostControllerTest do
 
     @tag login_as: "test@example.com"
     test "renders form", %{conn: conn} do
-      conn = get(conn, Routes.post_path(conn, :new))
+      conn = get(conn, ~p"/admin/posts/new")
       assert html_response(conn, 200) =~ "Neuen Beitrag erstellen"
     end
   end
@@ -80,18 +80,18 @@ defmodule DievergoldereiWeb.PostControllerTest do
 
     @tag login_as: "test@example.com"
     test "redirects to show when data is valid", %{conn: conn} do
-      create_conn = post(conn, Routes.post_path(conn, :create), post: @create_attrs)
+      create_conn = post(conn, ~p"/admin/posts", post: @create_attrs)
 
       assert %{id: id} = redirected_params(create_conn)
-      assert redirected_to(create_conn) == Routes.post_path(create_conn, :show, id)
+      assert redirected_to(create_conn) == ~p"/admin/posts/#{id}"
 
-      conn = get(conn, Routes.post_path(conn, :show, id))
+      conn = get(conn, ~p"/admin/posts/#{id}")
       assert html_response(conn, 200) =~ "Beitragsvorschau"
     end
 
     @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.post_path(conn, :create), post: @invalid_attrs)
+      conn = post(conn, ~p"/admin/posts", post: @invalid_attrs)
       assert html_response(conn, 200) =~ "Neuen Beitrag erstellen"
     end
   end
@@ -101,7 +101,7 @@ defmodule DievergoldereiWeb.PostControllerTest do
 
     @tag login_as: "test@example.com"
     test "renders form for editing chosen post", %{conn: conn, post: post} do
-      conn = get(conn, Routes.post_path(conn, :edit, post))
+      conn = get(conn, ~p"/admin/posts/#{post}/edit")
       assert html_response(conn, 200) =~ "Beitrag bearbeiten"
     end
   end
@@ -111,16 +111,16 @@ defmodule DievergoldereiWeb.PostControllerTest do
 
     @tag login_as: "test@example.com"
     test "redirects when data is valid", %{conn: conn, post: post} do
-      update_conn = put(conn, Routes.post_path(conn, :update, post), post: @update_attrs)
-      assert redirected_to(update_conn) == Routes.post_path(update_conn, :show, post)
+      update_conn = put(conn, ~p"/admin/posts/#{post}", post: @update_attrs)
+      assert redirected_to(update_conn) == ~p"/admin/posts/#{post}"
 
-      conn = get(conn, Routes.post_path(conn, :show, post))
+      conn = get(conn, ~p"/admin/posts/#{post}")
       assert html_response(conn, 200) =~ "some updated content"
     end
 
     @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn, post: post} do
-      conn = put(conn, Routes.post_path(conn, :update, post), post: @invalid_attrs)
+      conn = put(conn, ~p"/admin/posts/#{post}", post: @invalid_attrs)
       assert html_response(conn, 200) =~ "Beitrag bearbeiten"
     end
   end
@@ -130,11 +130,11 @@ defmodule DievergoldereiWeb.PostControllerTest do
 
     @tag login_as: "test@example.com"
     test "deletes chosen post", %{conn: conn, post: post} do
-      delete_conn = delete(conn, Routes.post_path(conn, :delete, post))
-      assert redirected_to(delete_conn) == Routes.post_path(delete_conn, :index)
+      delete_conn = delete(conn, ~p"/admin/posts/#{post}")
+      assert redirected_to(delete_conn) == ~p"/admin/posts"
 
       assert_error_sent 404, fn ->
-        get(conn, Routes.post_path(conn, :show, post))
+        get(conn, ~p"/admin/posts/#{post}")
       end
     end
   end

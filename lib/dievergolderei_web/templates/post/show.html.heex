@@ -2,7 +2,7 @@
 
 <h1 class="text-4xl font-light mt-6">Beitragsvorschau</h1>
 
-<%= link to: Routes.post_path(@conn, :edit, @post), class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
+<%= link to: ~p"/admin/posts/#{@post}/edit", class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
   <svg
     class="h-8 w-8"
     xmlns="http://www.w3.org/2000/svg"
@@ -22,4 +22,4 @@
 
 <hr class="my-4" />
 
-<%= render(@view_module, "post.html", post: @post, conn: @conn) %>
+<%= render(DievergoldereiWeb.PostView, "post.html", post: @post, conn: @conn) %>

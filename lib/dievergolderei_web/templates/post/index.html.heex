@@ -2,7 +2,7 @@
 
 <h1 class="text-4xl font-light mt-6">Blogbeiträge</h1>
 
-<%= link to: Routes.post_path(@conn, :new), class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
+<%= link to: ~p"/admin/posts/new", class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
   <svg
     class="h-8 w-8"
     xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@
         <%= (String.slice(post.content, 0..120) <> "...") |> markdown %>
       </div>
       <div class="flex-none flex">
-        <%= link to: Routes.post_path(@conn, :show, post), class: "button button-gray inline-block flex-grow rounded-none rounded-bl" do %>
+        <%= link to: ~p"/admin/posts/#{post}", class: "button button-gray inline-block flex-grow rounded-none rounded-bl" do %>
           <svg
             class="h-4 w-4 mx-auto"
             xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@
             />
           </svg>
         <% end %>
-        <%= link to: Routes.post_path(@conn, :edit, post), class: "button button-gray inline-block flex-grow rounded-none border-r-0 border-l-0" do %>
+        <%= link to: ~p"/admin/posts/#{post}/edit", class: "button button-gray inline-block flex-grow rounded-none border-r-0 border-l-0" do %>
           <svg
             class="h-4 w-4 mx-auto"
             xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@
             />
           </svg>
         <% end %>
-        <%= link to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-red inline-block flex-grow rounded-none rounded-br" do %>
+        <%= link to: ~p"/admin/posts/#{post}", method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-red inline-block flex-grow rounded-none rounded-br" do %>
           <svg
             class="h-4 w-4 mx-auto"
             xmlns="http://www.w3.org/2000/svg"

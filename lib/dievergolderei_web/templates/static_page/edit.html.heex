@@ -4,5 +4,5 @@
 
 <%= render(
   "form.html",
-  Map.put(assigns, :action, Routes.static_page_path(@conn, :update, @static_page))
+  Map.put(assigns, :action, ~p"/admin/pages/#{@static_page}")
 ) %>

@@ -27,7 +27,6 @@ defmodule DievergoldereiWeb do
 
       import Plug.Conn
       import DievergoldereiWeb.Gettext
-      alias DievergoldereiWeb.Router.Helpers, as: Routes
 
       unquote(verified_routes())
     end
@@ -100,7 +99,6 @@ defmodule DievergoldereiWeb do
       import DievergoldereiWeb.Breadcrumbs
       import DievergoldereiWeb.UploadHelpers
       alias DievergoldereiWeb.DateTimeHelpers, as: DT
-      alias DievergoldereiWeb.Router.Helpers, as: Routes
 
       unquote(verified_routes())
     end
@@ -111,7 +109,7 @@ defmodule DievergoldereiWeb do
       use Phoenix.VerifiedRoutes,
         endpoint: DievergoldereiWeb.Endpoint,
         router: DievergoldereiWeb.Router,
-        statics: DievergoldereiWeb.static_paths()
+        statics: ["uploads" | DievergoldereiWeb.static_paths()]
     end
   end
 

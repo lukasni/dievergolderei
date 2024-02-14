@@ -25,9 +25,9 @@
               </div>
               <div>
                 <hr class="my-2" />
-                <%= link("Adminbereich", to: Routes.page_path(@conn, :admin), class: "block") %>
+                <%= link("Adminbereich", to: ~p"/admin", class: "block") %>
                 <%= link("Ausloggen",
-                  to: Routes.session_path(@conn, :delete, @current_user),
+                  to: ~p"/sessions/#{@current_user}",
                   method: "delete",
                   class: "block"
                 ) %>
@@ -37,19 +37,19 @@
           <%= unless assigns[:hide_logo] == true do %>
             <img
               class="block lg:h-64 mt-4 mx-auto"
-              src={Routes.static_path(@conn, ~s(/images/header.svg))}
+              src={~p(/images/header.svg)}
               alt="Logo Die Vergolderei"
             />
           <% end %>
         </div>
       </header>
       <main role="main" class="mt-8">
-        <%= if info = get_flash(@conn, :info) do %>
+        <%= if info = Phoenix.Flash.get(@flash, :info) do %>
           <div class="alert alert-info">
             <p><%= info %></p>
           </div>
         <% end %>
-        <%= if error = get_flash(@conn, :error) do %>
+        <%= if error = Phoenix.Flash.get(@flash, :error) do %>
           <div class="alert alert-danger">
             <p><%= error %></p>
           </div>

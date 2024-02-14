@@ -4,7 +4,7 @@
   Seitenvorschau
 </h1>
 
-<%= link to: Routes.static_page_path(@conn, :edit, @static_page), class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
+<%= link to: ~p"/admin/pages/#{@static_page}/edit", class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
   <svg
     class="h-8 w-8"
     xmlns="http://www.w3.org/2000/svg"

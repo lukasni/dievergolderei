@@ -3,10 +3,10 @@
     <h2 class="text-2xl">Blog</h2>
     <ul class="mt-4">
       <li>
-        <%= link("Neu", to: Routes.post_path(@conn, :new), class: "button button-dvblue") %>
+        <%= link("Neu", to: ~p"/admin/posts/new", class: "button button-dvblue") %>
       </li>
       <li class="mt-4">
-        <%= link("Übersicht", to: Routes.post_path(@conn, :index), class: "button button-gray") %>
+        <%= link("Übersicht", to: ~p"/admin/posts", class: "button button-gray") %>
       </li>
     </ul>
     <h3 class="mt-4 text-xl">Statistik</h3>
@@ -28,7 +28,7 @@
     <h2 class="text-2xl">Öffnungszeiten</h2>
     <ul class="mt-4">
       <li>
-        <%= link("Übersicht", to: Routes.hours_path(@conn, :index), class: "button button-gray") %>
+        <%= link("Übersicht", to: ~p"/admin/hours", class: "button button-gray") %>
       </li>
     </ul>
   </section>
@@ -36,7 +36,7 @@
     <h2 class="text-2xl">Gallerie</h2>
     <ul class="mt-4">
       <li>
-        <%= link("Übersicht", to: Routes.photo_path(@conn, :index), class: "button button-gray") %>
+        <%= link("Übersicht", to: ~p"/admin/photos", class: "button button-gray") %>
       </li>
     </ul>
   </section>
@@ -44,7 +44,7 @@
     <h2 class="text-2xl">Shop</h2>
     <ul class="mt-4">
       <li>
-        <%= link("Übersicht", to: Routes.shop_path(@conn, :index), class: "button button-gray") %>
+        <%= link("Übersicht", to: ~p"/admin/shop", class: "button button-gray") %>
       </li>
     </ul>
   </section>
@@ -53,7 +53,7 @@
     <ul class="mt-4">
       <li>
         <%= link("Übersicht",
-          to: Routes.static_page_path(@conn, :index),
+          to: ~p"/admin/pages",
           class: "button button-gray"
         ) %>
       </li>
@@ -63,7 +63,7 @@
     <h2 class="text-2xl">Benutzer</h2>
     <ul class="mt-4">
       <li>
-        <%= link("Übersicht", to: Routes.user_path(@conn, :index), class: "button button-gray") %>
+        <%= link("Übersicht", to: ~p"/admin/users", class: "button button-gray") %>
       </li>
     </ul>
   </section>

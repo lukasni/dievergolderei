@@ -23,13 +23,13 @@ defmodule DievergoldereiWeb.UserControllerTest do
   test "requires authentication on all actions", %{conn: conn} do
     Enum.each(
       [
-        get(conn, Routes.user_path(conn, :index)),
-        get(conn, Routes.user_path(conn, :new)),
-        get(conn, Routes.user_path(conn, :show, "123")),
-        get(conn, Routes.user_path(conn, :edit, "123")),
-        put(conn, Routes.user_path(conn, :update, "123"), hours: %{}),
-        post(conn, Routes.user_path(conn, :create), hours: %{}),
-        delete(conn, Routes.user_path(conn, :delete, "123"))
+        get(conn, ~p"/admin/photos"),
+        get(conn, ~p"/admin/photos/new"),
+        get(conn, ~p"/admin/photos/#{"123"}"),
+        get(conn, ~p"/admin/photos/#{"123"}/edit"),
+        put(conn, ~p"/admin/photos/#{"123"}", user: %{}),
+        post(conn, ~p"/admin/users", user: %{}),
+        delete(conn, ~p"/admin/users/#{"123"}")
       ],
       fn conn ->
         assert html_response(conn, 302)
@@ -43,7 +43,7 @@ defmodule DievergoldereiWeb.UserControllerTest do
 
     @tag login_as: "test@example.com"
     test "lists all users", %{conn: conn} do
-      conn = get(conn, Routes.user_path(conn, :index))
+      conn = get(conn, ~p"/admin/users")
       assert html_response(conn, 200) =~ "test@example.com"
     end
   end
@@ -53,7 +53,7 @@ defmodule DievergoldereiWeb.UserControllerTest do
 
     @tag login_as: "test@example.com"
     test "renders form", %{conn: conn} do
-      conn = get(conn, Routes.user_path(conn, :new))
+      conn = get(conn, ~p"/admin/users/new")
       assert html_response(conn, 200) =~ "Neuer Benutzer"
     end
   end
@@ -63,18 +63,18 @@ defmodule DievergoldereiWeb.UserControllerTest do
 
     @tag login_as: "test@example.com"
     test "redirects to show when data is valid", %{conn: conn} do
-      create_conn = post(conn, Routes.user_path(conn, :create), user: @create_attrs)
+      create_conn = post(conn, ~p"/admin/users", user: @create_attrs)
 
       assert %{id: id} = redirected_params(create_conn)
-      assert redirected_to(create_conn) == Routes.user_path(create_conn, :show, id)
+      assert redirected_to(create_conn) == ~p"/admin/users/#{id}"
 
-      conn = get(conn, Routes.user_path(conn, :show, id))
+      conn = get(conn, ~p"/admin/users/#{id}")
       assert html_response(conn, 200) =~ "Show User"
     end
 
     @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.user_path(conn, :create), user: @invalid_attrs)
+      conn = post(conn, ~p"/admin/users", user: @invalid_attrs)
       assert html_response(conn, 200) =~ "Neuer Benutzer"
     end
   end
@@ -84,7 +84,7 @@ defmodule DievergoldereiWeb.UserControllerTest do
 
     @tag login_as: "test@example.com"
     test "renders form for editing chosen user", %{conn: conn, user: user} do
-      conn = get(conn, Routes.user_path(conn, :edit, user))
+      conn = get(conn, ~p"/admin/users/#{user}/edit")
       assert html_response(conn, 200) =~ "Benutzer bearbeiten"
     end
   end
@@ -94,16 +94,16 @@ defmodule DievergoldereiWeb.UserControllerTest do
 
     @tag login_as: "test@example.com"
     test "redirects when data is valid", %{conn: conn, user: user} do
-      update_conn = put(conn, Routes.user_path(conn, :update, user), user: @update_attrs)
-      assert redirected_to(update_conn) == Routes.user_path(update_conn, :show, user)
+      update_conn = put(conn, ~p"/admin/users/#{user}", user: @update_attrs)
+      assert redirected_to(update_conn) == ~p"/admin/users/#{user}"
 
-      conn = get(conn, Routes.user_path(conn, :show, user))
+      conn = get(conn, ~p"/admin/users/#{user}")
       assert html_response(conn, 200) =~ "some updated display_name"
     end
 
     @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn, user: user} do
-      conn = put(conn, Routes.user_path(conn, :update, user), user: @invalid_attrs)
+      conn = put(conn, ~p"/admin/users/#{user}", user: @invalid_attrs)
       assert html_response(conn, 200) =~ "Benutzer bearbeiten"
     end
   end
@@ -113,11 +113,11 @@ defmodule DievergoldereiWeb.UserControllerTest do
 
     @tag login_as: "test@example.com"
     test "deletes chosen user", %{conn: conn, user: user} do
-      delete_conn = delete(conn, Routes.user_path(conn, :delete, user))
-      assert redirected_to(delete_conn) == Routes.user_path(delete_conn, :index)
+      delete_conn = delete(conn, ~p"/admin/users/#{user}")
+      assert redirected_to(delete_conn) == ~p"/admin/users"
 
       assert_error_sent 404, fn ->
-        get(conn, Routes.user_path(conn, :show, user))
+        get(conn, ~p"/admin/users/#{user}")
       end
     end
   end

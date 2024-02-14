@@ -15,10 +15,10 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
   test "requires authentication on all actions", %{conn: conn} do
     Enum.each(
       [
-        get(conn, Routes.static_page_path(conn, :index)),
-        get(conn, Routes.static_page_path(conn, :show, "123")),
-        get(conn, Routes.static_page_path(conn, :edit, "123")),
-        put(conn, Routes.static_page_path(conn, :update, "123"), hours: %{})
+        get(conn, ~p"/admin/pages"),
+        get(conn, ~p"/admin/pages/#{"123"}"),
+        get(conn, ~p"/admin/pages/#{"123"}/edit"),
+        put(conn, ~p"/admin/pages/#{"123"}", page: %{})
       ],
       fn conn ->
         assert html_response(conn, 302)
@@ -32,7 +32,7 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
 
     @tag login_as: "test@example.com"
     test "lists all static_pages", %{conn: conn} do
-      conn = get(conn, Routes.static_page_path(conn, :index))
+      conn = get(conn, ~p"/admin/pages")
       assert html_response(conn, 200) =~ "Statische Seiteninhalte"
     end
   end
@@ -42,7 +42,7 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
 
     @tag login_as: "test@example.com"
     test "renders form for editing chosen static_page", %{conn: conn, static_page: static_page} do
-      conn = get(conn, Routes.static_page_path(conn, :edit, static_page))
+      conn = get(conn, ~p"/admin/pages/#{static_page}/edit")
       assert html_response(conn, 200) =~ "Seite bearbeiten"
     end
   end
@@ -53,21 +53,19 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
     @tag login_as: "test@example.com"
     test "redirects when data is valid", %{conn: conn, static_page: static_page} do
       create_conn =
-        put(conn, Routes.static_page_path(conn, :update, static_page), static_page: @update_attrs)
+        put(conn, ~p"/admin/pages/#{static_page}", static_page: @update_attrs)
 
       assert redirected_to(create_conn) ==
-               Routes.static_page_path(create_conn, :show, static_page)
+               ~p"/admin/pages/#{static_page}"
 
-      conn = get(conn, Routes.static_page_path(conn, :show, static_page))
+      conn = get(conn, ~p"/admin/pages/#{static_page}")
       assert html_response(conn, 200) =~ "some updated content"
     end
 
     @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn, static_page: static_page} do
       conn =
-        put(conn, Routes.static_page_path(conn, :update, static_page),
-          static_page: @invalid_attrs
-        )
+        put(conn, ~p"/admin/pages/#{static_page}", static_page: @invalid_attrs)
 
       assert html_response(conn, 200) =~ "Seite bearbeiten"
     end

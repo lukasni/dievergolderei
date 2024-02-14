@@ -1,37 +1,37 @@
 <nav role="navigation" class="sm:flex items-center justify-between">
   <a
     class="block sm:flex-1 small-caps tracking-wide hover:text-white text-md text-center bg-opacity-25 bg-gray-300 hover:bg-dvblue-500 py-1 border-t border-black sm:border-b"
-    href={Routes.page_path(@conn, :index)}
+    href={~p"/"}
   >
     Start
   </a>
   <a
     class="block sm:flex-1 small-caps tracking-wide hover:text-white text-md text-center bg-opacity-25 bg-gray-300 hover:bg-dvblue-500 py-1 sm:border-t border-black sm:border-b"
-    href={Routes.page_path(@conn, :contact)}
+    href={~p"/kontakt"}
   >
     Kontakt
   </a>
   <a
     class="block sm:flex-1 small-caps tracking-wide hover:text-white text-md text-center bg-opacity-25 bg-gray-300 hover:bg-dvblue-500 py-1 sm:border-t border-black sm:border-b"
-    href={Routes.page_path(@conn, :shop)}
+    href={~p"/shop"}
   >
     Shop
   </a>
   <a
     class="block sm:flex-1 small-caps tracking-wide hover:text-white text-md text-center bg-opacity-25 bg-gray-300 hover:bg-dvblue-500 py-1 sm:border-t border-black sm:border-b"
-    href={Routes.page_path(@conn, :gallery)}
+    href={~p"/impressionen"}
   >
     Impressionen
   </a>
   <a
     class="block sm:flex-1 small-caps tracking-wide hover:text-white text-md text-center bg-opacity-25 bg-gray-300 hover:bg-dvblue-500 py-1 sm:border-t border-black sm:border-b"
-    href={Routes.page_path(@conn, :history)}
+    href={~p"/geschichte"}
   >
     Geschichte
   </a>
   <a
     class="block sm:flex-1 small-caps tracking-wide hover:text-white text-md text-center bg-opacity-25 bg-gray-300 hover:bg-dvblue-500 py-1 sm:border-t border-black border-b"
-    href={Routes.post_path(@conn, :blog)}
+    href={~p"/blog"}
   >
     Blog
   </a>

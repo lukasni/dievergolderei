@@ -14,12 +14,12 @@ defmodule DievergoldereiWeb.PageControllerTest do
     setup [:setup_index, :setup_featured]
 
     test "lists hours", %{conn: conn} do
-      conn = get(conn, Routes.page_path(conn, :index))
+      conn = get(conn, ~p"/")
       assert html_response(conn, 200) =~ "Öffnungszeiten"
     end
 
     test "lists index page content", %{conn: conn, page: page} do
-      conn = get(conn, Routes.page_path(conn, :index))
+      conn = get(conn, ~p"/")
       assert html_response(conn, 200) =~ page.content
     end
   end
@@ -28,14 +28,14 @@ defmodule DievergoldereiWeb.PageControllerTest do
     setup [:setup_contact]
 
     test "lists contact page content", %{conn: conn, page: page} do
-      conn = get(conn, Routes.page_path(conn, :contact))
+      conn = get(conn, ~p"/kontakt")
       assert html_response(conn, 200) =~ page.content
     end
   end
 
   describe "gallery" do
     test "shows static gallery content", %{conn: conn} do
-      conn = get(conn, Routes.page_path(conn, :gallery))
+      conn = get(conn, ~p"/impressionen")
       assert html_response(conn, 200) =~ "Impressionen"
       assert html_response(conn, 200) =~ "<video"
     end
@@ -45,14 +45,14 @@ defmodule DievergoldereiWeb.PageControllerTest do
     setup [:setup_history]
 
     test "lists history page content", %{conn: conn, page: page} do
-      conn = get(conn, Routes.page_path(conn, :history))
+      conn = get(conn, ~p"/geschichte")
       assert html_response(conn, 200) =~ page.content
     end
   end
 
   describe "admin" do
     test "redirects unauthenticated user", %{conn: conn} do
-      conn = get(conn, Routes.page_path(conn, :admin))
+      conn = get(conn, ~p"/admin")
       assert html_response(conn, 302)
       assert conn.halted
     end

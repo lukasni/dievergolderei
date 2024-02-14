@@ -1,5 +1,5 @@
 <%= if @current_user do %>
-  <%= link to: Routes.post_path(@conn, :new), class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
+  <%= link to: ~p"/admin/posts/new", class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
     <svg
       class="h-8 w-8"
       xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@
     <ul class="mt-2">
       <li>
         <%= link("Neueste Beiträge",
-          to: Routes.post_path(@conn, :blog),
+          to: ~p"/blog",
           class: "hover:underline text-dvblue-500"
         ) %>
       </li>
@@ -37,7 +37,7 @@
           <%= year %>
           <ul class="ml-4 list-disc list-inside">
             <%= for month <- months do %>
-              <li><%= month_link(@conn, month, class: "hover:underline text-dvblue-500") %></li>
+              <li><%= month_link(month, class: "hover:underline text-dvblue-500") %></li>
             <% end %>
           </ul>
         </li>

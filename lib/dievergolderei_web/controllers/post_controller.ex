@@ -41,7 +41,7 @@ defmodule DievergoldereiWeb.PostController do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Eintrag erfolgreich erstellt.")
-        |> redirect(to: Routes.post_path(conn, :show, post))
+        |> redirect(to: ~p"/admin/posts/#{post}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html",
@@ -74,7 +74,7 @@ defmodule DievergoldereiWeb.PostController do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Eintrag erfolgreich angepasst.")
-        |> redirect(to: Routes.post_path(conn, :show, post))
+        |> redirect(to: ~p"/admin/posts/#{post}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html",
@@ -91,6 +91,6 @@ defmodule DievergoldereiWeb.PostController do
 
     conn
     |> put_flash(:info, "Eintrag erfolgreich gelöscht.")
-    |> redirect(to: Routes.post_path(conn, :index))
+    |> redirect(to: ~p"/admin/posts")
   end
 end

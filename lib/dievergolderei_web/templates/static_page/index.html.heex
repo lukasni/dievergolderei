@@ -15,7 +15,7 @@
         <td class="p-2">
           <span>
             <%= link("Bearbeiten",
-              to: Routes.static_page_path(@conn, :edit, static_page),
+              to: ~p"/admin/pages/#{static_page}/edit",
               class: "button button-dvblue"
             ) %>
           </span>

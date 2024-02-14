@@ -3,15 +3,15 @@ defmodule DievergoldereiWeb.UploadHelpers do
   Helper functions for handling Photos in views
   """
   use Phoenix.HTML
-  alias DievergoldereiWeb.Router.Helpers, as: Routes
+  use DievergoldereiWeb, :verified_routes
 
-  def upload_img_tag(conn, upload, attributes \\ [])
+  def upload_img_tag(_conn, upload, attributes \\ [])
 
-  def upload_img_tag(conn, %Dievergolderei.Gallery.Photo{} = upload, attributes) do
-    img_tag(Routes.photo_path(conn, :serve, upload), attributes)
+  def upload_img_tag(_conn, %Dievergolderei.Gallery.Photo{} = upload, attributes) do
+    img_tag(~p"/uploads/#{upload}", attributes)
   end
 
-  def upload_img_tag(conn, %Dievergolderei.Shop.Item{} = upload, attributes) do
-    img_tag(Routes.shop_path(conn, :serve, upload), attributes)
+  def upload_img_tag(_conn, %Dievergolderei.Shop.Item{} = upload, attributes) do
+    img_tag(~p"/uploads/shop/#{upload}", attributes)
   end
 end

@@ -17,96 +17,96 @@ defmodule DievergoldereiWeb.Breadcrumbs do
       end
   """
   use Phoenix.HTML
-  import DievergoldereiWeb.Router.Helpers
+  use DievergoldereiWeb, :verified_routes
 
   # Breadcrumb definitions
 
-  def crumbs(conn, :root) do
-    [{"Admin", page_path(conn, :admin)}]
+  def crumbs(_conn, :root) do
+    [{"Admin", ~p"/admin"}]
   end
 
   def crumbs(conn, :posts) do
-    [{"Blog", post_path(conn, :index)} | crumbs(conn, :root)]
+    [{"Blog", ~p"/admin/posts"} | crumbs(conn, :root)]
   end
 
   def crumbs(conn, :shop_items) do
-    [{"Shop", shop_path(conn, :index)} | crumbs(conn, :root)]
+    [{"Shop", ~p"/admin/shop"} | crumbs(conn, :root)]
   end
 
   def crumbs(conn, :post_new) do
-    [{"Neu", post_path(conn, :new)} | crumbs(conn, :posts)]
+    [{"Neu", ~p"/admin/posts/new"} | crumbs(conn, :posts)]
   end
 
   def crumbs(conn, :shop_item_new) do
-    [{"Neu", shop_path(conn, :new)} | crumbs(conn, :shop_items)]
+    [{"Neu", ~p"/admin/shop/new"} | crumbs(conn, :shop_items)]
   end
 
   def crumbs(conn, :hours) do
-    [{"Öffnungszeiten", hours_path(conn, :index)} | crumbs(conn, :root)]
+    [{"Öffnungszeiten", ~p"/admin/hours"} | crumbs(conn, :root)]
   end
 
   def crumbs(conn, :hours_new) do
-    [{"Neu", hours_path(conn, :new)} | crumbs(conn, :hours)]
+    [{"Neu", ~p"/admin/hours/new"} | crumbs(conn, :hours)]
   end
 
   def crumbs(conn, :photos) do
-    [{"Gallerie", photo_path(conn, :index)} | crumbs(conn, :root)]
+    [{"Gallerie", ~p"/admin/photos"} | crumbs(conn, :root)]
   end
 
   def crumbs(conn, :photo_new) do
-    [{"Neu", photo_path(conn, :index)} | crumbs(conn, :photos)]
+    [{"Neu", ~p"/admin/photos"} | crumbs(conn, :photos)]
   end
 
   def crumbs(conn, :static_pages) do
-    [{"Statische Seiten", static_page_path(conn, :index)} | crumbs(conn, :root)]
+    [{"Statische Seiten", ~p"/admin/pages"} | crumbs(conn, :root)]
   end
 
   def crumbs(conn, :users) do
-    [{"Benutzer", user_path(conn, :index)} | crumbs(conn, :root)]
+    [{"Benutzer", ~p"/admin/users"} | crumbs(conn, :root)]
   end
 
   def crumbs(conn, :user_new) do
-    [{"Neu", user_path(conn, :index)} | crumbs(conn, :users)]
+    [{"Neu", ~p"/admin/users"} | crumbs(conn, :users)]
   end
 
   def crumbs(conn, :post, %Dievergolderei.Blog.Post{} = post) do
-    [{post.slug, post_path(conn, :show, post)} | crumbs(conn, :posts)]
+    [{post.slug, ~p"/admin/posts/#{post}"} | crumbs(conn, :posts)]
   end
 
   def crumbs(conn, :post_edit, %Dievergolderei.Blog.Post{} = post) do
-    [{"Bearbeiten", post_path(conn, :edit, post)} | crumbs(conn, :post, post)]
+    [{"Bearbeiten", ~p"/admin/posts/#{post}/edit"} | crumbs(conn, :post, post)]
   end
 
   def crumbs(conn, :hours, %Dievergolderei.OpeningHours.Hours{} = hours) do
-    [{hours.label, hours_path(conn, :edit, hours)} | crumbs(conn, :hours)]
+    [{hours.label, ~p"/admin/hours/#{hours}/edit"} | crumbs(conn, :hours)]
   end
 
   def crumbs(conn, :photo, %Dievergolderei.Gallery.Photo{} = photo) do
-    [{photo.id, photo_path(conn, :show, photo)} | crumbs(conn, :photos)]
+    [{photo.id, ~p"/admin/photos/#{photo}"} | crumbs(conn, :photos)]
   end
 
   def crumbs(conn, :shop_item, %Dievergolderei.Shop.Item{} = item) do
-    [{item.id, shop_path(conn, :show, item)} | crumbs(conn, :shop_items)]
+    [{item.id, ~p"/admin/shop/#{item}"} | crumbs(conn, :shop_items)]
   end
 
   def crumbs(conn, :user, %Dievergolderei.Accounts.User{} = user) do
-    [{user.display_name, user_path(conn, :edit, user)} | crumbs(conn, :users)]
+    [{user.display_name, ~p"/admin/users/#{user}/edit"} | crumbs(conn, :users)]
   end
 
   def crumbs(conn, :photo_edit, %Dievergolderei.Gallery.Photo{} = photo) do
-    [{"Bearbeiten", photo_path(conn, :edit, photo)} | crumbs(conn, :photo, photo)]
+    [{"Bearbeiten", ~p"/admin/photos/#{photo}/edit"} | crumbs(conn, :photo, photo)]
   end
 
   def crumbs(conn, :shop_item_edit, %Dievergolderei.Shop.Item{} = item) do
-    [{"Bearbeiten", shop_path(conn, :edit, item)} | crumbs(conn, :shop_item, item)]
+    [{"Bearbeiten", ~p"/admin/shop/#{item}/edit"} | crumbs(conn, :shop_item, item)]
   end
 
   def crumbs(conn, :static_page, %Dievergolderei.Pages.StaticPage{} = page) do
-    [{page.name, static_page_path(conn, :show, page)} | crumbs(conn, :static_pages)]
+    [{page.name, ~p"/admin/pages/#{page}"} | crumbs(conn, :static_pages)]
   end
 
   def crumbs(conn, :static_page_edit, %Dievergolderei.Pages.StaticPage{} = page) do
-    [{"Bearbeiten", static_page_path(conn, :edit, page)} | crumbs(conn, :static_page, page)]
+    [{"Bearbeiten", ~p"/admin/pages/#{page}/edit"} | crumbs(conn, :static_page, page)]
   end
 
   # Implementation
