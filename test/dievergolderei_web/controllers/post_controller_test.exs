@@ -30,7 +30,7 @@ defmodule DievergoldereiWeb.PostControllerTest do
         get(conn, ~p"/admin/posts/#{"123"}"),
         get(conn, ~p"/admin/posts/#{"123"}/edit"),
         put(conn, ~p"/admin/posts/#{"123"}", post: %{}),
-        post(conn, ~p"/admin/posts/#{"123"}", post: %{}),
+        post(conn, ~p"/admin/posts", post: %{}),
         delete(conn, ~p"/admin/posts/#{"123"}")
       ],
       fn conn ->

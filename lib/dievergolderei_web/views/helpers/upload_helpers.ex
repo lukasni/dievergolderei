@@ -2,7 +2,7 @@ defmodule DievergoldereiWeb.UploadHelpers do
   @moduledoc """
   Helper functions for handling Photos in views
   """
-  use Phoenix.HTML
+  use PhoenixHTMLHelpers
   use DievergoldereiWeb, :verified_routes
 
   def upload_img_tag(_conn, upload, attributes \\ [])

@@ -17,6 +17,7 @@ config :dievergolderei, DievergoldereiWeb.Gettext, default_locale: "de"
 # Configures the endpoint
 config :dievergolderei, DievergoldereiWeb.Endpoint,
   url: [host: "localhost"],
+  adapter: Bandit.PhoenixAdapter,
   secret_key_base: "GbGHdYKslelLVH8Bv1STveMW3vK//AHVQt8YL4t8sooPjaFGa+vpCo5ZtRFcamXB",
   render_errors: [view: DievergoldereiWeb.ErrorView, accepts: ~w(html json)],
   pubsub_server: Dievergolderei.PubSub,

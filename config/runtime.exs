@@ -54,8 +54,8 @@ if config_env() == :prod do
   config :dievergolderei, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :dievergolderei, DievergoldereiWeb.Endpoint,
-  http: [:inet6, port: String.to_integer(System.get_env("PORT") || "80")],
-  url: [host: "dievergolderei.ch", port: 443, scheme: "https"],
+  http: [:inet6, port: port],
+  url: [host: host, port: 443, scheme: "https"],
   secret_key_base: secret_key_base,
   server: true,
   force_ssl: [hsts: true],

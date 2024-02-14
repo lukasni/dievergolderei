@@ -7,6 +7,6 @@ defmodule DievergoldereiWeb.PostView do
 
     opts = Keyword.merge(opts, to: ~p"/blog/#{link}")
 
-    Phoenix.HTML.Link.link(text, opts)
+    link(text, opts)
   end
 end

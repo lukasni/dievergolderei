@@ -16,7 +16,7 @@ defmodule DievergoldereiWeb.Breadcrumbs do
         [{"Second", url} | crumbs(conn, :first)]
       end
   """
-  use Phoenix.HTML
+  use PhoenixHTMLHelpers
   use DievergoldereiWeb, :verified_routes
 
   # Breadcrumb definitions
