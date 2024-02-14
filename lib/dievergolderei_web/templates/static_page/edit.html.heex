@@ -1,5 +1,8 @@
-<%= breadcrumbs [@conn, :static_page_edit, @static_page] %>
+<%= breadcrumbs([@conn, :static_page_edit, @static_page]) %>
 
 <h1 class="text-4xl font-light mt-6">Seite bearbeiten</h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.static_page_path(@conn, :update, @static_page)) %>
+<%= render(
+  "form.html",
+  Map.put(assigns, :action, Routes.static_page_path(@conn, :update, @static_page))
+) %>

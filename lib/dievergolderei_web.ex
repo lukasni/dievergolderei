@@ -16,7 +16,9 @@ defmodule DievergoldereiWeb do
   below. Instead, define any helper function in modules
   and import those modules here.
   """
-  def static_paths, do: ~w(assets css fonts images js favicon.ico robots.txt android-chrome-192x192.png android-chrome-512x512.png
+  def static_paths,
+    do:
+      ~w(assets css fonts images js favicon.ico robots.txt android-chrome-192x192.png android-chrome-512x512.png
   apple-touch-icon.png browserconfig.xml favicon-16x16.png favicon-32x32.png mstile-150x150.png safari-pinned-tab.svg site.webmanifest)
 
   def controller do

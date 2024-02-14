@@ -1,5 +1,5 @@
-<%= breadcrumbs [@conn, :photo_new] %>
+<%= breadcrumbs([@conn, :photo_new]) %>
 
 <h1 class="text-4xl font-light mt-6">Bild hochladen</h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.photo_path(@conn, :create)) %>
+<%= render("form.html", Map.put(assigns, :action, Routes.photo_path(@conn, :create))) %>

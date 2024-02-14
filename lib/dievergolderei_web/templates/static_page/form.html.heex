@@ -6,12 +6,12 @@
   <% end %>
 
   <div class="mt-4">
-    <%= textarea f, :content, id: "content_textarea" %>
-    <%= error_tag f, :content %>
+    <%= textarea(f, :content, id: "content_textarea") %>
+    <%= error_tag(f, :content) %>
   </div>
 
   <div>
-    <%= submit "Speichern", class: "button button-dvblue mt-4 w-full md:w-64" %>
+    <%= submit("Speichern", class: "button button-dvblue mt-4 w-full md:w-64") %>
   </div>
 <% end %>
 

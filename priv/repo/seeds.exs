@@ -42,7 +42,7 @@ if Mix.env() == :dev do
 
     %Post{}
     |> Post.changeset(%{title: title, publish_on: publish_on, content: content})
-    #|> Repo.insert!()
+    |> Repo.insert!()
   end
 end
 
@@ -162,7 +162,7 @@ photos = [
     content_type: "image/jpeg",
     filename: "2.jpeg",
     hash: "905915a82b3fcde52abfa4a0e5aacca9d62166bfaf2a5a136402f1c7bd3977eb",
-    size: 103565,
+    size: 103_565,
     inserted_at: NaiveDateTime.utc_now(:second),
     updated_at: NaiveDateTime.utc_now(:second)
   },

@@ -65,7 +65,9 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
     @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn, static_page: static_page} do
       conn =
-        put(conn, Routes.static_page_path(conn, :update, static_page), static_page: @invalid_attrs)
+        put(conn, Routes.static_page_path(conn, :update, static_page),
+          static_page: @invalid_attrs
+        )
 
       assert html_response(conn, 200) =~ "Seite bearbeiten"
     end

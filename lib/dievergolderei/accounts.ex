@@ -130,12 +130,12 @@ defmodule Dievergolderei.Accounts do
     user = %{
       display_name: "Admin",
       email: "admin@local",
-      password: (for _ <- 1..length, into: "", do: << Enum.random(alphabet) >>)
+      password: for(_ <- 1..length, into: "", do: <<Enum.random(alphabet)>>)
     }
 
     IO.puts("""
     Created new admin user:
-    #{inspect user}
+    #{inspect(user)}
     """)
 
     create_user(user)

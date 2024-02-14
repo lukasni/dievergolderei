@@ -10,7 +10,6 @@ defmodule DievergoldereiWeb.Endpoint do
     signing_salt: "NyYC1qOQ"
   ]
 
-
   socket "/socket", DievergoldereiWeb.UserSocket,
     websocket: true,
     longpoll: false

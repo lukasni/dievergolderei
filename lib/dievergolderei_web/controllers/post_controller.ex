@@ -11,6 +11,7 @@ defmodule DievergoldereiWeb.PostController do
 
   def blog(conn, _params) do
     posts = Dievergolderei.Blog.list_most_recent_published_posts(5)
+
     months =
       Dievergolderei.Blog.months_with_posts()
       |> Enum.group_by(& &1.year)
