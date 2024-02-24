@@ -1,5 +1,7 @@
 defmodule DievergoldereiWeb.PageView do
-  use DievergoldereiWeb, :view
+  use DievergoldereiWeb, :html
+
+  embed_templates "../templates/page/*"
 
   alias Decimal, as: D
 

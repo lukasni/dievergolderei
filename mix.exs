@@ -31,7 +31,7 @@ defmodule Dievergolderei.MixProject do
   def application do
     [
       mod: {Dievergolderei.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -71,6 +71,7 @@ defmodule Dievergolderei.MixProject do
       {:jason, "~> 1.0"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
+      {:ecto_psql_extras, "~> 0.6"},
       {:earmark, "~> 1.4.0"},
       {:html_sanitize_ex, "~> 1.3.0"},
       {:argon2_elixir, "~> 4.0"},
