@@ -20,10 +20,10 @@
         <div class="relative text-right">
           <%= if @current_user do %>
             <div class="sm:absolute right-0 top-0 mt-1 bg-opacity-25 bg-dvgold-200 border-dvgold-400 border p-2 rounded">
-              <div>
+              <div phx-click={Phoenix.LiveView.JS.toggle(to: "#admin-nav")}>
                 <%= @current_user.display_name %>
               </div>
-              <div>
+              <div id="admin-nav" style="display: none;">
                 <hr class="my-2" />
                 <%= link("Adminbereich", to: ~p"/admin", class: "block") %>
                 <%= link("Ausloggen",
