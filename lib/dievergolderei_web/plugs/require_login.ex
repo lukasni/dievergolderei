@@ -2,10 +2,8 @@ defmodule DievergoldereiWeb.RequireLogin do
   @moduledoc """
   Module plug for requiring a logged-in user
   """
+  use DievergoldereiWeb, :verified_routes
   import Plug.Conn
-
-  alias DievergoldereiWeb.Router.Helpers, as: Routes
-
   # coveralls-ignore-start
   def init(opts), do: opts
 
@@ -16,7 +14,7 @@ defmodule DievergoldereiWeb.RequireLogin do
       nil ->
         conn
         |> Phoenix.Controller.put_flash(:error, "Login benötigt")
-        |> Phoenix.Controller.redirect(to: Routes.session_path(conn, :new))
+        |> Phoenix.Controller.redirect(to: ~p"/sessions/new")
         |> halt()
 
       _user ->

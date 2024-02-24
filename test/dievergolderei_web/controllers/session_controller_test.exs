@@ -12,7 +12,7 @@ defmodule DievergoldereiWeb.SessionControllerTest do
 
   describe "login page" do
     test "shows login form", %{conn: conn} do
-      conn = get(conn, Routes.session_path(conn, :new))
+      conn = get(conn, ~p"/sessions/new")
       assert html_response(conn, 200) =~ "Login"
     end
   end
@@ -21,26 +21,24 @@ defmodule DievergoldereiWeb.SessionControllerTest do
     setup [:create_user]
 
     test "redirects with correct password", %{conn: conn, user: user} do
-      conn = post(conn, Routes.session_path(conn, :create), session: @create_attrs)
+      conn = post(conn, ~p"/sessions", session: @create_attrs)
 
-      assert redirected_to(conn) == Routes.page_path(conn, :admin)
+      assert redirected_to(conn) == ~p"/admin"
       assert %User{} = conn.assigns[:current_user]
 
-      conn = get(conn, Routes.page_path(conn, :admin))
+      conn = get(conn, ~p"/admin")
       assert html_response(conn, 200) =~ user.display_name
     end
 
     test "rejects incorrect password", %{conn: conn, user: user} do
       conn =
-        post(conn, Routes.session_path(conn, :create),
-          session: %{email: user.email, password: "incorrect"}
-        )
+        post(conn, ~p"/sessions", session: %{email: user.email, password: "incorrect"})
 
       assert nil == conn.assigns[:current_user]
       assert html_response(conn, 200) =~ "Invalid username/password combination"
 
-      conn = get(conn, Routes.page_path(conn, :admin))
-      assert redirected_to(conn) == Routes.session_path(conn, :new)
+      conn = get(conn, ~p"/admin")
+      assert redirected_to(conn) == ~p"/sessions/new"
     end
   end
 
@@ -49,19 +47,19 @@ defmodule DievergoldereiWeb.SessionControllerTest do
 
     @tag login_as: "test@example.com"
     test "user can log out", %{conn: conn, user: user} do
-      conn = delete(conn, Routes.session_path(conn, :delete, user))
+      conn = delete(conn, ~p"/sessions/#{user}")
 
       assert nil == conn.assigns[:current_user]
-      assert redirected_to(conn) == Routes.page_path(conn, :index)
+      assert redirected_to(conn) == ~p"/"
     end
   end
 end
 
 """
-create_conn = post(conn, Routes.hours_path(conn, :create), hours: @create_attrs)
+create_conn = post(conn, ~p"/admin/hours", hours: @create_attrs)
 
-assert redirected_to(create_conn) == Routes.hours_path(create_conn, :index)
+assert redirected_to(create_conn) == ~p"/admin/hours"
 
-conn = get(conn, Routes.hours_path(conn, :index))
+conn = get(conn, ~p"/admin/hours")
 assert html_response(conn, 200) =~ "some label"
 """

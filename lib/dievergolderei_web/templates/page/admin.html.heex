@@ -1,0 +1,70 @@
+<div class="mt-12 md:grid md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2 gap-8 auto-rows-fr">
+  <section class="shadow bg-gray-200 bg-opacity-50 p-4 md:row-span-2 rounded">
+    <h2 class="text-2xl">Blog</h2>
+    <ul class="mt-4">
+      <li>
+        <%= link("Neu", to: ~p"/admin/posts/new", class: "button button-dvblue") %>
+      </li>
+      <li class="mt-4">
+        <%= link("Übersicht", to: ~p"/admin/posts", class: "button button-gray") %>
+      </li>
+    </ul>
+    <h3 class="mt-4 text-xl">Statistik</h3>
+    <table class="w-full mt-2">
+      <tr class="border-b border-gray-400">
+        <th class="font-normal text-left">Neuster Beitrag</th>
+        <td class="text-right">
+          <%= (@blog_statistics.latest && @blog_statistics.latest |> DT.strftime("%d. %b %Y")) ||
+            "N/A" %>
+        </td>
+      </tr>
+      <tr>
+        <th class="font-normal text-left">Total Beiträge</th>
+        <td class="text-right"><%= @blog_statistics.count %></td>
+      </tr>
+    </table>
+  </section>
+  <section class="shadow bg-gray-200 bg-opacity-50 p-4">
+    <h2 class="text-2xl">Öffnungszeiten</h2>
+    <ul class="mt-4">
+      <li>
+        <%= link("Übersicht", to: ~p"/admin/hours", class: "button button-gray") %>
+      </li>
+    </ul>
+  </section>
+  <section class="shadow bg-gray-200 bg-opacity-50 p-4">
+    <h2 class="text-2xl">Gallerie</h2>
+    <ul class="mt-4">
+      <li>
+        <%= link("Übersicht", to: ~p"/admin/photos", class: "button button-gray") %>
+      </li>
+    </ul>
+  </section>
+  <section class="shadow bg-gray-200 bg-opacity-50 p-4">
+    <h2 class="text-2xl">Shop</h2>
+    <ul class="mt-4">
+      <li>
+        <%= link("Übersicht", to: ~p"/admin/shop", class: "button button-gray") %>
+      </li>
+    </ul>
+  </section>
+  <section class="shadow bg-gray-200 bg-opacity-50 p-4">
+    <h2 class="text-2xl">Statische Seiten</h2>
+    <ul class="mt-4">
+      <li>
+        <%= link("Übersicht",
+          to: ~p"/admin/pages",
+          class: "button button-gray"
+        ) %>
+      </li>
+    </ul>
+  </section>
+  <section class="shadow bg-gray-200 bg-opacity-50 p-4">
+    <h2 class="text-2xl">Benutzer</h2>
+    <ul class="mt-4">
+      <li>
+        <%= link("Übersicht", to: ~p"/admin/users", class: "button button-gray") %>
+      </li>
+    </ul>
+  </section>
+</div>

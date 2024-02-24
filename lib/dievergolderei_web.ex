@@ -16,6 +16,10 @@ defmodule DievergoldereiWeb do
   below. Instead, define any helper function in modules
   and import those modules here.
   """
+  def static_paths,
+    do:
+      ~w(assets css fonts images js favicon.ico robots.txt android-chrome-192x192.png android-chrome-512x512.png
+  apple-touch-icon.png browserconfig.xml favicon-16x16.png favicon-32x32.png mstile-150x150.png safari-pinned-tab.svg site.webmanifest)
 
   def controller do
     quote do
@@ -23,7 +27,8 @@ defmodule DievergoldereiWeb do
 
       import Plug.Conn
       import DievergoldereiWeb.Gettext
-      alias DievergoldereiWeb.Router.Helpers, as: Routes
+
+      unquote(verified_routes())
     end
   end
 
@@ -37,8 +42,11 @@ defmodule DievergoldereiWeb do
       import Phoenix.Controller,
         only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
 
+      # Import basic rendering functionality (render, render_layout, etc)
+      import Phoenix.View
+
       # Include shared imports and aliases for views
-      unquote(view_helpers())
+      unquote(html_helpers())
     end
   end
 
@@ -47,7 +55,7 @@ defmodule DievergoldereiWeb do
       use Phoenix.LiveView,
         layout: {DievergoldereiWeb.LayoutView, "live.html"}
 
-      unquote(view_helpers())
+      unquote(html_helpers())
     end
   end
 
@@ -55,7 +63,23 @@ defmodule DievergoldereiWeb do
     quote do
       use Phoenix.LiveComponent
 
-      unquote(view_helpers())
+      unquote(html_helpers())
+    end
+  end
+
+  def html do
+    quote do
+      use Phoenix.Component
+
+      # Import convenience functions from controllers
+      import Phoenix.Controller,
+        only: [get_csrf_token: 0, view_module: 1, view_template: 1]
+
+      # Import basic rendering functionality (render, render_layout, etc)
+      import Phoenix.View
+
+      # Include general helpers for rendering HTML
+      unquote(html_helpers())
     end
   end
 
@@ -77,16 +101,15 @@ defmodule DievergoldereiWeb do
     end
   end
 
-  defp view_helpers do
+  defp html_helpers do
     quote do
       # Use all HTML functionality
-      use Phoenix.HTML
+      import Phoenix.HTML
+      import Phoenix.HTML.Form
+      use PhoenixHTMLHelpers
 
       # Import LiveView helpers (live_render, live_component, live_patch, etc)
       import Phoenix.LiveView.Helpers
-
-      # Import basic rendering functionality (render, render_layout, etc)
-      import Phoenix.View
 
       import DievergoldereiWeb.ErrorHelpers
       import DievergoldereiWeb.Gettext
@@ -94,7 +117,17 @@ defmodule DievergoldereiWeb do
       import DievergoldereiWeb.Breadcrumbs
       import DievergoldereiWeb.UploadHelpers
       alias DievergoldereiWeb.DateTimeHelpers, as: DT
-      alias DievergoldereiWeb.Router.Helpers, as: Routes
+
+      unquote(verified_routes())
+    end
+  end
+
+  def verified_routes do
+    quote do
+      use Phoenix.VerifiedRoutes,
+        endpoint: DievergoldereiWeb.Endpoint,
+        router: DievergoldereiWeb.Router,
+        statics: ["uploads" | DievergoldereiWeb.static_paths()]
     end
   end
 

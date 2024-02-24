@@ -5,10 +5,11 @@ config :dievergolderei, Dievergolderei.Shop, upload_directory: "uploads/"
 
 # Configure your database
 config :dievergolderei, Dievergolderei.Repo,
-  username: "postgres",
-  password: "postgres",
+  # username: "postgres",
+  # password: "postgres",
+  # hostname: "localhost",
+  socket_dir: "/var/run/postgresql",
   database: "dievergolderei_dev",
-  hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
@@ -24,13 +25,9 @@ config :dievergolderei, DievergoldereiWeb.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: [
-    node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
-      cd: Path.expand("../assets", __DIR__)
-    ]
+    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:dievergolderei, ~w(--watch)]}
   ]
 
 # ## SSL Support

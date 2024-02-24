@@ -19,7 +19,7 @@ defmodule DievergoldereiWeb.ShopController do
       {:ok, item} ->
         conn
         |> put_flash(:info, "Shopartikel erfolgreich erstellt.")
-        |> redirect(to: Routes.shop_path(conn, :show, item))
+        |> redirect(to: ~p"/admin/shop/#{item}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -52,7 +52,7 @@ defmodule DievergoldereiWeb.ShopController do
       {:ok, item} ->
         conn
         |> put_flash(:info, "Shopartikel erfolgreich angepasst.")
-        |> redirect(to: Routes.shop_path(conn, :show, item))
+        |> redirect(to: ~p"/admin/shop/#{item}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", item: item, changeset: changeset)
@@ -65,6 +65,6 @@ defmodule DievergoldereiWeb.ShopController do
 
     conn
     |> put_flash(:info, "Artikel erfolgreich gelöscht.")
-    |> redirect(to: Routes.shop_path(conn, :index))
+    |> redirect(to: ~p"/admin/shop")
   end
 end

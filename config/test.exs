@@ -4,8 +4,10 @@ config :dievergolderei, Dievergolderei.Photo, upload_directory: "/tmp/dv_uploads
 
 # Configure your database
 config :dievergolderei, Dievergolderei.Repo,
-  username: "postgres",
-  password: "postgres",
+  # username: "postgres",
+  # password: "postgres",
+  # hostname: "localhost",
+  socket_dir: "/var/run/postgresql",
   database: "dievergolderei_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
@@ -22,4 +24,4 @@ config :argon2_elixir,
   m_cost: 8
 
 # Print only warnings and errors during test
-config :logger, level: :warn
+config :logger, level: :warning

@@ -1,0 +1,18 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Formular enthält Fehler und konnte nicht gespeichert werden.</p>
+    </div>
+  <% end %>
+
+  <div class="mt-4">
+    <%= textarea(f, :content, id: "content_textarea") %>
+    <%= error_tag(f, :content) %>
+  </div>
+
+  <div>
+    <%= submit("Speichern", class: "button button-dvblue mt-4 w-full md:w-64") %>
+  </div>
+<% end %>
+
+<%= markdown_editor("content_textarea") %>

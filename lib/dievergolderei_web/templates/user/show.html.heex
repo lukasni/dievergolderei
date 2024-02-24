@@ -1,0 +1,16 @@
+<h1>Show User</h1>
+
+<ul>
+  <li>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </li>
+
+  <li>
+    <strong>Display name:</strong>
+    <%= @user.display_name %>
+  </li>
+</ul>
+
+<span><%= link("Edit", to: ~p"/admin/users/#{@user}/edit") %></span>
+<span><%= link("Back", to: ~p"/admin/users") %></span>

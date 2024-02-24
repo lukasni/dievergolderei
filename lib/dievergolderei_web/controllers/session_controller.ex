@@ -11,7 +11,7 @@ defmodule DievergoldereiWeb.SessionController do
         conn
         |> DievergoldereiWeb.Auth.login(user)
         |> put_flash(:info, "Erfolgreich angemeldet")
-        |> redirect(to: Routes.page_path(conn, :admin))
+        |> redirect(to: ~p"/admin")
 
       {:error, _reason} ->
         conn
@@ -23,6 +23,6 @@ defmodule DievergoldereiWeb.SessionController do
   def delete(conn, _) do
     conn
     |> DievergoldereiWeb.Auth.logout()
-    |> redirect(to: Routes.page_path(conn, :index))
+    |> redirect(to: ~p"/")
   end
 end

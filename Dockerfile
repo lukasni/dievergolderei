@@ -1,66 +1,51 @@
-FROM ubuntu:18.04
+ARG ELIXIR_VERSION=1.14.5
+ARG OTP_VERSION=24.2.2
+ARG UBUNTU_VERSION=bionic-20230530
 
-ARG env=prod
+ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-ubuntu-${UBUNTU_VERSION}"
+ARG RUNNER_IMAGE="ubuntu:${UBUNTU_VERSION}"
 
-# install ubuntu packages
-RUN apt-get update -q \
- && apt-get install -y \
-    git \
-    curl \
-    locales \
-    build-essential \
-    autoconf \
-    libncurses5-dev \
-    libwxgtk3.0-dev \
-    libgl1-mesa-dev \
-    libglu1-mesa-dev \
-    libpng-dev \
-    libssh-dev \
-    unixodbc-dev \
- && apt-get clean
+FROM ${BUILDER_IMAGE} as builder
 
- # set the terminal emulator
-ENV TERM=xterm
+# install build dependencies
+RUN apt-get update -y && apt-get install -y build-essential git \
+    && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
-# install asdf and its plugins
-# ASDF will only correctly install plugins into the home directory as of 0.7.5
-# so .... Just go with it.
-ENV ASDF_ROOT /root/.asdf
-ENV PATH "${ASDF_ROOT}/bin:${ASDF_ROOT}/shims:$PATH"
+# prepare build dir
+WORKDIR /app
 
-RUN git clone https://github.com/asdf-vm/asdf.git ${ASDF_ROOT} --branch v0.7.8  \
- && asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang \
- && asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir \
- && asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs \
- && ${ASDF_ROOT}/plugins/nodejs/bin/import-release-team-keyring
+# install hex + rebar
+RUN mix local.hex --force && \
+    mix local.rebar --force
 
-# set the locale
-RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
-# install erlang
-ENV ERLANG_VERSION 22.2.8
-RUN asdf install erlang ${ERLANG_VERSION} \
- && asdf global erlang ${ERLANG_VERSION}
+# set build ENV
+ENV MIX_ENV="prod"
 
-# install elixir
-ENV ELIXIR_VERSION 1.10.2-otp-22
-RUN asdf install elixir ${ELIXIR_VERSION} \
- && asdf global elixir ${ELIXIR_VERSION}
+# install mix dependencies
+COPY mix.exs mix.lock ./
+RUN mix deps.get --only $MIX_ENV
+RUN mkdir config
 
-# install local Elixir hex and rebar
-RUN mix local.hex --force \
- && mix local.rebar --force
+# copy compile-time config files before we compile dependencies
+# to ensure any relevant config change will trigger the dependencies
+# to be re-compiled.
+COPY config/config.exs config/${MIX_ENV}.exs config/
+RUN mix deps.compile
 
-# install nodejs
-ENV NODEJS_VERSION 12.16.1
-RUN asdf install nodejs ${NODEJS_VERSION} \
- && asdf global nodejs ${NODEJS_VERSION}
+COPY priv priv
+COPY assets assets
+COPY lib lib
 
-ENV MIX_ENV=$env
+RUN mix compile
 
-WORKDIR /opt/build
-ADD ./bin/build ./bin/build
+COPY config/runtime.exs config/
+COPY rel rel
 
-CMD ["bin/build"]
+RUN mix release
+
+FROM scratch as app
+
+WORKDIR /app
+COPY --from=builder /app/_build/prod/dievergolderei-*.tar.gz ./
+
+CMD ["/bin/bash"]

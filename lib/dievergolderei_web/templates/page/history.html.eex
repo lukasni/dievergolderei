@@ -1,4 +1,0 @@
-
-<article class="prose" id="history">
-    <%= markdown @static_content %>
-</article>

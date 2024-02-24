@@ -10,14 +10,10 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :dievergolderei, DievergoldereiWeb.Endpoint,
-  url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
-
-config :dievergolderei, Dievergolderei.Photo, upload_directory: "/var/dievergolderei/uploads/"
-config :dievergolderei, Dievergolderei.Shop, upload_directory: "/var/dievergolderei/uploads/"
 
 # ## SSL Support
 #

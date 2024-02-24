@@ -1,0 +1,83 @@
+<%= breadcrumbs([@conn, :photos]) %>
+
+<h1 class="text-4xl font-light mt-6">Fotogallerie</h1>
+
+<%= link to: ~p"/admin/photos/new", class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
+  <svg
+    class="h-8 w-8"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+    />
+  </svg>
+  <span class="ml-1 mr-2">Neu</span>
+<% end %>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 pb-16">
+  <%= for photo <- @photos do %>
+    <div class="flex flex-col bg-gray-200 rounded overflow-hidden">
+      <div class="h-screen/3 relative">
+        <%= unless photo.in_gallery do %>
+          <div class="h-full w-full bg-gray-800 bg-opacity-50 absolute flex items-center justify-center text-white text-2xl font-bold">
+            Nicht in Gallerie
+          </div>
+        <% end %>
+        <%= upload_img_tag(@conn, photo, class: "object-cover h-full w-full") %>
+      </div>
+
+      <div class="flex-none flex">
+        <%= link to: ~p"/admin/photos/#{photo}", class: "button button-gray inline-block flex-grow rounded-none rounded-bl" do %>
+          <svg
+            class="h-4 w-4 mx-auto"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+            <path
+              fill-rule="evenodd"
+              d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        <% end %>
+        <%= link to: ~p"/admin/photos/#{photo}/edit", class: "button button-gray inline-block flex-grow rounded-none border-r-0 border-l-0" do %>
+          <svg
+            class="h-4 w-4 mx-auto"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+            <path
+              fill-rule="evenodd"
+              d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        <% end %>
+        <%= link to: ~p"/admin/photos/#{photo}", method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-red inline-block flex-grow rounded-none rounded-br" do %>
+          <svg
+            class="h-4 w-4 mx-auto"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

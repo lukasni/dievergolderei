@@ -1,0 +1,5 @@
+<%= breadcrumbs([@conn, :post_new]) %>
+
+<h1 class="text-4xl font-light mt-6">Neuen Beitrag erstellen</h1>
+
+<%= render("form.html", Map.put(assigns, :action, ~p"/admin/posts")) %>

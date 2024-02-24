@@ -40,13 +40,13 @@ defmodule DievergoldereiWeb.PhotoControllerTest do
   test "requires authentication on all admin actions", %{conn: conn} do
     Enum.each(
       [
-        get(conn, Routes.photo_path(conn, :index)),
-        get(conn, Routes.photo_path(conn, :new)),
-        get(conn, Routes.photo_path(conn, :show, "123")),
-        get(conn, Routes.photo_path(conn, :edit, "123")),
-        get(conn, Routes.photo_path(conn, :update, "123")),
-        get(conn, Routes.photo_path(conn, :create), photo: %{}),
-        get(conn, Routes.photo_path(conn, :delete, "123"))
+        get(conn, ~p"/admin/photos"),
+        get(conn, ~p"/admin/photos/new"),
+        get(conn, ~p"/admin/photos/#{"123"}"),
+        get(conn, ~p"/admin/photos/#{"123"}/edit"),
+        put(conn, ~p"/admin/photos/#{123}", photo: %{}),
+        post(conn, ~p"/admin/photos", photo: %{}),
+        delete(conn, ~p"/admin/photos/#{"123"}")
       ],
       fn conn ->
         assert html_response(conn, 302)
@@ -60,7 +60,7 @@ defmodule DievergoldereiWeb.PhotoControllerTest do
 
     @tag login_as: "test@example.com"
     test "lists all photos", %{conn: conn} do
-      conn = get(conn, Routes.photo_path(conn, :index))
+      conn = get(conn, ~p"/admin/photos")
       assert html_response(conn, 200) =~ "Gallerie"
     end
   end
@@ -69,7 +69,7 @@ defmodule DievergoldereiWeb.PhotoControllerTest do
     setup [:create_photo]
 
     test "renders existing photo", %{conn: conn, photo: photo} do
-      conn = get(conn, Routes.photo_path(conn, :serve, photo))
+      conn = get(conn, ~p"/uploads/#{photo}")
       assert conn.status == 200
     end
   end
@@ -79,7 +79,7 @@ defmodule DievergoldereiWeb.PhotoControllerTest do
 
     @tag login_as: "test@example.com"
     test "renders form", %{conn: conn} do
-      conn = get(conn, Routes.photo_path(conn, :new))
+      conn = get(conn, ~p"/admin/photos/new")
       assert html_response(conn, 200) =~ "Bild hochladen"
     end
   end
@@ -89,17 +89,17 @@ defmodule DievergoldereiWeb.PhotoControllerTest do
 
     @tag login_as: "test@example.com"
     test "redirects to show when data is valid", %{conn: conn} do
-      create_conn = post(conn, Routes.photo_path(conn, :create), photo: @create_attrs)
+      create_conn = post(conn, ~p"/admin/photos", photo: @create_attrs)
       assert %{id: id} = redirected_params(create_conn)
-      assert redirected_to(create_conn) == Routes.photo_path(create_conn, :show, id)
+      assert redirected_to(create_conn) == ~p"/admin/photos/#{id}"
 
-      conn = get(conn, Routes.photo_path(conn, :show, id))
+      conn = get(conn, ~p"/admin/photos/#{id}")
       assert html_response(conn, 200) =~ "Bildvorschau"
     end
 
     @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, Routes.photo_path(conn, :create), photo: @invalid_attrs)
+      conn = post(conn, ~p"/admin/photos", photo: @invalid_attrs)
       assert html_response(conn, 200) =~ "Das Formular enthält Fehler"
     end
   end
@@ -109,7 +109,7 @@ defmodule DievergoldereiWeb.PhotoControllerTest do
 
     @tag login_as: "test@example.com"
     test "renders form for editing chosen photo", %{conn: conn, photo: photo} do
-      conn = get(conn, Routes.photo_path(conn, :edit, photo))
+      conn = get(conn, ~p"/admin/photos/#{photo}/edit")
       assert html_response(conn, 200) =~ "Bild bearbeiten"
     end
   end
@@ -119,16 +119,16 @@ defmodule DievergoldereiWeb.PhotoControllerTest do
 
     @tag login_as: "test@example.com"
     test "redirects when data is valid", %{conn: conn, photo: photo} do
-      update_conn = put(conn, Routes.photo_path(conn, :update, photo), photo: @update_attrs)
-      assert redirected_to(update_conn) == Routes.photo_path(update_conn, :show, photo)
+      update_conn = put(conn, ~p"/admin/photos/#{photo}", photo: @update_attrs)
+      assert redirected_to(update_conn) == ~p"/admin/photos/#{photo}"
 
-      conn = get(conn, Routes.photo_path(conn, :show, photo))
+      conn = get(conn, ~p"/admin/photos/#{photo}")
       assert html_response(conn, 200) =~ "some updated description"
     end
 
     @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn, photo: photo} do
-      conn = put(conn, Routes.photo_path(conn, :update, photo), photo: @invalid_attrs)
+      conn = put(conn, ~p"/admin/photos/#{photo}", photo: @invalid_attrs)
       assert html_response(conn, 200) =~ "Das Formular enthält Fehler"
     end
   end
@@ -138,11 +138,11 @@ defmodule DievergoldereiWeb.PhotoControllerTest do
 
     @tag login_as: "test@example.com"
     test "deletes chosen photo from DB and Filesystem", %{conn: conn, photo: photo} do
-      delete_conn = delete(conn, Routes.photo_path(conn, :delete, photo))
-      assert redirected_to(delete_conn) == Routes.photo_path(delete_conn, :index)
+      delete_conn = delete(conn, ~p"/admin/photos/#{photo}")
+      assert redirected_to(delete_conn) == ~p"/admin/photos"
 
       assert_error_sent 404, fn ->
-        get(conn, Routes.photo_path(conn, :show, photo))
+        get(conn, ~p"/admin/photos/#{photo}")
       end
 
       assert_raise File.Error, fn ->

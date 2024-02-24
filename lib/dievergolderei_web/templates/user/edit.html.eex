@@ -1,5 +1,0 @@
-<%= breadcrumbs [@conn, :user, @user] %>
-
-<h1 class="text-4xl font-light mt-6">Benutzer bearbeiten</h1>
-
-<%= render "form.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user)) %>
