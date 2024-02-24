@@ -1,0 +1,42 @@
+<div class="container mx-auto px-4 py-4">
+  <header class="">
+    <.main_nav>
+      <:item to={~p"/"}>Start</:item>
+      <:item to={~p"/kontakt"}>Kontakt</:item>
+      <:item to={~p"/shop"}>Shop</:item>
+      <:item to={~p"/impressionen"}>Impressionen</:item>
+      <:item to={~p"/geschichte"}>Geschichte</:item>
+      <:item to={~p"/blog"}>Blog</:item>
+      <:item :if={@current_user} to={~p"/admin"}>Adminbereich</:item>
+    </.main_nav>
+
+    <div class="relative text-right">
+      
+      <%= if @current_user && false do %>
+        <div class="sm:absolute right-0 top-0 mt-1 bg-opacity-25 bg-dvgold-200 border-dvgold-400 border p-2 rounded">
+          <div phx-click={Phoenix.LiveView.JS.toggle(to: "#admin-nav")}>
+            <%= @current_user.display_name %>
+          </div>
+          <div id="admin-nav" style="display: none;">
+            <hr class="my-2" />
+            <.link navigate={~p"/admin"} class="block">Adminbereich</.link>
+            <.link href={~p"/sessions/#{@current_user}"} method="delete" class="block">
+              Ausloggen
+            </.link>
+          </div>
+        </div>
+      <% end %>
+      <%= unless assigns[:hide_logo] == true do %>
+        <img
+          class="block lg:h-64 mt-4 mx-auto"
+          src={~p(/images/header.svg)}
+          alt="Logo Die Vergolderei"
+        />
+      <% end %>
+    </div>
+  </header>
+  <main role="main" class="mt-8">
+    <.flash_group flash={@flash} />
+    <%= @inner_content %>
+  </main>
+</div>

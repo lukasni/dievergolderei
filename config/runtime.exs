@@ -69,11 +69,9 @@ if config_env() == :prod do
       port: 443,
       cipher_suite: :compatible,
       keyfile: System.get_env("SSL_KEY_FILE"),
-      certfile: System.get_env("SSL_CERT_FILE"),
-      #cacertfile: System.get_env("SSL_CACERT_FILE"),
+      certfile: System.get_env("SSL_CERT_FILE")
+      # cacertfile: System.get_env("SSL_CACERT_FILE"),
     ]
-
-
 
   # ## SSL Support
   #

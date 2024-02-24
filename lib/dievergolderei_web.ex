@@ -23,7 +23,10 @@ defmodule DievergoldereiWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: DievergoldereiWeb
+      use Phoenix.Controller,
+        namespace: DievergoldereiWeb,
+        formats: [html: "View", json: "JSON"],
+        layouts: [html: DievergoldereiWeb.Layouts]
 
       import Plug.Conn
       import DievergoldereiWeb.Gettext
@@ -111,8 +114,14 @@ defmodule DievergoldereiWeb do
       # Import LiveView helpers (live_render, live_component, live_patch, etc)
       import Phoenix.LiveView.Helpers
 
-      import DievergoldereiWeb.ErrorHelpers
+      # Core UI components and translation
+      import DievergoldereiWeb.CoreComponents
       import DievergoldereiWeb.Gettext
+
+      # Shortcut for generating JS commands
+      alias Phoenix.LiveView.JS
+
+      import DievergoldereiWeb.ErrorHelpers
       import DievergoldereiWeb.Markdown
       import DievergoldereiWeb.Breadcrumbs
       import DievergoldereiWeb.UploadHelpers
