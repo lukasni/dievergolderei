@@ -13,6 +13,7 @@ alias Dievergolderei.Repo
 alias Dievergolderei.Blog.Post
 alias Dievergolderei.OpeningHours.Hours
 alias Dievergolderei.Pages.StaticPage
+alias Dievergolderei.Gallery.Photo
 
 Repo.insert!(%Hours{label: "Montag", times: "geschlossen", active: true, list_position: 0})
 
@@ -48,7 +49,7 @@ end
 index_page = """
 ## Herzlich Willkommen
 
-Das Rahmenatelier „Die Vergolderei“ ist ihr Werkstattladen für individuelle Bilderrahmen, Einrahmungen und Spiegel in Rheinfelden.
+Das Rahmenatelier "Die Vergolderei" ist ihr Werkstattladen für individuelle Bilderrahmen, Einrahmungen und Spiegel in Rheinfelden.
 
 Dazu führe ich eine kleine, feine Auswahl an Künstlerbedarf.
 """
@@ -60,15 +61,16 @@ Repo.insert!(%StaticPage{
 
 contact_page = """
 ## Kontakt
-<address>Die Vergolderei
-Brodlaube 9
-CH-4310 Rheinfelden
-Schweiz
+<address class="border-l-2 border-dvblue-500 pl-4 not-italic" >
+Die Vergolderei<br>
+Regula Stindt<br>
+Brodlaube 9<br>
+CH-4310 Rheinfelden<br>
+Schweiz<br>
 </address>
 
 [061 831 14 84](tel:+41618311484)
 [regula.stindt@dievergolderei.ch](mailto:regula.stindt@dievergolderei.ch)
-
 """
 
 Repo.insert!(%StaticPage{
@@ -93,10 +95,10 @@ Da arbeite ich mit den Firmen Talens und Lascaux zusammen.
 
 Seit Sommer 2001 bin ich an der Brodlaube 9 im schönen Lokal im Haus der Familie Thurnheer.
 
-<div class="row">
-<div class="column"><img src="/photos/4"></div>
-<div class="column"><img src="/photos/5"></div>
-<div class="column"><img src="/photos/6"></div>
+<div class="md:flex items-center justify-between">
+<div class="flex-1"><img src="/uploads/1"></div>
+<div class="md:ml-1 flex-1"><img src="/uploads/3"></div>
+<div class="md:ml-1 flex-1"><img src="/uploads/2"></div>
 </div>
 
 Neu dazu führe ich ein kleine Auswahl von Kunst, Acrylbilder und Kunstdrucke nach Wahl auf Bestellung.
@@ -112,3 +114,71 @@ Repo.insert!(%StaticPage{
   name: "history",
   content: history_page
 })
+
+shop_page = """
+## Aktuell im Verkauf
+
+In diesem virtuellen Schaufenster sehen Sie eine Auswahl der Bilder und Spiegel die aktuell im Verkauf sind. Bei Interesse können Sie mich gerne [kontaktieren](/kontakt) um ein Bild zu reservieren.
+
+### TheFramer von Emsa
+Die Vergolderei ist ein Partner von TheFramer von EMSA. Auf deren Webseite können Sie bequem von zuhause einen individuellen Bilderrahmen gestalten.
+[![TheFramer](/images/theframer.png) {: .block .h-32} Der Rahmenkonfigurator von EMSA](https://www.theframer.ch/) {: .flex .items-center}
+"""
+
+Repo.insert!(%StaticPage{
+  name: "shop",
+  content: shop_page
+})
+
+featured_page = """
+[![TheFramer](/images/theframer.png) {: .block .h-32} Der Rahmenkonfigurator von Emsa](https://www.theframer.ch/) {: .flex .items-center}
+"""
+
+Repo.insert!(%StaticPage{
+  name: "featured",
+  content: featured_page
+})
+
+photos = [
+  %{
+    id: 3,
+    in_gallery: false,
+    description: nil,
+    title: "Geschichte 3",
+    slug: nil,
+    content_type: "image/jpeg",
+    filename: "3.jpeg",
+    hash: "a97e6205727fa7007ff23d467535375144bf54c98e0cee79028136461c69c5f7",
+    size: 89982,
+    inserted_at: NaiveDateTime.utc_now(:second),
+    updated_at: NaiveDateTime.utc_now(:second)
+  },
+  %{
+    id: 2,
+    in_gallery: false,
+    description: nil,
+    title: "Geschichte 2",
+    slug: nil,
+    content_type: "image/jpeg",
+    filename: "2.jpeg",
+    hash: "905915a82b3fcde52abfa4a0e5aacca9d62166bfaf2a5a136402f1c7bd3977eb",
+    size: 103_565,
+    inserted_at: NaiveDateTime.utc_now(:second),
+    updated_at: NaiveDateTime.utc_now(:second)
+  },
+  %{
+    id: 1,
+    in_gallery: false,
+    description: nil,
+    title: "Geschichte 1",
+    slug: nil,
+    content_type: "image/jpeg",
+    filename: "1.jpeg",
+    hash: "24bcb6b9a8a8490feb7dc48166d1dcdbbcc4e7abb952426f88df3ebd2cb6c290",
+    size: 95389,
+    inserted_at: NaiveDateTime.utc_now(:second),
+    updated_at: NaiveDateTime.utc_now(:second)
+  }
+]
+
+Repo.insert_all(Photo, photos)

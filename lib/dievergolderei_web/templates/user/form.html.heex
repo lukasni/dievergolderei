@@ -1,0 +1,23 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label(f, :display_name, class: "block mt-4") %>
+  <%= text_input(f, :display_name, class: "block rounded") %>
+  <%= error_tag(f, :display_name) %>
+
+  <%= label(f, :email, class: "block mt-4") %>
+  <%= email_input(f, :email, class: "block rounded") %>
+  <%= error_tag(f, :email) %>
+
+  <%= label(f, :password, class: "block mt-4") %>
+  <%= password_input(f, :password, class: "block rounded") %>
+  <%= error_tag(f, :password) %>
+
+  <div>
+    <%= submit("Speichern", class: "button button-dvblue mt-4 w-full md:w-64") %>
+  </div>
+<% end %>

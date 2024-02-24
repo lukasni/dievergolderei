@@ -18,12 +18,14 @@ defmodule DievergoldereiWeb.ConnCase do
   using do
     quote do
       # Import conveniences for testing with connections
-      use Phoenix.ConnTest
+      import Plug.Conn
+      import Phoenix.ConnTest
       import Dievergolderei.TestHelpers
-      alias DievergoldereiWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
       @endpoint DievergoldereiWeb.Endpoint
+
+      use DievergoldereiWeb, :verified_routes
     end
   end
 

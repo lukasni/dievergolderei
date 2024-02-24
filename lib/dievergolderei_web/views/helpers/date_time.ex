@@ -18,7 +18,7 @@ defmodule DievergoldereiWeb.DateTimeHelpers do
       end,
       month_names: fn month ->
         {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September",
-        "Oktober", "November", "Dezember"}
+         "Oktober", "November", "Dezember"}
         |> elem(month - 1)
       end,
       day_of_week_names: fn day_of_week ->
@@ -26,7 +26,8 @@ defmodule DievergoldereiWeb.DateTimeHelpers do
         |> elem(day_of_week - 1)
       end,
       abbreviated_month_names: fn month ->
-        {"Jan.", "Feb.", "Mär.", "Apr.", "Mai.", "Jun.", "Jul.", "Aug.", "Sep.", "Okt.", "Nov.", "Dez."}
+        {"Jan.", "Feb.", "Mär.", "Apr.", "Mai.", "Jun.", "Jul.", "Aug.", "Sep.", "Okt.", "Nov.",
+         "Dez."}
         |> elem(month - 1)
       end,
       abbreviated_day_of_week_names: fn day_of_week ->

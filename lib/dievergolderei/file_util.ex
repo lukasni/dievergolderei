@@ -1,7 +1,7 @@
 defmodule Dievergolderei.FileUtil do
   def hash(filename, algorithm) when is_binary(filename) do
     filename
-    |> File.stream!([], 2048)
+    |> File.stream!(2048)
     |> hash(algorithm)
   end
 

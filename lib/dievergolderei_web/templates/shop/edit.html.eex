@@ -1,5 +1,0 @@
-<%= breadcrumbs [@conn, :shop_item_edit, @item] %>
-
-<h1 class="text-4xl font-light mt-6">Shopartikel bearbeiten</h1>
-
-<%= render "form.html", Map.put(assigns, :action, Routes.shop_path(@conn, :update, @item)) %>

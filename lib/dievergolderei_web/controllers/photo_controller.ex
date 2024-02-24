@@ -19,7 +19,7 @@ defmodule DievergoldereiWeb.PhotoController do
       {:ok, photo} ->
         conn
         |> put_flash(:info, "Foto erfolgreich hochgeladen.")
-        |> redirect(to: Routes.photo_path(conn, :show, photo))
+        |> redirect(to: ~p"/admin/photos/#{photo}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -52,7 +52,7 @@ defmodule DievergoldereiWeb.PhotoController do
       {:ok, photo} ->
         conn
         |> put_flash(:info, "Foto erfolgreich angepasst.")
-        |> redirect(to: Routes.photo_path(conn, :show, photo))
+        |> redirect(to: ~p"/admin/photos/#{photo}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", photo: photo, changeset: changeset)
@@ -65,6 +65,6 @@ defmodule DievergoldereiWeb.PhotoController do
 
     conn
     |> put_flash(:info, "Foto erfolgreich gelöscht.")
-    |> redirect(to: Routes.photo_path(conn, :index))
+    |> redirect(to: ~p"/admin/photos")
   end
 end

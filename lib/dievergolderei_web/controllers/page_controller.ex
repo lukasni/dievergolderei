@@ -8,7 +8,13 @@ defmodule DievergoldereiWeb.PageController do
     posts = Dievergolderei.Blog.list_most_recent_published_posts(3)
     content = Pages.get_content_by_name!("index")
     featured = Pages.get_content_by_name!("featured")
-    render(conn, "index.html", static_content: content, hours: hours, posts: posts, featured_content: featured)
+
+    render(conn, "index.html",
+      static_content: content,
+      hours: hours,
+      posts: posts,
+      featured_content: featured
+    )
   end
 
   def contact(conn, _params) do

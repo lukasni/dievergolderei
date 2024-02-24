@@ -35,7 +35,7 @@ defmodule DievergoldereiWeb.StaticPageController do
       {:ok, static_page} ->
         conn
         |> put_flash(:info, "Statische seite erfolgreich angepasst.")
-        |> redirect(to: Routes.static_page_path(conn, :show, static_page))
+        |> redirect(to: ~p"/admin/pages/#{static_page}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", static_page: static_page, changeset: changeset)
