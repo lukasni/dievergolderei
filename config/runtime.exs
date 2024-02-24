@@ -54,29 +54,25 @@ if config_env() == :prod do
   config :dievergolderei, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :dievergolderei, DievergoldereiWeb.Endpoint,
-  http: [:inet6, port: port],
-  url: [host: host, port: 443, scheme: "https"],
-  secret_key_base: secret_key_base,
-  server: true,
-  force_ssl: [hsts: true],
-  https: [
-    :inet6,
-    port: 443,
-    cipher_suite: :compatible,
-    keyfile: System.get_env("SSL_KEY_FILE"),
-    certfile: System.get_env("SSL_CERT_FILE"),
-    cacertfile: System.get_env("SSL_CACERT_FILE"),
-    dhfile: System.get_env("SSL_DHPARAM_FILE")
-  ]
+    url: [host: host, port: 443, scheme: "https"],
+    http: [
+      # Enable IPv6 and bind on all interfaces.
+      # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
+      # See the documentation on https://hexdocs.pm/bandit/Bandit.html#t:options/0
+      # for details about using IPv6 vs IPv4 and loopback vs public addresses.
+      ip: {0, 0, 0, 0, 0, 0, 0, 0},
+      port: port
+    ],
+    secret_key_base: secret_key_base,
+    force_ssl: [hsts: true],
+    https: [
+      port: 443,
+      cipher_suite: :compatible,
+      keyfile: System.get_env("SSL_KEY_FILE"),
+      certfile: System.get_env("SSL_CERT_FILE"),
+      #cacertfile: System.get_env("SSL_CACERT_FILE"),
+    ]
 
-  upload_directory =
-    System.get_env("UPLOAD_DIRECTORY") ||
-      raise """
-      environment variable UPLOAD_DIRECTORY is missing.
-      """
-
-  config :dievergolderei, Dievergolderei.Photo, upload_directory: upload_directory
-  config :dievergolderei, Dievergolderei.Shop, upload_directory: upload_directory
 
 
   # ## SSL Support
