@@ -1,5 +1,7 @@
 defmodule DievergoldereiWeb.PostView do
-  use DievergoldereiWeb, :view
+  use DievergoldereiWeb, :html
+
+  embed_templates "../templates/post/*"
 
   def month_link(%Date{month: month, year: year}, opts \\ []) do
     text = Dievergolderei.DateUtil.month_name(month) <> " #{year}"

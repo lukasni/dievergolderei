@@ -1,7 +1,9 @@
 defmodule DievergoldereiWeb.ShopView do
-  use DievergoldereiWeb, :view
+  use DievergoldereiWeb, :html
 
   alias Decimal, as: D
+
+  embed_templates "../templates/shop/*"
 
   defp format_chf(%D{} = number) do
     case D.compare(number, D.round(number)) do

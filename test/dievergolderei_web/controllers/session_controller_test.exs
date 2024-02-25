@@ -27,7 +27,7 @@ defmodule DievergoldereiWeb.SessionControllerTest do
       assert %User{} = conn.assigns[:current_user]
 
       conn = get(conn, ~p"/admin")
-      assert html_response(conn, 200) =~ user.display_name
+      assert html_response(conn, 200) =~ "Adminbereich"
     end
 
     test "rejects incorrect password", %{conn: conn, user: user} do

@@ -2,4 +2,4 @@
 
 <h1 class="text-4xl font-light mt-6">Neuen Shopartikel erstellen</h1>
 
-<%= render("form.html", Map.put(assigns, :action, ~p"/admin/shop")) %>
+<._form changeset={@changeset} action={~p"/admin/shop"} />

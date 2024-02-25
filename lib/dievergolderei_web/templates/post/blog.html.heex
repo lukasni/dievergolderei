@@ -7,7 +7,7 @@
 <div class="md:flex" role="blog">
   <section class="md:w-2/3">
     <%= for post <- @posts do %>
-      <%= render(DievergoldereiWeb.PostView, "post.html", post: post, conn: @conn) %>
+      <.post post={post} conn={@conn} />
     <% end %>
   </section>
   <nav role="navigation" class="md:w-1/3 md:pl-4">

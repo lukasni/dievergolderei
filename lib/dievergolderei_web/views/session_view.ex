@@ -1,3 +1,5 @@
 defmodule DievergoldereiWeb.SessionView do
-  use DievergoldereiWeb, :view
+  use DievergoldereiWeb, :html
+
+  embed_templates "../templates/session/*"
 end
