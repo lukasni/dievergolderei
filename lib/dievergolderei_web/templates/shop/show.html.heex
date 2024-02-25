@@ -1,4 +1,8 @@
-<%= breadcrumbs([@conn, :shop_item, @item]) %>
+<.breadcrumb>
+    <:item to={~p"/admin/"}>Admin</:item>
+    <:item to={~p"/admin/shop"}>Shop</:item>
+    <:item><%= @item.title || @item.id %></:item>
+</.breadcrumb>
 
 <h1 class="text-4xl font-light mt-6">Shopartikel</h1>
 

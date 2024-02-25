@@ -3,45 +3,31 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 
-.small-caps {
-  font-variant: small-caps;
-}
-
-.button {
-  @apply px-4 py-2 border text-center rounded block;
-}
-
-.button-dvblue {
-  @apply bg-dvblue-300 border-dvblue-500 text-white;
-}
-
-.button-gray {
-  @apply bg-gray-300 border-gray-500;
-}
-
-.button-red {
-  @apply bg-red-300 border-red-500 text-red-800;
-}
-
-.breadcrumbs {
-  & li {
-    @apply inline;
+@layer components {
+  .button {
+    @apply px-4 py-2 border text-center rounded block;
   }
-
-  & li:after {
-    content: " / ";
+  
+  .button-dvblue {
+    @apply bg-dvblue-300 border-dvblue-500 text-white;
   }
-
-  & li:last-child:after {
-    content: "";
+  
+  .button-gray {
+    @apply bg-gray-300 border-gray-500;
   }
-
-  & a {
-    @apply text-dvblue-500;
+  
+  .button-red {
+    @apply bg-red-300 border-red-500 text-red-800;
   }
 }
 
 @import "tailwindcss/utilities";
+
+@layer utilities {
+  .small-caps {
+    font-variant-caps: small-caps;
+  }
+}
 
 body::before {
     background-image: url("/images/bg.png");
@@ -49,33 +35,4 @@ body::before {
     filter: blur(5px);
     z-index: -2;
     @apply bg-cover w-screen h-screen block fixed top-0 left-0 opacity-25 pointer-events-none;
-}
-
-/* Alerts and form errors */
-.alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-.alert-info {
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-}
-.alert-warning {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
-}
-.alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
-}
-.alert p {
-  margin-bottom: 0;
-}
-.alert:empty {
-  display: none;
 }

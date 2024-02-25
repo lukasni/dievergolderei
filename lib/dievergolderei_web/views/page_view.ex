@@ -29,7 +29,7 @@ defmodule DievergoldereiWeb.PageView do
         <h2 class="text-2xl"><%= @title %></h2>
       </header>
       <ul class="mt-4">
-        <li :for={button <- @button} class="mb-4">
+        <li :for={button <- @button} class="mb-4 last:mb-0">
           <.link
             navigate={button.to}
             class={[

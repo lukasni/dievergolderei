@@ -1,37 +1,14 @@
-<%= form_for @changeset, @action, [multipart: true], fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Das Formular enthält Fehler, bitte unten überprüfen.</p>
-    </div>
-  <% end %>
+<.simple_form :let={f} for={@changeset} action={@action} multipart class="md:max-w-md">
+  <.error :if={@changeset.action}>
+    Formular enthält Fehler und konnte nicht gespeichert werden.
+  </.error>
 
-  <div class="mt-4 md:max-w-md">
-    <%= label(f, :photo, "Bild", class: "text-lg block") %>
-    <%= file_input(f, :photo, class: "rounded block w-full") %>
-    <%= error_tag(f, :hash) %>
-  </div>
-
-  <div class="mt-4 md:max-w-md">
-    <%= text_input(f, :title, placeholder: "Titel - optional", class: "rounded block w-full") %>
-    <%= error_tag(f, :title) %>
-  </div>
-
-  <div class="mt-4 md:max-w-md">
-    <%= number_input(f, :price,
-      placeholder: "Preis - optional",
-      step: "0.05",
-      class: "rounded block w-full"
-    ) %>
-    <%= error_tag(f, :price) %>
-  </div>
-
-  <div class="mt-4 md:max-w-md">
-    <%= label f, :reserved, class: "flex items-center space-x-2" do %>
-      Reserviert <%= checkbox(f, :reserved) %>
-    <% end %>
-  </div>
-
-  <div>
-    <%= submit("Speichern", class: "button button-dvblue mt-4 w-full md:w-64") %>
-  </div>
-<% end %>
+  <.input field={f[:photo]} type="file" label="Bild" />
+  <.input field={f[:title]} type="text" placeholder="Titel - optional" />
+  <.input field={f[:price]} type="number" step="0.05" placeholder="Preis - optional" />
+  <.input field={f[:reserved]} type="checkbox" label="Reserviert" />
+  
+  <:actions>
+    <.button>Speichern</.button>
+  </:actions>
+</.simple_form>

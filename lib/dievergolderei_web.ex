@@ -78,9 +78,6 @@ defmodule DievergoldereiWeb do
       import Phoenix.Controller,
         only: [get_csrf_token: 0, view_module: 1, view_template: 1]
 
-      # Import basic rendering functionality (render, render_layout, etc)
-      import Phoenix.View
-
       # Include general helpers for rendering HTML
       unquote(html_helpers())
     end
@@ -117,6 +114,7 @@ defmodule DievergoldereiWeb do
       # Core UI components and translation
       import DievergoldereiWeb.CoreComponents
       import DievergoldereiWeb.Components.Controls
+      import DievergoldereiWeb.Components.Breadcrumbs
       import DievergoldereiWeb.Gettext
 
       # Shortcut for generating JS commands
@@ -124,7 +122,6 @@ defmodule DievergoldereiWeb do
 
       import DievergoldereiWeb.ErrorHelpers
       import DievergoldereiWeb.Markdown
-      import DievergoldereiWeb.Breadcrumbs
       import DievergoldereiWeb.UploadHelpers
       alias DievergoldereiWeb.DateTimeHelpers, as: DT
 

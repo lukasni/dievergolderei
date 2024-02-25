@@ -42,5 +42,10 @@
 
   <.admin_section title="Technische Infos">
     <:button to={~p"/admin/dashboard"}>Dashboard</:button>
+    <:footer>
+      <.link href={~p"/sessions/#{@current_user}"} method="delete" class="block">
+        Ausloggen
+      </.link>
+    </:footer>
   </.admin_section>
 </div>

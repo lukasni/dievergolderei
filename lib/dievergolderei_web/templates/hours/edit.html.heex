@@ -1,4 +1,8 @@
-<%= breadcrumbs([@conn, :hours, @hours]) %>
+<.breadcrumb>
+    <:item to={~p"/admin/"}>Admin</:item>
+    <:item to={~p"/admin/hours"}>Öffnungszeiten</:item>
+    <:item><%= @hours.label %></:item>
+</.breadcrumb>
 
 <h1 class="text-4xl font-light mt-6">Öffnungszeiten Bearbeiten</h1>
 

@@ -1,37 +1,19 @@
-<%= form_for @changeset, @action, [multipart: true], fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Das Formular entält fehler, bitte unten überprüfen.</p>
-    </div>
-  <% end %>
+<.simple_form :let={f} for={@changeset} action={@action} multipart>
+  <.error :if={@changeset.action}>
+    Formular enthält Fehler und konnte nicht gespeichert werden.
+  </.error>
 
   <div class="grid md:grid-cols-3 gap-4 mt-4">
-    <div>
-      <%= label(f, :title, "Titel", class: "text-lg block") %>
-      <%= text_input(f, :title, class: "rounded block w-full") %>
-      <%= error_tag(f, :title) %>
-    </div>
-
-    <div>
-      <%= label(f, :upload, "Bild", class: "text-lg block") %>
-      <%= file_input(f, :upload, class: "rounded") %>
-    </div>
-
-    <div>
-      <%= label(f, :publish_on, "Veröffentlichungsdatum", class: "text-lg block") %>
-      <%= date_input(f, :publish_on, class: "rounded block w-full") %>
-      <%= error_tag(f, :publish_on) %>
-    </div>
+    <.input field={f[:title]} type="text" label="Titel" />
+    <.input field={f[:upload]} type="file" label="Bild" />
+    <.input field={f[:publish_on]} type="text" label="Veröffentlichungsdatum" />
   </div>
+  
+  <.input field={f[:content]} type="textarea" id="content_textarea" />
 
-  <div class="mt-4">
-    <%= textarea(f, :content, id: "content_textarea") %>
-    <%= error_tag(f, :content) %>
-  </div>
-
-  <div>
-    <%= submit("Speichern", class: "button button-dvblue mt-4 w-full md:w-64") %>
-  </div>
-<% end %>
+  <:actions>
+    <.button>Speichern</.button>
+  </:actions>
+</.simple_form>
 
 <%= markdown_editor("content_textarea") %>

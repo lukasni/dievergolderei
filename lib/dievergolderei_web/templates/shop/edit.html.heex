@@ -1,4 +1,9 @@
-<%= breadcrumbs([@conn, :shop_item_edit, @item]) %>
+<.breadcrumb>
+    <:item to={~p"/admin/"}>Admin</:item>
+    <:item to={~p"/admin/shop"}>Shop</:item>
+    <:item to={~p"/admin/shop/#{@item}"}><%= @item.title || @item.id %></:item>
+    <:item>Bearbeiten</:item>
+</.breadcrumb>
 
 <h1 class="text-4xl font-light mt-6">Shopartikel bearbeiten</h1>
 

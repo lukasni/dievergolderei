@@ -1,4 +1,7 @@
-<%= breadcrumbs([@conn, :static_pages]) %>
+<.breadcrumb>
+    <:item to={~p"/admin/"}>Admin</:item>
+    <:item>Statische Seiten</:item>
+</.breadcrumb>
 
 <h1 class="text-4xl font-light mt-6">Statische Seiteninhalte</h1>
 
@@ -13,12 +16,9 @@
         </td>
 
         <td class="p-2">
-          <span>
-            <%= link("Bearbeiten",
-              to: ~p"/admin/pages/#{static_page}/edit",
-              class: "button button-dvblue"
-            ) %>
-          </span>
+          <.link navigate={~p"/admin/pages/#{static_page}/edit"} class="button button-dvblue">
+            Bearbeiten
+          </.link>
         </td>
       </tr>
     <% end %>

@@ -1,4 +1,7 @@
-<%= breadcrumbs([@conn, :users]) %>
+<.breadcrumb>
+    <:item to={~p"/admin/"}>Admin</:item>
+    <:item>Benutzer</:item>
+</.breadcrumb>
 
 <h1 class="text-4xl font-light mt-6">
   Benutzer
@@ -6,30 +9,19 @@
 
 <.fab to={~p"/admin/users/new"} icon="hero-plus" text="Neu" />
 
-<table class="mt-4">
-  <thead>
-    <tr>
-      <th class="p-2 text-left">Email</th>
-      <th class="p-2 text-left">Display name</th>
+<.table id="users" rows={@users} row_click={&JS.navigate(~p"/admin/users/#{&1}")}>
+  <:col :let={user} label="Email"><%= user.email %></:col>
+  <:col :let={user} label="Name"><%= user.display_name %></:col>
 
-      <th class="p-2 text-left"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr :for={user <- @users}>
-      <td class="p-2"><%= user.email %></td>
-      <td class="p-2"><%= user.display_name %></td>
-
-      <td class="p-2">
-        <div class="flex-none flex">
-          <%= link to: ~p"/admin/users/#{user}/edit", class: "button button-gray flex-grow rounded-none rounded-l border-r-0 flex items-center justify-center" do %>
-            <.icon name="hero-pencil-square-solid h-4 w-4" />
-          <% end %>
-          <%= link to: ~p"/admin/users/#{user}", method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-red flex-grow rounded-none rounded-r flex items-center justify-center" do %>
-            <.icon name="hero-trash-solid h-4 w-4" />
-          <% end %>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <:action :let={user}>
+    <div class="sr-only">
+      <.link navigate={~p"/admin/users/#{user}"}>Anzeigen</.link>
+    </div>
+    <.link navigate={~p"/admin/users/#{user}/edit"}>Bearbeiten</.link>
+  </:action>
+  <:action :let={user}>
+    <.link href={~p"/admin/users/#{user}"} method="delete" data-confirm="Are you sure?">
+      Löschen
+    </.link>
+  </:action>
+</.table>
