@@ -13,21 +13,13 @@ defmodule DievergoldereiWeb.Layouts do
       role="navigation"
       class="sm:flex items-center justify-between bg-gray-300 bg-opacity-25 border-y border-black"
     >
-      <%= for item <- @item do %>
-        <.link
-          :if={item[:to]}
-          class="block sm:flex-1 small-caps tracking-wide hover:text-white text-md text-center hover:bg-dvblue-500 py-1"
-          navigate={item.to}
-        >
-          <%= render_slot(item) %>
-        </.link>
-        <div
-          :if={!item[:to]}
-          class="block small-caps tracking-wide hover:text-white text-md text-center hover:bg-dvblue-500 py-1"
-        >
-          <%= render_slot(item) %>
-        </div>
-      <% end %>
+      <.link
+        :for={item <- @item}
+        class="block sm:flex-1 small-caps tracking-wide hover:text-white text-md text-center hover:bg-dvblue-500 py-1"
+        navigate={item.to}
+      >
+        <%= render_slot(item) %>
+      </.link>
     </nav>
     """
   end

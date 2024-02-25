@@ -16,22 +16,20 @@
     </tr>
   </thead>
   <tbody>
-    <%= for user <- @users do %>
-      <tr>
-        <td class="p-2"><%= user.email %></td>
-        <td class="p-2"><%= user.display_name %></td>
+    <tr :for={user <- @users}>
+      <td class="p-2"><%= user.email %></td>
+      <td class="p-2"><%= user.display_name %></td>
 
-        <td class="p-2">
-          <div class="flex-none flex">
-            <%= link to: ~p"/admin/users/#{user}/edit", class: "button button-gray flex-grow rounded-none rounded-l border-r-0 flex items-center justify-center" do %>
-              <.icon name="hero-pencil-square-solid h-4 w-4" />
-            <% end %>
-            <%= link to: ~p"/admin/users/#{user}", method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-red flex-grow rounded-none rounded-r flex items-center justify-center" do %>
-              <.icon name="hero-trash-solid h-4 w-4" />
-            <% end %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
+      <td class="p-2">
+        <div class="flex-none flex">
+          <%= link to: ~p"/admin/users/#{user}/edit", class: "button button-gray flex-grow rounded-none rounded-l border-r-0 flex items-center justify-center" do %>
+            <.icon name="hero-pencil-square-solid h-4 w-4" />
+          <% end %>
+          <%= link to: ~p"/admin/users/#{user}", method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-red flex-grow rounded-none rounded-r flex items-center justify-center" do %>
+            <.icon name="hero-trash-solid h-4 w-4" />
+          <% end %>
+        </div>
+      </td>
+    </tr>
   </tbody>
 </table>

@@ -15,29 +15,27 @@
     </tr>
   </thead>
   <tbody>
-    <%= for item <- @items do %>
-      <tr class="border-t">
-        <td><%= upload_img_tag(@conn, item, width: "150") %></td>
-        <td><%= item.title %></td>
-        <td><%= item.price |> format_chf() %></td>
+    <tr :for={item <- @items} class="border-t">
+      <td><%= upload_img_tag(@conn, item, width: "150") %></td>
+      <td><%= item.title %></td>
+      <td><%= item.price |> format_chf() %></td>
 
-        <td>
-          <span>
-            <%= link("Bearbeiten",
-              to: ~p"/admin/shop/#{item}/edit",
-              class: "button button-dvblue mb-2"
-            ) %>
-          </span>
-          <span>
-            <%= link("Löschen",
-              to: ~p"/admin/shop/#{item}",
-              method: :delete,
-              data: [confirm: "Wirklich löschen?"],
-              class: "button button-red"
-            ) %>
-          </span>
-        </td>
-      </tr>
-    <% end %>
+      <td>
+        <span>
+          <%= link("Bearbeiten",
+            to: ~p"/admin/shop/#{item}/edit",
+            class: "button button-dvblue mb-2"
+          ) %>
+        </span>
+        <span>
+          <%= link("Löschen",
+            to: ~p"/admin/shop/#{item}",
+            method: :delete,
+            data: [confirm: "Wirklich löschen?"],
+            class: "button button-red"
+          ) %>
+        </span>
+      </td>
+    </tr>
   </tbody>
 </table>

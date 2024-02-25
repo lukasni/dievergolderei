@@ -17,9 +17,7 @@
   </span>
 </h2>
 
-<%= if @photo.description do %>
-  <p class="mt-2"><%= @photo.description %></p>
-<% end %>
+<p :if={@photo.description} class="mt-2"><%= @photo.description %></p>
 
 <hr class="my-4" />
 

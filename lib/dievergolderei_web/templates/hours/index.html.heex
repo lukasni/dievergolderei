@@ -15,42 +15,40 @@
     </tr>
   </thead>
   <tbody>
-    <%= for hours <- @hours do %>
-      <tr class="border-t">
-        <td>
-          <input type="checkbox" class="form-checkbox" disabled checked={hours.active} />
-        </td>
-        <td><%= hours.label %></td>
-        <td style="white-space: pre-line"><%= hours.times %></td>
-        <td>
-          <div class="flex items-center justify-start space-x-1 my-2">
-            <%= link("🡅",
-              to: ~p"/admin/hours/reorder?direction=up&id=#{hours}",
-              method: :post,
-              class: "button button-gray"
-            ) %>
-            <%= link("🡇",
-              to: ~p"/admin/hours/reorder?direction=down&id=#{hours}",
-              method: :post,
-              class: "button button-gray"
-            ) %>
-          </div>
-        </td>
-        <td>
-          <div class="flex items-center justify-end space-x-1">
-            <%= link("Bearbeiten",
-              to: ~p"/admin/hours/#{hours}/edit",
-              class: "button button-dvblue"
-            ) %>
-            <%= link("Löschen",
-              to: ~p"/admin/hours/#{hours}",
-              method: :delete,
-              data: [confirm: "Wirklich löschen?"],
-              class: "button button-red"
-            ) %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
+    <tr :for={hours <- @hours} class="border-t">
+      <td>
+        <input type="checkbox" class="form-checkbox" disabled checked={hours.active} />
+      </td>
+      <td><%= hours.label %></td>
+      <td style="white-space: pre-line"><%= hours.times %></td>
+      <td>
+        <div class="flex items-center justify-start space-x-1 my-2">
+          <%= link("🡅",
+            to: ~p"/admin/hours/reorder?direction=up&id=#{hours}",
+            method: :post,
+            class: "button button-gray"
+          ) %>
+          <%= link("🡇",
+            to: ~p"/admin/hours/reorder?direction=down&id=#{hours}",
+            method: :post,
+            class: "button button-gray"
+          ) %>
+        </div>
+      </td>
+      <td>
+        <div class="flex items-center justify-end space-x-1">
+          <%= link("Bearbeiten",
+            to: ~p"/admin/hours/#{hours}/edit",
+            class: "button button-dvblue"
+          ) %>
+          <%= link("Löschen",
+            to: ~p"/admin/hours/#{hours}",
+            method: :delete,
+            data: [confirm: "Wirklich löschen?"],
+            class: "button button-red"
+          ) %>
+        </div>
+      </td>
+    </tr>
   </tbody>
 </table>

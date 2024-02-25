@@ -5,28 +5,27 @@
 <.fab to={~p"/admin/photos/new"} icon="hero-plus" text="Neu" />
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 pb-16">
-  <%= for photo <- @photos do %>
-    <div class="flex flex-col bg-gray-200 rounded overflow-hidden">
-      <div class="h-screen/3 relative">
-        <%= unless photo.in_gallery do %>
-          <div class="h-full w-full bg-gray-800 bg-opacity-50 absolute flex items-center justify-center text-white text-2xl font-bold">
-            Nicht in Gallerie
-          </div>
-        <% end %>
-        <%= upload_img_tag(@conn, photo, class: "object-cover h-full w-full") %>
+  <div :for={photo <- @photos} class="flex flex-col bg-gray-200 rounded overflow-hidden">
+    <div class="h-screen/3 relative">
+      <div
+        :if={!photo.in_gallery}
+        class="h-full w-full bg-gray-800 bg-opacity-50 absolute flex items-center justify-center text-white text-2xl font-bold"
+      >
+        Nicht in Gallerie
       </div>
-
-      <div class="flex-none flex items-center justify-between">
-        <%= link to: ~p"/admin/photos/#{photo}", class: "button button-gray flex-1 rounded-none rounded-bl flex items-center justify-center" do %>
-          <.icon name="hero-eye-solid" class="h-4 w-4" />
-        <% end %>
-        <%= link to: ~p"/admin/photos/#{photo}/edit", class: "button button-gray flex-1 rounded-none border-r-0 border-l-0 flex items-center justify-center" do %>
-          <.icon name="hero-pencil-square-solid" class="h-4 w-4" />
-        <% end %>
-        <%= link to: ~p"/admin/photos/#{photo}", method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-red flex-1 rounded-none rounded-br flex items-center justify-center" do %>
-          <.icon name="hero-trash-solid" class="h-4 w-4" />
-        <% end %>
-      </div>
+      <%= upload_img_tag(@conn, photo, class: "object-cover h-full w-full") %>
     </div>
-  <% end %>
+
+    <div class="flex-none flex items-center justify-between">
+      <%= link to: ~p"/admin/photos/#{photo}", class: "button button-gray flex-1 rounded-none rounded-bl flex items-center justify-center" do %>
+        <.icon name="hero-eye-solid" class="h-4 w-4" />
+      <% end %>
+      <%= link to: ~p"/admin/photos/#{photo}/edit", class: "button button-gray flex-1 rounded-none border-r-0 border-l-0 flex items-center justify-center" do %>
+        <.icon name="hero-pencil-square-solid" class="h-4 w-4" />
+      <% end %>
+      <%= link to: ~p"/admin/photos/#{photo}", method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-red flex-1 rounded-none rounded-br flex items-center justify-center" do %>
+        <.icon name="hero-trash-solid" class="h-4 w-4" />
+      <% end %>
+    </div>
+  </div>
 </div>
