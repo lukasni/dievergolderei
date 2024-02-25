@@ -15,7 +15,6 @@
 <strong>Reserviert:</strong>
 <%= if @item.reserved, do: "☑", else: "☐" %>
 
-
 <.fab to={~p"/admin/shop/#{@item}/edit"} icon="hero-plus" text="Bearbeiten" />
 
 <%= upload_img_tag(@conn, @item, class: "max-w-xl") %>

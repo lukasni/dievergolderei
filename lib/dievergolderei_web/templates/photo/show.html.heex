@@ -5,14 +5,16 @@
 <.fab to={~p"/admin/photos/#{@photo}/edit"} icon="hero-pencil-square-solid" text="Bearbeiten" />
 
 <h2 class={[
-            "text-2xl mt-4 flex items-center justify-start",
-            !@photo.title && "text-gray-600"
-    ]}>
+  "text-2xl mt-4 flex items-center justify-start",
+  !@photo.title && "text-gray-600"
+]}>
   <%= @photo.title || "Ohne Titel" %>
-  <span :if={@photo.in_gallery} class="rounded-full bg-dvblue-500 text-white p-1 ml-2 flex items-center justify-center">
-    <.icon :if={@photo.in_gallery} name="hero-photo-solid" class="h-6 w-6"/>
+  <span
+    :if={@photo.in_gallery}
+    class="rounded-full bg-dvblue-500 text-white p-1 ml-2 flex items-center justify-center"
+  >
+    <.icon :if={@photo.in_gallery} name="hero-photo-solid" class="h-6 w-6" />
   </span>
-
 </h2>
 
 <%= if @photo.description do %>

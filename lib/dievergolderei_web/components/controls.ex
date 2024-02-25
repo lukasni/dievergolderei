@@ -12,9 +12,11 @@ defmodule DievergoldereiWeb.Components.Controls do
     <.link
       navigate={@to}
       class={[
-        ["fixed bottom-0 right-0 flex items-center justify-between p-2 m-6 rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20"],
+        "fixed bottom-0 right-0 flex items-center justify-between p-2 m-6",
+        "rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20",
         @text && "px-4 gap-2"
-      ]}>
+      ]}
+    >
       <.icon name={@icon} />
       <%= @text %>
     </.link>
