@@ -1,8 +1,4 @@
-<%= if @current_user do %>
-  <%= link to: ~p"/admin/posts/new", class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
-    <.icon name="hero-plus" />
-  <% end %>
-<% end %>
+<.fab :if={@current_user} to={~p"/admin/posts/new"} icon="hero-plus" />
 
 <div class="md:flex" role="blog">
   <section class="md:w-2/3">

@@ -1,8 +1,6 @@
 defmodule DievergoldereiWeb.SessionControllerTest do
   use DievergoldereiWeb.ConnCase
 
-  alias Dievergolderei.Accounts.User
-
   @create_attrs %{email: "test@example.com", password: "supersecret", display_name: "Test User"}
 
   defp create_user(_) do
@@ -24,7 +22,7 @@ defmodule DievergoldereiWeb.SessionControllerTest do
       conn = post(conn, ~p"/sessions", session: @create_attrs)
 
       assert redirected_to(conn) == ~p"/admin"
-      assert %User{} = conn.assigns[:current_user]
+      assert user == conn.assigns[:current_user]
 
       conn = get(conn, ~p"/admin")
       assert html_response(conn, 200) =~ "Adminbereich"

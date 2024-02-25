@@ -2,12 +2,7 @@
 
 <h1 class="text-4xl font-light mt-6">Öffnungszeiten</h1>
 
-<%= link to: ~p"/admin/hours/new", class: "fixed flex items-center bottom-0 right-0 m-6 p-2 inline-block rounded-full bg-dvblue-500 hover:bg-dvblue-300 text-white shadow z-20" do %>
-  <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-  </svg>
-  <span class="ml-1 mr-2">Neu</span>
-<% end %>
+<.fab to={~p"/admin/hours/new"} icon="hero-plus" text="Neu" />
 
 <table class="w-full pb-16 mt-8">
   <thead>

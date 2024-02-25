@@ -116,6 +116,7 @@ defmodule DievergoldereiWeb do
 
       # Core UI components and translation
       import DievergoldereiWeb.CoreComponents
+      import DievergoldereiWeb.Components.Controls
       import DievergoldereiWeb.Gettext
 
       # Shortcut for generating JS commands
