@@ -7,8 +7,8 @@
 
 <.fab to={~p"/admin/photos/new"} icon="hero-plus" text="Neu" />
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 pb-16">
-  <div :for={photo <- @photos} class="flex flex-col bg-gray-200 rounded overflow-hidden">
+<.card_grid>
+  <.card :for={photo <- @photos}>
     <div class="h-screen/3 relative">
       <div
         :if={!photo.in_gallery}
@@ -19,16 +19,16 @@
       <%= upload_img_tag(@conn, photo, class: "object-cover h-full w-full") %>
     </div>
 
-    <div class="flex-none flex items-center justify-between">
-      <%= link to: ~p"/admin/photos/#{photo}", class: "button button-gray flex-1 rounded-none rounded-bl flex items-center justify-center" do %>
-        <.icon name="hero-eye-solid" class="h-4 w-4" />
-      <% end %>
-      <%= link to: ~p"/admin/photos/#{photo}/edit", class: "button button-gray flex-1 rounded-none border-r-0 border-l-0 flex items-center justify-center" do %>
-        <.icon name="hero-pencil-square-solid" class="h-4 w-4" />
-      <% end %>
-      <%= link to: ~p"/admin/photos/#{photo}", method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-red flex-1 rounded-none rounded-br flex items-center justify-center" do %>
-        <.icon name="hero-trash-solid" class="h-4 w-4" />
-      <% end %>
-    </div>
-  </div>
-</div>
+    <:footer>
+      <.card_button navigate={~p"/admin/photos/#{photo}"} icon="hero-eye-solid" />
+      <.card_button navigate={~p"/admin/photos/#{photo}/edit"} icon="hero-pencil-square-solid" />
+      <.card_button
+        navigate={~p"/admin/photos/#{photo}"}
+        icon="hero-trash-solid"
+        class="button-red"
+        method="delete"
+        data-confirm="Wirklich löschen?"
+      />
+    </:footer>
+  </.card>
+</.card_grid>

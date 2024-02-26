@@ -7,30 +7,29 @@
 
 <.fab to={~p"/admin/posts/new"} icon="hero-plus" text="Neu" />
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 pb-16">
-  <div :for={post <- @posts} class="flex flex-col bg-gray-200 bg-opacity-50 rounded">
-    <div class="flex-none flex justify-between items-center p-2">
-      <h2 class="text-xl truncate"><%= post.title %></h2>
-      <div class="flex-none ml-2 text-gray-600">
-        <%= post.publish_on |> DT.strftime("%d. %b %Y") %>
-      </div>
-    </div>
+<.card_grid>
+  <.card :for={post <- @posts}>
+    <:header>
+      <.card_title title={post.title} subtitle={DT.strftime(post.publish_on, "%d. %b %Y")} />
+    </:header>
+
     <div :if={post.photo} class="h-48">
       <%= upload_img_tag(@conn, post.photo, class: "object-cover h-full w-full") %>
     </div>
     <div class="prose-sm flex-grow p-2">
       <%= (String.slice(post.content, 0..120) <> "...") |> markdown %>
     </div>
-    <div class="flex-none flex items-center justify-between">
-      <%= link to: ~p"/admin/posts/#{post}", class: "button button-gray flex-1 rounded-none rounded-bl flex items-center justify-center" do %>
-        <.icon name="hero-eye-solid" class="h-4 w-4" />
-      <% end %>
-      <%= link to: ~p"/admin/posts/#{post}/edit", class: "button button-gray flex-1 rounded-none border-r-0 border-l-0 flex items-center justify-center" do %>
-        <.icon name="hero-pencil-square-solid" class="h-4 w-4" />
-      <% end %>
-      <%= link to: ~p"/admin/posts/#{post}", method: :delete, data: [confirm: "Wirklich löschen?"], class: "button button-red flex-1 rounded-none rounded-br flex items-center justify-center" do %>
-        <.icon name="hero-trash-solid" class="h-4 w-4" />
-      <% end %>
-    </div>
-  </div>
-</div>
+
+    <:footer>
+      <.card_button navigate={~p"/admin/posts/#{post}"} icon="hero-eye-solid" />
+      <.card_button navigate={~p"/admin/posts/#{post}/edit"} icon="hero-pencil-square-solid" />
+      <.card_button
+        navigate={~p"/admin/posts/#{post}"}
+        icon="hero-trash-solid"
+        class="button-red"
+        method="delete"
+        data-confirm="Wirklich löschen?"
+      />
+    </:footer>
+  </.card>
+</.card_grid>

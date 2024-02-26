@@ -115,6 +115,7 @@ defmodule DievergoldereiWeb do
       import DievergoldereiWeb.CoreComponents
       import DievergoldereiWeb.Components.Controls
       import DievergoldereiWeb.Components.Breadcrumbs
+      import DievergoldereiWeb.Components.Cards
       import DievergoldereiWeb.Gettext
 
       # Shortcut for generating JS commands
