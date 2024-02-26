@@ -7,38 +7,32 @@
 
 <.fab to={~p"/admin/shop/new"} icon="hero-plus" text="Neu" />
 
-<table class="w-full pb-16 mt-8">
-  <thead>
-    <tr>
-      <th class="text-left">Bild</th>
-      <th class="text-left">Titel</th>
-      <th class="text-left">Preis</th>
+<.card_grid>
+  <.card :for={item <- @items}>
+    <:header>
+      <.card_title 
+        :if={item.title} 
+        title={item.title} 
+        subtitle={format_chf(item.price)}
+      />
+    </:header>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr :for={item <- @items} class="border-t">
-      <td><Components.Uploads.image_for schema={item} class="w-36" /></td>
-      <td><%= item.title %></td>
-      <td><%= item.price |> format_chf() %></td>
+    <div class="h-screen/3 relative">
+      <Components.Uploads.image_for schema={item} class="object-cover h-full w-full" />
+    </div>
 
-      <td>
-        <span>
-          <%= link("Bearbeiten",
-            to: ~p"/admin/shop/#{item}/edit",
-            class: "button button-dvblue mb-2"
-          ) %>
-        </span>
-        <span>
-          <%= link("Löschen",
-            to: ~p"/admin/shop/#{item}",
-            method: :delete,
-            data: [confirm: "Wirklich löschen?"],
-            class: "button button-red"
-          ) %>
-        </span>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <:footer>
+      <.card_button 
+        navigate={~p"/admin/shop/#{item}/edit"} 
+        icon="hero-pencil-square-solid"
+      />
+      <.card_button
+        href={~p"/admin/shop/#{item}"}
+        icon="hero-trash-solid"
+        class="button button-red"
+        method="delete"
+        data-confirm="Wirklich löschen?"
+      />
+    </:footer>
+  </.card>
+</.card_grid>

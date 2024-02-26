@@ -3,12 +3,20 @@ defmodule DievergoldereiWeb.PostView do
 
   embed_templates "../templates/post/*"
 
-  def month_link(%Date{month: month, year: year}, opts \\ []) do
-    text = Dievergolderei.DateUtil.month_name(month) <> " #{year}"
-    link = "#{year}-#{month}"
+  attr :month, Date
+  attr :rest, :global
 
-    opts = Keyword.merge(opts, to: ~p"/blog/#{link}")
+  def month_link(assigns) do
+    assigns =
+      assign(assigns, :slug, "#{assigns.month.year}-#{assigns.month.month}")
 
-    link(text, opts)
+    ~H"""
+    <.link
+      navigate={~p"/blog/#{@slug}"}
+      {@rest}
+    >
+      <%= Dievergolderei.DateUtil.month_name(@month.month) %> <%= @month.year %>
+    </.link>
+    """
   end
 end

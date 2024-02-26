@@ -106,7 +106,6 @@ defmodule DievergoldereiWeb do
       # Use all HTML functionality
       import Phoenix.HTML
       import Phoenix.HTML.Form
-      use PhoenixHTMLHelpers
 
       # Import LiveView helpers (live_render, live_component, live_patch, etc)
       import Phoenix.LiveView.Helpers

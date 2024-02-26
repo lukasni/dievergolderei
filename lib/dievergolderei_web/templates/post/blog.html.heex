@@ -8,16 +8,15 @@
     <h4 class="text-2xl">Archiv</h4>
     <ul class="mt-2">
       <li>
-        <%= link("Neueste Beiträge",
-          to: ~p"/blog",
-          class: "hover:underline text-dvblue-500"
-        ) %>
+        <.link navigate={~p"/blog"} class="hover:underline text-dvblue-500">
+          Neueste Beiträge
+        </.link>
       </li>
       <li :for={{year, months} <- @months} class="mt-2">
         <%= year %>
         <ul class="ml-4 list-disc list-inside">
           <li :for={month <- months}>
-            <%= month_link(month, class: "hover:underline text-dvblue-500") %>
+            <.month_link month={month} class="hover:underline text-dvblue-500" />
           </li>
         </ul>
       </li>
