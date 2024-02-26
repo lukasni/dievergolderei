@@ -14,7 +14,7 @@
     </:header>
 
     <div :if={post.photo} class="h-48">
-      <%= upload_img_tag(@conn, post.photo, class: "object-cover h-full w-full") %>
+      <Components.Uploads.image_for schema={post.photo} class="object-cover h-full w-full" />
     </div>
     <div class="prose-sm flex-grow p-2">
       <%= (String.slice(post.content, 0..120) <> "...") |> markdown %>

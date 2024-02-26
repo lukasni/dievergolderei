@@ -118,12 +118,12 @@ defmodule DievergoldereiWeb do
       import DievergoldereiWeb.Components.Cards
       import DievergoldereiWeb.Gettext
 
+      alias DievergoldereiWeb.Components
+
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
 
-      import DievergoldereiWeb.ErrorHelpers
       import DievergoldereiWeb.Markdown
-      import DievergoldereiWeb.UploadHelpers
       alias DievergoldereiWeb.DateTimeHelpers, as: DT
 
       unquote(verified_routes())

@@ -16,7 +16,7 @@
       >
         Nicht in Gallerie
       </div>
-      <%= upload_img_tag(@conn, photo, class: "object-cover h-full w-full") %>
+      <Components.Uploads.image_for schema={photo} class="object-cover h-full w-full" />
     </div>
 
     <:footer>

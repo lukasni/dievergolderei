@@ -25,4 +25,4 @@
 
 <hr class="my-4" />
 
-<%= upload_img_tag(@conn, @photo, class: "max-w-xl") %>
+<Components.Uploads.image_for schema={@photo} class="max-w-xl" />

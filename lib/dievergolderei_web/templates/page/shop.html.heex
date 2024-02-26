@@ -10,6 +10,6 @@
       <h4 class="text-xl font-light"><%= item.title %></h4>
       <h5 class="text-md"><%= item.price |> format_chf() %></h5>
     </div>
-    <%= upload_img_tag(@conn, item, class: "flex-grow object-cover") %>
+    <Components.Uploads.image_for schema={item} class="flex-grow object-cover" />
   </li>
 </ul>

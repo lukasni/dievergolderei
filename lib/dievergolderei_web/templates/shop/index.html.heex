@@ -19,7 +19,7 @@
   </thead>
   <tbody>
     <tr :for={item <- @items} class="border-t">
-      <td><%= upload_img_tag(@conn, item, width: "150") %></td>
+      <td><Components.Uploads.image_for schema={item} class="w-36" /></td>
       <td><%= item.title %></td>
       <td><%= item.price |> format_chf() %></td>
 

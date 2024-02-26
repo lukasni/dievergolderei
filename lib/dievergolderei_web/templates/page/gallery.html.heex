@@ -10,7 +10,7 @@
 
 <div class="flex flex-wrap items-center -mx-1 mt-4">
   <div :for={photo <- @photos} class="flex-grow h-screen/3 p-1">
-    <%= upload_img_tag(@conn, photo, class: "min-w-full max-h-full object-cover m-0") %>
+    <Components.Uploads.image_for schema={photo} class="min-w-full max-h-full object-cover m-0" />
   </div>
   <div class="flex-grow"></div>
 </div>
