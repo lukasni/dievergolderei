@@ -1,3 +1,5 @@
 defmodule DievergoldereiWeb.UserView do
-  use DievergoldereiWeb, :view
+  use DievergoldereiWeb, :html
+
+  embed_templates "../templates/user/*"
 end

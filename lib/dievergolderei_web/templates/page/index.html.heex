@@ -7,27 +7,19 @@
   <aside class="md:row-span-2 mt-6 md:mt-0">
     <h2 class="text-2xl">Öffnungszeiten</h2>
     <table class="mt-4 w-full border-t border-dvblue-500">
-      <%= for hour <- @hours do %>
-        <tr class="border-b border-dvblue-500">
-          <th class="font-normal text-left py-2"><%= hour.label %></th>
-          <td class="text-right py-2"><%= markdown(hour.times) %></td>
-        </tr>
-      <% end %>
+      <tr :for={hour <- @hours} class="border-b border-dvblue-500">
+        <th class="font-normal text-left py-2"><%= hour.label %></th>
+        <td class="text-right py-2"><%= markdown(hour.times) %></td>
+      </tr>
     </table>
     <article class="prose">
       <%= markdown(@featured_content) %>
     </article>
   </aside>
-  <%= if length(@posts) > 0 do %>
-    <div class="">
-      <div class="mt-8 prose">
-        <h2 class="">Aktuell</h2>
-        <div class="mt-4">
-          <%= for post <- @posts do %>
-            <%= render(DievergoldereiWeb.PostView, "post.html", post: post, conn: @conn) %>
-          <% end %>
-        </div>
-      </div>
+  <section :if={length(@posts) > 0} class="mt-8 prose">
+    <h2>Aktuell</h2>
+    <div class="mt-4">
+      <DievergoldereiWeb.PostView.post :for={post <- @posts} post={post} conn={@conn} />
     </div>
-  <% end %>
+  </section>
 </div>

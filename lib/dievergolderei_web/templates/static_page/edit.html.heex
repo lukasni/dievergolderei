@@ -1,8 +1,12 @@
-<%= breadcrumbs([@conn, :static_page_edit, @static_page]) %>
+<.breadcrumb>
+  <:item to={~p"/admin/"}>Admin</:item>
+  <:item to={~p"/admin/pages"}>Statische Seiten</:item>
+  <:item to={~p"/admin/pages/#{@static_page}"}><%= @static_page.name %></:item>
+  <:item>Bearbeiten</:item>
+</.breadcrumb>
 
-<h1 class="text-4xl font-light mt-6">Seite bearbeiten</h1>
+<.header>
+  Seite bearbeiten
+</.header>
 
-<%= render(
-  "form.html",
-  Map.put(assigns, :action, ~p"/admin/pages/#{@static_page}")
-) %>
+<._form changeset={@changeset} action={~p"/admin/pages/#{@static_page}"} />

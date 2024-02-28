@@ -19,7 +19,6 @@ config :logger, level: :info
 config :dievergolderei, Dievergolderei.Photo, upload_directory: "/var/dievergolderei/uploads/"
 config :dievergolderei, Dievergolderei.Shop, upload_directory: "/var/dievergolderei/uploads/"
 
-
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

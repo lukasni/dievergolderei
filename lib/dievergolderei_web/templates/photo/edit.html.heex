@@ -1,5 +1,12 @@
-<%= breadcrumbs([@conn, :photo_edit, @photo]) %>
+<.breadcrumb>
+  <:item to={~p"/admin/"}>Admin</:item>
+  <:item to={~p"/admin/photos"}>Gallerie</:item>
+  <:item to={~p"/admin/photos/#{@photo}"}><%= @photo.title || @photo.id %></:item>
+  <:item>Bearbeiten</:item>
+</.breadcrumb>
 
-<h1 class="text-4xl font-light mt-6">Bild bearbeiten</h1>
+<.header>
+  Bild bearbeiten
+</.header>
 
-<%= render("form.html", Map.put(assigns, :action, ~p"/admin/photos/#{@photo}")) %>
+<._form changeset={@changeset} action={~p"/admin/photos/#{@photo}"} />

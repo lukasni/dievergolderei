@@ -1,0 +1,24 @@
+<div class="container mx-auto px-4 py-4">
+  <header class="">
+    <.main_nav>
+      <:item to={~p"/"}>Start</:item>
+      <:item to={~p"/kontakt"}>Kontakt</:item>
+      <:item to={~p"/shop"}>Shop</:item>
+      <:item to={~p"/impressionen"}>Impressionen</:item>
+      <:item to={~p"/geschichte"}>Geschichte</:item>
+      <:item to={~p"/blog"}>Blog</:item>
+      <:item :if={@current_user} to={~p"/admin"}>Adminbereich</:item>
+    </.main_nav>
+
+    <img
+      :if={!assigns[:hide_logo]}
+      class="block lg:h-64 mt-4 mx-auto"
+      src={~p(/images/header.svg)}
+      alt="Logo Die Vergolderei"
+    />
+  </header>
+  <main role="main" class="mt-8">
+    <.flash_group flash={@flash} />
+    <%= @inner_content %>
+  </main>
+</div>

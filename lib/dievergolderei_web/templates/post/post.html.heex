@@ -4,7 +4,6 @@
     <span class="text-sm text-gray-600"><%= @post.publish_on |> DT.strftime("%d. %b %Y") %></span>
   </h2>
   <div class="post-content"><%= markdown(@post.content) %></div>
-  <%= if @post.photo do %>
-    <%= upload_img_tag(@conn, @post.photo) %>
-  <% end %>
+
+  <Components.Uploads.image_for :if={@post.photo} schema={@post.photo} />
 </article>
