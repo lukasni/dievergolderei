@@ -39,7 +39,7 @@
   <.admin_section title="Benutzer" class="md:row-span-2">
     <:button to={~p"/admin/users"}>Übersicht</:button>
     <:footer>
-      <.link href={~p"/sessions/#{@current_user}"} method="delete" class="button button-red">
+      <.link href={~p"/users/log_out"} method="delete" class="button button-red">
         Ausloggen
       </.link>
     </:footer>

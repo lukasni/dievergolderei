@@ -47,6 +47,7 @@ defmodule DievergoldereiWeb.UserController do
         |> redirect(to: ~p"/admin/users/#{user}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        IO.inspect(changeset)
         render(conn, "edit.html", user: user, changeset: changeset)
     end
   end

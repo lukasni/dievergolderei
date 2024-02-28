@@ -56,7 +56,7 @@ defmodule DievergoldereiWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {DievergoldereiWeb.LayoutView, "live.html"}
+      layout: {DievergoldereiWeb.Layouts, :app}
 
       unquote(html_helpers())
     end
@@ -90,7 +90,6 @@ defmodule DievergoldereiWeb do
       import Plug.Conn
       import Phoenix.Controller
       import Phoenix.LiveView.Router
-      import Phoenix.LiveDashboard.Router
     end
   end
 
