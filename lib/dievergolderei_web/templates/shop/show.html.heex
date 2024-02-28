@@ -4,7 +4,9 @@
   <:item><%= @item.title || @item.id %></:item>
 </.breadcrumb>
 
-<h1 class="text-4xl font-light mt-6">Shopartikel</h1>
+<.header>
+  Verkaufsartikel
+</.header>
 
 <h2 class={
   ~w"text-2xl mt-4 flex items-center justify-start" ++
@@ -19,6 +21,6 @@
 <strong>Reserviert:</strong>
 <%= if @item.reserved, do: "☑", else: "☐" %>
 
-<.fab to={~p"/admin/shop/#{@item}/edit"} icon="hero-plus" text="Bearbeiten" />
+<.fab to={~p"/admin/shop/#{@item}/edit"} icon="hero-pencil-square-solid" text="Bearbeiten" />
 
 <Components.Uploads.image_for schema={@item} class="max-w-xl" />

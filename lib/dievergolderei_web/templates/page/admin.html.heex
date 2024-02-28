@@ -3,7 +3,7 @@
     <:button to={~p"/admin/posts/new"} class="button-dvblue">Neu</:button>
     <:button to={~p"/admin/posts"}>Übersicht</:button>
     <:footer>
-      <h3 class="mt-4 text-xl">Statistik</h3>
+      <h3 class="text-xl">Statistik</h3>
       <table class="w-full mt-2">
         <tr class="border-b border-gray-400">
           <th class="font-normal text-left">Neuster Beitrag</th>
@@ -36,16 +36,16 @@
     <:button to={~p"/admin/pages"}>Übersicht</:button>
   </.admin_section>
 
-  <.admin_section title="Benutzer">
+  <.admin_section title="Benutzer" class="md:row-span-2">
     <:button to={~p"/admin/users"}>Übersicht</:button>
+    <:footer>
+      <.link href={~p"/sessions/#{@current_user}"} method="delete" class="button button-red">
+        Ausloggen
+      </.link>
+    </:footer>
   </.admin_section>
 
   <.admin_section title="Technische Infos">
     <:button to={~p"/admin/dashboard"}>Dashboard</:button>
-    <:footer>
-      <.link href={~p"/sessions/#{@current_user}"} method="delete" class="block">
-        Ausloggen
-      </.link>
-    </:footer>
   </.admin_section>
 </div>

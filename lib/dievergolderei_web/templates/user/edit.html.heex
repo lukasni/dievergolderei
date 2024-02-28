@@ -4,6 +4,8 @@
   <:item><%= @user.display_name %></:item>
 </.breadcrumb>
 
-<h1 class="text-4xl font-light mt-6">Benutzer bearbeiten</h1>
+<.header>
+  Benutzer bearbeiten
+</.header>
 
 <._form changeset={@changeset} action={~p"/admin/users/#{@user}"} />

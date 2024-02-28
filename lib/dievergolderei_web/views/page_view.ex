@@ -20,7 +20,7 @@ defmodule DievergoldereiWeb.PageView do
     attr :class, :string
   end
 
-  slot :footer, default: nil
+  slot :footer
 
   def admin_section(assigns) do
     ~H"""
@@ -41,7 +41,7 @@ defmodule DievergoldereiWeb.PageView do
           </.link>
         </li>
       </ul>
-      <footer :if={@footer != []}>
+      <footer :if={@footer != []} class="mt-4">
         <%= render_slot(@footer) %>
       </footer>
     </section>

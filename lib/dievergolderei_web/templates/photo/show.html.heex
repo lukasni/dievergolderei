@@ -4,7 +4,9 @@
   <:item><%= @photo.title || @photo.id %></:item>
 </.breadcrumb>
 
-<h1 class="text-4xl font-light mt-6">Bildvorschau</h1>
+<.header>
+  Bildvorschau
+</.header>
 
 <.fab to={~p"/admin/photos/#{@photo}/edit"} icon="hero-pencil-square-solid" text="Bearbeiten" />
 

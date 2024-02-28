@@ -4,6 +4,8 @@
   <:item><%= @hours.label %></:item>
 </.breadcrumb>
 
-<h1 class="text-4xl font-light mt-6">Öffnungszeiten Bearbeiten</h1>
+<.header>
+  Öffnungszeiten Bearbeiten
+</.header>
 
 <._form changeset={@changeset} action={~p"/admin/hours/#{@hours}"} />

@@ -4,18 +4,15 @@
   <:item><%= @user.display_name %></:item>
 </.breadcrumb>
 
-<h1>Show User</h1>
+<.header>
+  Benutzer
+</.header>
 
-<ul>
-  <li>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </li>
+<div class="max-w-md">
+<.list>
+  <:item title="Name"><%= @user.display_name %></:item>
+  <:item title="Email"><%= @user.email %></:item>
+</.list>
+</div>
 
-  <li>
-    <strong>Display name:</strong>
-    <%= @user.display_name %>
-  </li>
-</ul>
-
-<.link navigate={~p"/admin/users/#{@user}/edit"}>Edit</.link>
+<.fab to={~p"/admin/users/#{@user}/edit"} icon="hero-pencil-square-solid" text="Bearbeiten" />
