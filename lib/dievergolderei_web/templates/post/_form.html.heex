@@ -6,7 +6,7 @@
   <div class="grid md:grid-cols-3 gap-4 mt-4">
     <.input field={f[:title]} type="text" label="Titel" />
     <.input field={f[:upload]} type="file" label="Bild" />
-    <.input field={f[:publish_on]} type="text" label="Veröffentlichungsdatum" />
+    <.input field={f[:publish_on]} type="date" label="Veröffentlichungsdatum" />
   </div>
 
   <.input field={f[:content]} type="textarea" id="content_textarea" />

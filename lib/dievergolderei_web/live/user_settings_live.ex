@@ -5,7 +5,7 @@ defmodule DievergoldereiWeb.UserSettingsLive do
 
   def render(assigns) do
     ~H"""
-    <.header class="text-center">
+    <.header>
       Account Settings
       <:subtitle>Manage your account email address and password settings</:subtitle>
     </.header>

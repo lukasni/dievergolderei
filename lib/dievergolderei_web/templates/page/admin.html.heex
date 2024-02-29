@@ -1,4 +1,4 @@
-<div class="mt-12 md:grid md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2 gap-8 auto-rows-fr">
+<div class="mt-12 grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2 gap-4 lg:gap-8 auto-rows-fr">
   <.admin_section title="Blog" class="md:row-span-2">
     <:button to={~p"/admin/posts/new"} class="button-dvblue">Neu</:button>
     <:button to={~p"/admin/posts"}>Übersicht</:button>
@@ -37,7 +37,8 @@
   </.admin_section>
 
   <.admin_section title="Benutzer" class="md:row-span-2">
-    <:button to={~p"/admin/users"}>Übersicht</:button>
+    <:button to={~p"/admin/users"}>Adminübersicht</:button>
+    <:button to={~p"/users/settings"}>Mein Profil</:button>
     <:footer>
       <.link href={~p"/users/log_out"} method="delete" class="button button-red">
         Ausloggen
