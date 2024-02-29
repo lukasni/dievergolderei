@@ -8,12 +8,15 @@ defmodule Dievergolderei.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      # Start the Ecto repository
-      Dievergolderei.Repo,
       # Start the Telemetry supervisor
       DievergoldereiWeb.Telemetry,
+      # Start the Ecto repository
+      Dievergolderei.Repo,
+      {DNSCluster, query: Application.get_env(:dievergolderei, :dns_cluster_query) || :ignore},
       # Start the PubSub system
       {Phoenix.PubSub, name: Dievergolderei.PubSub},
+      # Start the Finch HTTP client for sending emails
+      {Finch, name: Dievergolderei.Finch},
       # Start the endpoint when the application starts
       DievergoldereiWeb.Endpoint
       # Starts a worker by calling: Dievergolderei.Worker.start_link(arg)

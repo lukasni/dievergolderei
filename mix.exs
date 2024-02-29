@@ -65,6 +65,8 @@ defmodule Dievergolderei.MixProject do
        app: false,
        compile: false,
        depth: 1},
+      {:swoosh, "~> 1.5"},
+      {:finch, "~> 0.13"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},

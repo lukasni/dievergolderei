@@ -54,7 +54,7 @@ defmodule DievergoldereiWeb.UserControllerTest do
     @tag login_as: "test@example.com"
     test "renders form", %{conn: conn} do
       conn = get(conn, ~p"/admin/users/new")
-      assert html_response(conn, 200) =~ "Neuer Benutzer"
+      assert html_response(conn, 200) =~ "Neuen Benutzer erstellen"
     end
   end
 
@@ -69,13 +69,13 @@ defmodule DievergoldereiWeb.UserControllerTest do
       assert redirected_to(create_conn) == ~p"/admin/users/#{id}"
 
       conn = get(conn, ~p"/admin/users/#{id}")
-      assert html_response(conn, 200) =~ "Show User"
+      assert html_response(conn, 200) =~ "Benutzer"
     end
 
     @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, ~p"/admin/users", user: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Neuer Benutzer"
+      assert html_response(conn, 200) =~ "Neuen Benutzer erstellen"
     end
   end
 

@@ -4,10 +4,12 @@
   </.error>
 
   <div class="grid md:grid-cols-2 gap-4 mt-4">
-    <.input field={f[:title]} type="text" label="Titel" />
-    <.input field={f[:photo]} type="file" label="Bild" />
+    <.input field={f[:title]} type="text" label="Titel"/>
     <.input field={f[:description]} type="text" label="Beschreibung" />
-    <.input field={f[:in_gallery]} type="text" label="In Impressionen" />
+    <.input field={f[:photo]} type="file" label="Bild" />
+    <div class="md:mt-10">
+      <.input field={f[:in_gallery]} type="checkbox" label="In Impressionen" />
+    </div>
   </div>
 
   <:actions>

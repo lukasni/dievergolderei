@@ -18,14 +18,6 @@ defmodule Dievergolderei.Release do
     {:ok, _, _} = Ecto.Migrator.with_repo(repo, &Ecto.Migrator.run(&1, :down, to: version))
   end
 
-  def add_user(email, display_name, password) do
-    Dievergolderei.Accounts.create_user(%{
-      email: email,
-      display_name: display_name,
-      password: password
-    })
-  end
-
   defp repos() do
     Application.load(@app)
     Application.fetch_env!(@app, :ecto_repos)

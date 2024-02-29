@@ -102,7 +102,7 @@ defmodule DievergoldereiWeb.PostControllerTest do
     @tag login_as: "test@example.com"
     test "renders form for editing chosen post", %{conn: conn, post: post} do
       conn = get(conn, ~p"/admin/posts/#{post}/edit")
-      assert html_response(conn, 200) =~ "Beitrag bearbeiten"
+      assert html_response(conn, 200) =~ "Blogbeitrag bearbeiten"
     end
   end
 
@@ -121,7 +121,7 @@ defmodule DievergoldereiWeb.PostControllerTest do
     @tag login_as: "test@example.com"
     test "renders errors when data is invalid", %{conn: conn, post: post} do
       conn = put(conn, ~p"/admin/posts/#{post}", post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Beitrag bearbeiten"
+      assert html_response(conn, 200) =~ "Blogbeitrag bearbeiten"
     end
   end
 

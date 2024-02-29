@@ -24,7 +24,7 @@ defmodule DievergoldereiWeb.PageView do
 
   def admin_section(assigns) do
     ~H"""
-    <section class={["shadow bg-gray-200 bg-opacity-50 p-4 rounded", @class]}>
+    <section class={["shadow bg-gray-200 bg-opacity-50 p-4 rounded mt-4 md:mt-0", @class]}>
       <header>
         <h2 class="text-2xl"><%= @title %></h2>
       </header>
