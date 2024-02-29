@@ -3,16 +3,9 @@ defmodule DievergoldereiWeb.UserLoginLive do
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm bg-white bg-opacity-50 p-6 rounded">
+    <div class="mx-auto max-w-sm bg-white p-6 rounded">
       <.header class="text-center">
         Sign in to account
-        <:subtitle>
-          Don't have an account?
-          <.link navigate={~p"/users/register"} class="font-semibold text-brand hover:underline">
-            Sign up
-          </.link>
-          for an account now.
-        </:subtitle>
       </.header>
 
       <.simple_form for={@form} id="login_form" action={~p"/users/log_in"} phx-update="ignore">
