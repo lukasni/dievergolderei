@@ -7,20 +7,20 @@ defmodule DievergoldereiWeb.UserForgotPasswordLive do
     ~H"""
     <div class="mx-auto max-w-sm">
       <.header class="text-center">
-        Forgot your password?
-        <:subtitle>We'll send a password reset link to your inbox</:subtitle>
+        Passwort vergessen?
+        <:subtitle>Wir schicken dir einen reset-link via Email</:subtitle>
       </.header>
 
       <.simple_form for={@form} id="reset_password_form" phx-submit="send_email">
         <.input field={@form[:email]} type="email" placeholder="Email" required />
         <:actions>
-          <.button phx-disable-with="Sending..." class="w-full button-dvblue">
-            Send password reset instructions
+          <.button phx-disable-with="Versenden..." class="w-full button-dvblue">
+            Versenden
           </.button>
         </:actions>
       </.simple_form>
       <p class="text-center text-sm mt-4">
-        | <.link href={~p"/users/log_in"}>Log in</.link>
+        <.link href={~p"/users/log_in"}>Anmelden</.link>
       </p>
     </div>
     """

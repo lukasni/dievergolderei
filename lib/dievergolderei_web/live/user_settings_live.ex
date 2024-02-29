@@ -6,8 +6,8 @@ defmodule DievergoldereiWeb.UserSettingsLive do
   def render(assigns) do
     ~H"""
     <.header>
-      Account Settings
-      <:subtitle>Manage your account email address and password settings</:subtitle>
+      Kontoeinstellungen
+      <:subtitle>Einstellungen für die E-Mail-Adresse und das Passwort deines Kontos</:subtitle>
     </.header>
 
     <div class="space-y-12 divide-y">
@@ -24,12 +24,12 @@ defmodule DievergoldereiWeb.UserSettingsLive do
             name="current_password"
             id="current_password_for_email"
             type="password"
-            label="Current password"
+            label="Passwort"
             value={@email_form_current_password}
             required
           />
           <:actions>
-            <.button phx-disable-with="Changing...">Change Email</.button>
+            <.button phx-disable-with="Versenden...">Email Anpassen</.button>
           </:actions>
         </.simple_form>
       </div>
@@ -49,23 +49,23 @@ defmodule DievergoldereiWeb.UserSettingsLive do
             id="hidden_user_email"
             value={@current_email}
           />
-          <.input field={@password_form[:password]} type="password" label="New password" required />
+          <.input field={@password_form[:password]} type="password" label="Neues Passwort" required />
           <.input
             field={@password_form[:password_confirmation]}
             type="password"
-            label="Confirm new password"
+            label="Neues Passwort bestätigen"
           />
           <.input
             field={@password_form[:current_password]}
             name="current_password"
             type="password"
-            label="Current password"
+            label="Aktuelles Passwort"
             id="current_password_for_password"
             value={@current_password}
             required
           />
           <:actions>
-            <.button phx-disable-with="Changing...">Change Password</.button>
+            <.button phx-disable-with="Versenden...">Passwort ändern</.button>
           </:actions>
         </.simple_form>
       </div>
@@ -77,10 +77,10 @@ defmodule DievergoldereiWeb.UserSettingsLive do
     socket =
       case Accounts.update_user_email(socket.assigns.current_user, token) do
         :ok ->
-          put_flash(socket, :info, "Email changed successfully.")
+          put_flash(socket, :info, "Email erfolgreich angepasst.")
 
         :error ->
-          put_flash(socket, :error, "Email change link is invalid or it has expired.")
+          put_flash(socket, :error, "E-Mail-Änderungslink ist ungültig oder abgelaufen.")
       end
 
     {:ok, push_navigate(socket, to: ~p"/users/settings")}
@@ -127,7 +127,7 @@ defmodule DievergoldereiWeb.UserSettingsLive do
           &url(~p"/users/settings/confirm_email/#{&1}")
         )
 
-        info = "A link to confirm your email change has been sent to the new address."
+        info = "Ein Link zur Bestätigung deiner E-Mail-Änderung wurde an die neue Adresse gesendet."
         {:noreply, socket |> put_flash(:info, info) |> assign(email_form_current_password: nil)}
 
       {:error, changeset} ->

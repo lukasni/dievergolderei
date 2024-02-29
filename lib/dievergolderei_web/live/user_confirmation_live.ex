@@ -6,17 +6,17 @@ defmodule DievergoldereiWeb.UserConfirmationLive do
   def render(%{live_action: :edit} = assigns) do
     ~H"""
     <div class="mx-auto max-w-sm">
-      <.header class="text-center">Confirm Account</.header>
+      <.header class="text-center">Konto aktivieren</.header>
 
       <.simple_form for={@form} id="confirmation_form" phx-submit="confirm_account">
         <.input field={@form[:token]} type="hidden" />
         <:actions>
-          <.button phx-disable-with="Confirming..." class="w-full">Confirm my account</.button>
+          <.button phx-disable-with="Aktiviere..." class="w-full">Konto Aktivieren</.button>
         </:actions>
       </.simple_form>
 
       <p class="text-center mt-4">
-        | <.link href={~p"/users/log_in"}>Log in</.link>
+        | <.link href={~p"/users/log_in"}>Anmelden</.link>
       </p>
     </div>
     """
@@ -34,7 +34,7 @@ defmodule DievergoldereiWeb.UserConfirmationLive do
       {:ok, _} ->
         {:noreply,
          socket
-         |> put_flash(:info, "User confirmed successfully.")
+         |> put_flash(:info, "Konto erfolgreich aktiviert.")
          |> redirect(to: ~p"/")}
 
       :error ->
@@ -49,7 +49,7 @@ defmodule DievergoldereiWeb.UserConfirmationLive do
           %{} ->
             {:noreply,
              socket
-             |> put_flash(:error, "User confirmation link is invalid or it has expired.")
+             |> put_flash(:error, "Aktivierungslink ist ungültig oder abgelaufen.")
              |> redirect(to: ~p"/")}
         end
     end

@@ -7,21 +7,21 @@ defmodule DievergoldereiWeb.UserConfirmationInstructionsLive do
     ~H"""
     <div class="mx-auto max-w-sm">
       <.header class="text-center">
-        No confirmation instructions received?
-        <:subtitle>We'll send a new confirmation link to your inbox</:subtitle>
+      Keine Aktivierungsanweisungen erhalten?
+        <:subtitle>Wir senden dir einen neuen Aktivierungslink via E-Mail</:subtitle>
       </.header>
 
       <.simple_form for={@form} id="resend_confirmation_form" phx-submit="send_instructions">
         <.input field={@form[:email]} type="email" placeholder="Email" required />
         <:actions>
-          <.button phx-disable-with="Sending..." class="w-full">
-            Resend confirmation instructions
+          <.button phx-disable-with="Wird versandt..." class="w-full">
+            Versenden
           </.button>
         </:actions>
       </.simple_form>
 
       <p class="text-center mt-4">
-        | <.link href={~p"/users/log_in"}>Log in</.link>
+        <.link href={~p"/users/log_in"}>Anmelden</.link>
       </p>
     </div>
     """
@@ -40,7 +40,7 @@ defmodule DievergoldereiWeb.UserConfirmationInstructionsLive do
     end
 
     info =
-      "If your email is in our system and it has not been confirmed yet, you will receive an email with instructions shortly."
+      "Wenn deine E-Mail in unserem System ist und noch nicht bestätigt wurde, wirst du in Kürze eine E-Mail mit Anweisungen erhalten."
 
     {:noreply,
      socket
