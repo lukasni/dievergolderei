@@ -111,7 +111,7 @@ defmodule Dievergolderei.Accounts.User do
     |> validate_email(opts)
     |> case do
       %{changes: %{email: _}} = changeset -> changeset
-      %{} = changeset -> add_error(changeset, :email, "did not change")
+      %{} = changeset -> add_error(changeset, :email, "nicht geändert")
     end
   end
 
@@ -130,7 +130,7 @@ defmodule Dievergolderei.Accounts.User do
   def password_changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:password])
-    |> validate_confirmation(:password, message: "does not match password")
+    |> validate_confirmation(:password, message: "muss identisch sein")
     |> validate_password(opts)
   end
 
@@ -167,7 +167,7 @@ defmodule Dievergolderei.Accounts.User do
     if valid_password?(changeset.data, password) do
       changeset
     else
-      add_error(changeset, :current_password, "is not valid")
+      add_error(changeset, :current_password, "ungültig")
     end
   end
 end
