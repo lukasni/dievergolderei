@@ -22,18 +22,20 @@ defmodule Dievergolderei.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Dievergolderei.DataCase
-      import Dievergolderei.TestHelpers
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Dievergolderei.Repo)
-
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Dievergolderei.Repo, {:shared, self()})
-    end
-
+    Dievergolderei.DataCase.setup_sandbox(tags)
     :ok
+  end
+
+  @doc """
+  Sets up the sandbox based on the test tags.
+  """
+  def setup_sandbox(tags) do
+    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Dievergolderei.Repo, shared: not tags[:async])
+    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 
   @doc """
