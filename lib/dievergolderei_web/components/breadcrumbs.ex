@@ -8,12 +8,15 @@ defmodule DievergoldereiWeb.Components.Breadcrumbs do
   def breadcrumb(assigns) do
     ~H"""
     <nav>
-      <span :for={item <- @item} class="after:content-['/'] last:after:content-['']">
+      <.intersperse :let={item} enum={@item}>
+        <:separator>
+          <span class="text-grey-500">/</span>
+        </:separator>
         <.link :if={item[:to]} navigate={item.to} class="text-dvblue-500">
           <%= render_slot(item) %>
         </.link>
         <%= if !item[:to], do: render_slot(item) %>
-      </span>
+      </.intersperse>
     </nav>
     """
   end
