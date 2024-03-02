@@ -8,7 +8,7 @@ defmodule Dievergolderei.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"Dievergolderei", "contact@example.com"})
+      |> from({"Die Vergolderei", "noreply@mg.dievergolderei.ch"})
       |> subject(subject)
       |> text_body(body)
 
