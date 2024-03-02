@@ -2,6 +2,7 @@ defmodule Dievergolderei.AccountsTest do
   use Dievergolderei.DataCase
 
   alias Dievergolderei.Accounts
+  import Dievergolderei.AccountsFixtures
 
   describe "users" do
     alias Dievergolderei.Accounts.User

@@ -8,7 +8,7 @@ defmodule Dievergolderei.Accounts.UserNotifier do
     email =
       new()
       |> to(recipient)
-      |> from({"Dievergolderei", "contact@example.com"})
+      |> from({"Die Vergolderei", "noreply@mg.dievergolderei.ch"})
       |> subject(subject)
       |> text_body(body)
 
@@ -21,17 +21,19 @@ defmodule Dievergolderei.Accounts.UserNotifier do
   Deliver instructions to confirm account.
   """
   def deliver_confirmation_instructions(user, url) do
-    deliver(user.email, "Confirmation instructions", """
+    deliver(user.email, "Kontobestätigung", """
 
     ==============================
 
-    Hi #{user.email},
+    Hi #{user.display_name},
 
-    You can confirm your account by visiting the URL below:
+    Du kannst dein Konto bestätigen,
+    indem du die untenstehende URL besuchst:
 
     #{url}
 
-    If you didn't create an account with us, please ignore this.
+    Falls du kein Konto bei uns erstellt hast,
+    ignoriere diese Nachricht bitte.
 
     ==============================
     """)
@@ -41,17 +43,19 @@ defmodule Dievergolderei.Accounts.UserNotifier do
   Deliver instructions to reset a user password.
   """
   def deliver_reset_password_instructions(user, url) do
-    deliver(user.email, "Reset password instructions", """
+    deliver(user.email, "Passwort zurücksetzen", """
 
     ==============================
 
-    Hi #{user.email},
+    Hallo #{user.display_name},
 
-    You can reset your password by visiting the URL below:
+    Du kannst dein Passwort zurücksetzen,
+    indem du die untenstehende URL besuchst:
 
     #{url}
 
-    If you didn't request this change, please ignore this.
+    Falls du diese Änderung nicht beantragt hast,
+    ignoriere diese Nachricht bitte.
 
     ==============================
     """)
@@ -61,17 +65,19 @@ defmodule Dievergolderei.Accounts.UserNotifier do
   Deliver instructions to update a user email.
   """
   def deliver_update_email_instructions(user, url) do
-    deliver(user.email, "Update email instructions", """
+    deliver(user.email, "E-Mail Änderung", """
 
     ==============================
 
-    Hi #{user.email},
+    Hallo #{user.display_name},
 
-    You can change your email by visiting the URL below:
+    Du kannst Deine E-Mail Adresse ändern,
+    indem Du die untenstehende URL besuchst:
 
     #{url}
 
-    If you didn't request this change, please ignore this.
+    Falls du diese Änderung nicht beantragt hast,
+    ignoriere diese Nachricht bitte.
 
     ==============================
     """)

@@ -2,6 +2,7 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
   use DievergoldereiWeb.ConnCase
 
   alias Dievergolderei.Pages
+  import Dievergolderei.AccountsFixtures
 
   @create_attrs %{content: "some content", name: "some name"}
   @update_attrs %{content: "some updated content", name: "some updated name"}
@@ -10,6 +11,12 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
   def fixture(:static_page) do
     {:ok, static_page} = Pages.create_static_page(@create_attrs)
     static_page
+  end
+
+  setup do
+    %{
+      user: user_fixture()
+    }
   end
 
   test "requires authentication on all actions", %{conn: conn} do
@@ -28,30 +35,28 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
   end
 
   describe "index" do
-    setup [:login_user]
-
-    @tag login_as: "test@example.com"
-    test "lists all static_pages", %{conn: conn} do
+    test "lists all static_pages", %{conn: conn, user: user} do
+      conn = conn |> log_in_user(user)
       conn = get(conn, ~p"/admin/pages")
       assert html_response(conn, 200) =~ "Statische Seiteninhalte"
     end
   end
 
   describe "edit static_page" do
-    setup [:create_static_page, :login_user]
+    setup [:create_static_page]
 
-    @tag login_as: "test@example.com"
-    test "renders form for editing chosen static_page", %{conn: conn, static_page: static_page} do
+    test "renders form for editing chosen static_page", %{conn: conn, static_page: static_page, user: user} do
+      conn = conn |> log_in_user(user)
       conn = get(conn, ~p"/admin/pages/#{static_page}/edit")
       assert html_response(conn, 200) =~ "Seite bearbeiten"
     end
   end
 
   describe "update static_page" do
-    setup [:create_static_page, :login_user]
+    setup [:create_static_page]
 
-    @tag login_as: "test@example.com"
-    test "redirects when data is valid", %{conn: conn, static_page: static_page} do
+    test "redirects when data is valid", %{conn: conn, static_page: static_page, user: user} do
+      conn = conn |> log_in_user(user)
       create_conn =
         put(conn, ~p"/admin/pages/#{static_page}", static_page: @update_attrs)
 
@@ -62,8 +67,8 @@ defmodule DievergoldereiWeb.StaticPageControllerTest do
       assert html_response(conn, 200) =~ "some updated content"
     end
 
-    @tag login_as: "test@example.com"
-    test "renders errors when data is invalid", %{conn: conn, static_page: static_page} do
+    test "renders errors when data is invalid", %{conn: conn, static_page: static_page, user: user} do
+      conn = conn |> log_in_user(user)
       conn =
         put(conn, ~p"/admin/pages/#{static_page}", static_page: @invalid_attrs)
 

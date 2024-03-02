@@ -16,7 +16,7 @@ defmodule DievergoldereiWeb.UserConfirmationLive do
       </.simple_form>
 
       <p class="text-center mt-4">
-        | <.link href={~p"/users/log_in"}>Anmelden</.link>
+        <.link href={~p"/users/log_in"}>Anmelden</.link>
       </p>
     </div>
     """

@@ -1,80 +1,79 @@
 defmodule DievergoldereiWeb.PageControllerTest do
   use DievergoldereiWeb.ConnCase
 
-  alias Dievergolderei.Pages
+  import Dievergolderei.PageFixtures
+  import Dievergolderei.AccountsFixtures
 
-  def fixture(name) do
-    {:ok, page} =
-      Pages.create_static_page(%{name: name, content: "#{String.capitalize(name)} Page"})
-
-    page
+  setup do
+    %{
+      pages: page_fixtures(),
+      user: user_fixture()
+    }
   end
 
-  describe "index" do
-    setup [:setup_index, :setup_featured]
-
+  describe "index page" do
     test "lists hours", %{conn: conn} do
       conn = get(conn, ~p"/")
       assert html_response(conn, 200) =~ "Öffnungszeiten"
     end
 
-    test "lists index page content", %{conn: conn, page: page} do
+    test "lists index & featured page content", %{conn: conn, pages: pages} do
       conn = get(conn, ~p"/")
-      assert html_response(conn, 200) =~ page.content
+      response = html_response(conn, 200)
+      assert response =~ pages[:index].content
+      assert response =~ pages[:featured].content
     end
   end
 
-  describe "contact" do
-    setup [:setup_contact]
-
-    test "lists contact page content", %{conn: conn, page: page} do
+  describe "contact page" do
+    test "lists contact page content", %{conn: conn, pages: pages} do
       conn = get(conn, ~p"/kontakt")
-      assert html_response(conn, 200) =~ page.content
+      response = html_response(conn, 200)
+      assert response =~ pages[:contact].content
     end
   end
 
-  describe "gallery" do
+  describe "gallery page" do
     test "shows static gallery content", %{conn: conn} do
       conn = get(conn, ~p"/impressionen")
-      assert html_response(conn, 200) =~ "Impressionen"
-      assert html_response(conn, 200) =~ "<video"
+      response = html_response(conn, 200)
+      assert response =~ "Impressionen"
+      assert response =~ "<video"
     end
   end
 
-  describe "history" do
-    setup [:setup_history]
-
-    test "lists history page content", %{conn: conn, page: page} do
+  describe "history page" do
+    test "lists history page content", %{conn: conn, pages: pages} do
       conn = get(conn, ~p"/geschichte")
-      assert html_response(conn, 200) =~ page.content
+      response = html_response(conn, 200)
+      assert response =~ pages[:history].content
     end
   end
 
-  describe "admin" do
+  describe "admin page" do
     test "redirects unauthenticated user", %{conn: conn} do
       conn = get(conn, ~p"/admin")
       assert html_response(conn, 302)
       assert conn.halted
     end
-  end
 
-  def setup_index(_) do
-    page = fixture("index")
-    {:ok, page: page}
-  end
+    test "allows authenticated user", %{conn: conn, user: user} do
+      conn = conn |> log_in_user(user) |> get(~p"/admin")
+      response = html_response(conn, 200)
+      assert response =~ "Adminübersicht"
+    end
 
-  def setup_contact(_) do
-    page = fixture("contact")
-    {:ok, page: page}
-  end
+    test "contains links to subadmin pages", %{conn: conn, user: user} do
+      conn = conn |> log_in_user(user) |> get(~p"/admin")
+      response = html_response(conn, 200)
 
-  def setup_history(_) do
-    page = fixture("history")
-    {:ok, page: page}
-  end
-
-  def setup_featured(_) do
-    page = fixture("featured")
-    {:ok, page: page}
+      assert response =~ ~p"/admin/posts"
+      assert response =~ ~p"/admin/hours"
+      assert response =~ ~p"/admin/photos"
+      assert response =~ ~p"/admin/shop"
+      assert response =~ ~p"/admin/pages"
+      assert response =~ ~p"/admin/users"
+      assert response =~ ~p"/admin/dashboard"
+    end
   end
 end
