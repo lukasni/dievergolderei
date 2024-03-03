@@ -69,11 +69,9 @@ if config_env() == :prod do
       port: 443,
       cipher_suite: :compatible,
       keyfile: System.get_env("SSL_KEY_FILE"),
-      certfile: System.get_env("SSL_CERT_FILE"),
-      #cacertfile: System.get_env("SSL_CACERT_FILE"),
+      certfile: System.get_env("SSL_CERT_FILE")
+      # cacertfile: System.get_env("SSL_CACERT_FILE"),
     ]
-
-
 
   # ## SSL Support
   #
@@ -113,15 +111,15 @@ if config_env() == :prod do
   # Also, you may need to configure the Swoosh API client of your choice if you
   # are not using SMTP. Here is an example of the configuration:
   #
-  #     config :dievergolderei, Dievergolderei.Mailer,
-  #       adapter: Swoosh.Adapters.Mailgun,
-  #       api_key: System.get_env("MAILGUN_API_KEY"),
-  #       domain: System.get_env("MAILGUN_DOMAIN")
+  config :dievergolderei, Dievergolderei.Mailer,
+    adapter: Swoosh.Adapters.Mailgun,
+    api_key: System.get_env("MAILGUN_API_KEY"),
+    domain: System.get_env("MAILGUN_DOMAIN")
   #
   # For this example you need include a HTTP client required by Swoosh API client.
   # Swoosh supports Hackney and Finch out of the box:
   #
-  #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
+  config :swoosh, :api_client, Dievergolderei.Finch
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
 end

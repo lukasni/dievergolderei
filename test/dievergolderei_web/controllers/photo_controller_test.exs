@@ -2,6 +2,7 @@ defmodule DievergoldereiWeb.PhotoControllerTest do
   use DievergoldereiWeb.ConnCase
 
   alias Dievergolderei.Gallery
+  import Dievergolderei.AccountsFixtures
 
   setup do
     File.mkdir_p(Gallery.Photo.upload_directory())
@@ -9,6 +10,10 @@ defmodule DievergoldereiWeb.PhotoControllerTest do
     on_exit(fn ->
       File.rm_rf(Gallery.Photo.upload_directory())
     end)
+
+    %{
+      user: user_fixture()
+    }
   end
 
   @upload %Plug.Upload{
@@ -56,11 +61,8 @@ defmodule DievergoldereiWeb.PhotoControllerTest do
   end
 
   describe "index" do
-    setup [:login_user]
-
-    @tag login_as: "test@example.com"
-    test "lists all photos", %{conn: conn} do
-      conn = get(conn, ~p"/admin/photos")
+    test "lists all photos", %{conn: conn, user: user} do
+      conn = conn |> log_in_user(user) |> get(~p"/admin/photos")
       assert html_response(conn, 200) =~ "Gallerie"
     end
   end
@@ -75,69 +77,60 @@ defmodule DievergoldereiWeb.PhotoControllerTest do
   end
 
   describe "new photo" do
-    setup [:login_user]
-
-    @tag login_as: "test@example.com"
-    test "renders form", %{conn: conn} do
-      conn = get(conn, ~p"/admin/photos/new")
+    test "renders form", %{conn: conn, user: user} do
+      conn = conn |> log_in_user(user) |> get(~p"/admin/photos/new")
       assert html_response(conn, 200) =~ "Bild hochladen"
     end
   end
 
   describe "create photo" do
-    setup [:login_user]
-
-    @tag login_as: "test@example.com"
-    test "redirects to show when data is valid", %{conn: conn} do
-      create_conn = post(conn, ~p"/admin/photos", photo: @create_attrs)
+    test "redirects to show when data is valid", %{conn: conn, user: user} do
+      create_conn = conn |> log_in_user(user) |> post(~p"/admin/photos", photo: @create_attrs)
       assert %{id: id} = redirected_params(create_conn)
       assert redirected_to(create_conn) == ~p"/admin/photos/#{id}"
 
-      conn = get(conn, ~p"/admin/photos/#{id}")
+      conn = conn |> log_in_user(user) |> get(~p"/admin/photos/#{id}")
       assert html_response(conn, 200) =~ "Bildvorschau"
     end
 
-    @tag login_as: "test@example.com"
-    test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, ~p"/admin/photos", photo: @invalid_attrs)
+    test "renders errors when data is invalid", %{conn: conn, user: user} do
+      conn = conn |> log_in_user(user) |> post(~p"/admin/photos", photo: @invalid_attrs)
       assert html_response(conn, 200) =~ "Das Formular enthält Fehler"
     end
   end
 
   describe "edit photo" do
-    setup [:login_user, :create_photo]
+    setup [:create_photo]
 
-    @tag login_as: "test@example.com"
-    test "renders form for editing chosen photo", %{conn: conn, photo: photo} do
-      conn = get(conn, ~p"/admin/photos/#{photo}/edit")
+    test "renders form for editing chosen photo", %{conn: conn, photo: photo, user: user} do
+      conn = conn |> log_in_user(user) |> get(~p"/admin/photos/#{photo}/edit")
       assert html_response(conn, 200) =~ "Bild bearbeiten"
     end
   end
 
   describe "update photo" do
-    setup [:login_user, :create_photo]
+    setup [:create_photo]
 
-    @tag login_as: "test@example.com"
-    test "redirects when data is valid", %{conn: conn, photo: photo} do
-      update_conn = put(conn, ~p"/admin/photos/#{photo}", photo: @update_attrs)
+    test "redirects when data is valid", %{conn: conn, photo: photo, user: user} do
+      update_conn = conn |> log_in_user(user) |> put(~p"/admin/photos/#{photo}", photo: @update_attrs)
       assert redirected_to(update_conn) == ~p"/admin/photos/#{photo}"
 
-      conn = get(conn, ~p"/admin/photos/#{photo}")
+      conn = conn |> log_in_user(user) |> get(~p"/admin/photos/#{photo}")
       assert html_response(conn, 200) =~ "some updated description"
     end
 
-    @tag login_as: "test@example.com"
-    test "renders errors when data is invalid", %{conn: conn, photo: photo} do
+    test "renders errors when data is invalid", %{conn: conn, photo: photo, user: user} do
+      conn = conn |> log_in_user(user)
       conn = put(conn, ~p"/admin/photos/#{photo}", photo: @invalid_attrs)
       assert html_response(conn, 200) =~ "Das Formular enthält Fehler"
     end
   end
 
   describe "delete photo" do
-    setup [:login_user, :create_photo]
+    setup [:create_photo]
 
-    @tag login_as: "test@example.com"
-    test "deletes chosen photo from DB and Filesystem", %{conn: conn, photo: photo} do
+    test "deletes chosen photo from DB and Filesystem", %{conn: conn, photo: photo, user: user} do
+      conn = conn |> log_in_user(user)
       delete_conn = delete(conn, ~p"/admin/photos/#{photo}")
       assert redirected_to(delete_conn) == ~p"/admin/photos"
 

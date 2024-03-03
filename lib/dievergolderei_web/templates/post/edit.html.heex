@@ -1,5 +1,12 @@
-<%= breadcrumbs([@conn, :post_edit, @post]) %>
+<.breadcrumb>
+  <:item to={~p"/admin/"}>Admin</:item>
+  <:item to={~p"/admin/posts"}>Blog</:item>
+  <:item to={~p"/admin/posts/#{@post}"}><%= @post.slug %></:item>
+  <:item>Bearbeiten</:item>
+</.breadcrumb>
 
-<h1 class="text-4xl font-light mt-6">Beitrag bearbeiten</h1>
+<.header>
+  Blogbeitrag bearbeiten
+</.header>
 
-<%= render("form.html", Map.put(assigns, :action, ~p"/admin/posts/#{!@post}")) %>
+<._form changeset={@changeset} action={~p"/admin/posts/#{@post}"} />

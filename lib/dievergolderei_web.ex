@@ -23,7 +23,10 @@ defmodule DievergoldereiWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: DievergoldereiWeb
+      use Phoenix.Controller,
+        namespace: DievergoldereiWeb,
+        formats: [html: "View", json: "JSON"],
+        layouts: [html: DievergoldereiWeb.Layouts]
 
       import Plug.Conn
       import DievergoldereiWeb.Gettext
@@ -53,7 +56,7 @@ defmodule DievergoldereiWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {DievergoldereiWeb.LayoutView, "live.html"}
+      layout: {DievergoldereiWeb.Layouts, :app}
 
       unquote(html_helpers())
     end
@@ -75,9 +78,6 @@ defmodule DievergoldereiWeb do
       import Phoenix.Controller,
         only: [get_csrf_token: 0, view_module: 1, view_template: 1]
 
-      # Import basic rendering functionality (render, render_layout, etc)
-      import Phoenix.View
-
       # Include general helpers for rendering HTML
       unquote(html_helpers())
     end
@@ -90,7 +90,6 @@ defmodule DievergoldereiWeb do
       import Plug.Conn
       import Phoenix.Controller
       import Phoenix.LiveView.Router
-      import Phoenix.LiveDashboard.Router
     end
   end
 
@@ -106,16 +105,23 @@ defmodule DievergoldereiWeb do
       # Use all HTML functionality
       import Phoenix.HTML
       import Phoenix.HTML.Form
-      use PhoenixHTMLHelpers
 
       # Import LiveView helpers (live_render, live_component, live_patch, etc)
       import Phoenix.LiveView.Helpers
 
-      import DievergoldereiWeb.ErrorHelpers
+      # Core UI components and translation
+      import DievergoldereiWeb.CoreComponents
+      import DievergoldereiWeb.Components.Controls
+      import DievergoldereiWeb.Components.Breadcrumbs
+      import DievergoldereiWeb.Components.Cards
       import DievergoldereiWeb.Gettext
+
+      alias DievergoldereiWeb.Components
+
+      # Shortcut for generating JS commands
+      alias Phoenix.LiveView.JS
+
       import DievergoldereiWeb.Markdown
-      import DievergoldereiWeb.Breadcrumbs
-      import DievergoldereiWeb.UploadHelpers
       alias DievergoldereiWeb.DateTimeHelpers, as: DT
 
       unquote(verified_routes())

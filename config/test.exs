@@ -18,6 +18,12 @@ config :dievergolderei, DievergoldereiWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+# In test we don't send emails.
+config :dievergolderei, Dievergolderei.Mailer, adapter: Swoosh.Adapters.Test
+
+# Disable swoosh api client as it is only required for production adapters.
+config :swoosh, :api_client, false
+
 # Lower Argon2 cost for testing
 config :argon2_elixir,
   t_cost: 1,

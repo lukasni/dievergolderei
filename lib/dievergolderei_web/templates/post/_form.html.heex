@@ -1,0 +1,19 @@
+<.simple_form :let={f} for={@changeset} action={@action} multipart>
+  <.error :if={@changeset.action}>
+    Formular enthält Fehler und konnte nicht gespeichert werden.
+  </.error>
+
+  <div class="grid md:grid-cols-3 gap-4 mt-4">
+    <.input field={f[:title]} type="text" label="Titel" />
+    <.input field={f[:upload]} type="file" label="Bild" />
+    <.input field={f[:publish_on]} type="date" label="Veröffentlichungsdatum" />
+  </div>
+
+  <.input field={f[:content]} type="textarea" id="content_textarea" />
+
+  <:actions>
+    <.button>Speichern</.button>
+  </:actions>
+</.simple_form>
+
+<%= markdown_editor("content_textarea") %>

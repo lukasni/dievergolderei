@@ -1,5 +1,9 @@
-<%= breadcrumbs([@conn, :shop_item_edit, @item]) %>
+<.breadcrumb>
+  <:item to={~p"/admin/"}>Admin</:item>
+  <:item to={~p"/admin/shop"}>Shop</:item>
+  <:item>Bearbeiten</:item>
+</.breadcrumb>
 
 <h1 class="text-4xl font-light mt-6">Shopartikel bearbeiten</h1>
 
-<%= render("form.html", Map.put(assigns, :action, ~p"/admin/shop/#{@item}")) %>
+<._form changeset={@changeset} action={~p"/admin/shop/#{@item}"} />

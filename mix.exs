@@ -4,8 +4,8 @@ defmodule Dievergolderei.MixProject do
   def project do
     [
       app: :dievergolderei,
-      version: "2.1.0",
-      elixir: "~> 1.14",
+      version: "2.2.0",
+      elixir: "~> 1.16",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -65,6 +65,8 @@ defmodule Dievergolderei.MixProject do
        app: false,
        compile: false,
        depth: 1},
+      {:swoosh, "~> 1.5"},
+      {:finch, "~> 0.13"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},

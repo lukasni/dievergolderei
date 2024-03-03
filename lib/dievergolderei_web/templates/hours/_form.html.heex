@@ -1,0 +1,11 @@
+<.simple_form :let={f} for={@changeset} action={@action} class="md:max-w-md">
+  <.error :if={@changeset.action}>
+    Formular enthält Fehler und konnte nicht gespeichert werden.
+  </.error>
+  <.input field={f[:label]} type="text" label="Titel" />
+  <.input field={f[:times]} type="textarea" label="Zeit / Text" rows="4" />
+  <.input field={f[:active]} type="checkbox" label="Aktiv" />
+  <:actions>
+    <.button>Speichern</.button>
+  </:actions>
+</.simple_form>

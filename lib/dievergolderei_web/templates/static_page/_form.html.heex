@@ -1,0 +1,13 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Formular enthält Fehler und konnte nicht gespeichert werden.
+  </.error>
+
+  <.input field={f[:content]} type="textarea" id="content_textarea" />
+
+  <:actions>
+    <.button>Speichern</.button>
+  </:actions>
+</.simple_form>
+
+<%= markdown_editor("content_textarea") %>

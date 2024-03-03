@@ -1,5 +1,11 @@
-<%= breadcrumbs([@conn, :post_new]) %>
+<.breadcrumb>
+  <:item to={~p"/admin/"}>Admin</:item>
+  <:item to={~p"/admin/posts"}>Blog</:item>
+  <:item>Neu</:item>
+</.breadcrumb>
 
-<h1 class="text-4xl font-light mt-6">Neuen Beitrag erstellen</h1>
+<.header>
+  Neuen Beitrag erstellen
+</.header>
 
-<%= render("form.html", Map.put(assigns, :action, ~p"/admin/posts")) %>
+<._form changeset={@changeset} action={~p"/admin/posts"} />

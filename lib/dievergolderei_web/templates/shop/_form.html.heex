@@ -1,0 +1,14 @@
+<.simple_form :let={f} for={@changeset} action={@action} multipart class="md:max-w-md">
+  <.error :if={@changeset.action}>
+    Formular enthält Fehler und konnte nicht gespeichert werden.
+  </.error>
+
+  <.input field={f[:photo]} type="file" label="Bild" />
+  <.input field={f[:title]} type="text" placeholder="Titel - optional" />
+  <.input field={f[:price]} type="number" step="0.05" placeholder="Preis - optional" />
+  <.input field={f[:reserved]} type="checkbox" label="Reserviert" />
+
+  <:actions>
+    <.button>Speichern</.button>
+  </:actions>
+</.simple_form>

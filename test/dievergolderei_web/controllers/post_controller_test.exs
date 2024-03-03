@@ -2,6 +2,7 @@ defmodule DievergoldereiWeb.PostControllerTest do
   use DievergoldereiWeb.ConnCase
 
   alias Dievergolderei.Blog
+  import Dievergolderei.AccountsFixtures
 
   @create_attrs %{
     content: "some content",
@@ -20,6 +21,12 @@ defmodule DievergoldereiWeb.PostControllerTest do
   def fixture(:post) do
     {:ok, post} = Blog.create_post(@create_attrs)
     post
+  end
+
+  setup do
+    %{
+      user: user_fixture()
+    }
   end
 
   test "requires authentication on all admin actions", %{conn: conn} do
@@ -41,10 +48,8 @@ defmodule DievergoldereiWeb.PostControllerTest do
   end
 
   describe "index" do
-    setup [:login_user]
-
-    @tag login_as: "test@example.com"
-    test "lists all posts", %{conn: conn} do
+    test "lists all posts", %{conn: conn, user: user} do
+      conn = conn |> log_in_user(user)
       conn = get(conn, ~p"/admin/posts")
       assert html_response(conn, 200) =~ "Blogbeiträge"
     end
@@ -66,20 +71,16 @@ defmodule DievergoldereiWeb.PostControllerTest do
   end
 
   describe "new post" do
-    setup [:login_user]
-
-    @tag login_as: "test@example.com"
-    test "renders form", %{conn: conn} do
+    test "renders form", %{conn: conn, user: user} do
+      conn = conn |> log_in_user(user)
       conn = get(conn, ~p"/admin/posts/new")
       assert html_response(conn, 200) =~ "Neuen Beitrag erstellen"
     end
   end
 
   describe "create post" do
-    setup [:login_user]
-
-    @tag login_as: "test@example.com"
-    test "redirects to show when data is valid", %{conn: conn} do
+    test "redirects to show when data is valid", %{conn: conn, user: user} do
+      conn = conn |> log_in_user(user)
       create_conn = post(conn, ~p"/admin/posts", post: @create_attrs)
 
       assert %{id: id} = redirected_params(create_conn)
@@ -89,28 +90,28 @@ defmodule DievergoldereiWeb.PostControllerTest do
       assert html_response(conn, 200) =~ "Beitragsvorschau"
     end
 
-    @tag login_as: "test@example.com"
-    test "renders errors when data is invalid", %{conn: conn} do
+    test "renders errors when data is invalid", %{conn: conn, user: user} do
+      conn = conn |> log_in_user(user)
       conn = post(conn, ~p"/admin/posts", post: @invalid_attrs)
       assert html_response(conn, 200) =~ "Neuen Beitrag erstellen"
     end
   end
 
   describe "edit post" do
-    setup [:create_post, :login_user]
+    setup [:create_post]
 
-    @tag login_as: "test@example.com"
-    test "renders form for editing chosen post", %{conn: conn, post: post} do
+    test "renders form for editing chosen post", %{conn: conn, post: post, user: user} do
+      conn = conn |> log_in_user(user)
       conn = get(conn, ~p"/admin/posts/#{post}/edit")
-      assert html_response(conn, 200) =~ "Beitrag bearbeiten"
+      assert html_response(conn, 200) =~ "Blogbeitrag bearbeiten"
     end
   end
 
   describe "update post" do
-    setup [:create_post, :login_user]
+    setup [:create_post]
 
-    @tag login_as: "test@example.com"
-    test "redirects when data is valid", %{conn: conn, post: post} do
+    test "redirects when data is valid", %{conn: conn, post: post, user: user} do
+      conn = conn |> log_in_user(user)
       update_conn = put(conn, ~p"/admin/posts/#{post}", post: @update_attrs)
       assert redirected_to(update_conn) == ~p"/admin/posts/#{post}"
 
@@ -118,18 +119,19 @@ defmodule DievergoldereiWeb.PostControllerTest do
       assert html_response(conn, 200) =~ "some updated content"
     end
 
-    @tag login_as: "test@example.com"
-    test "renders errors when data is invalid", %{conn: conn, post: post} do
+    test "renders errors when data is invalid", %{conn: conn, post: post, user: user} do
+      conn = conn |> log_in_user(user)
       conn = put(conn, ~p"/admin/posts/#{post}", post: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Beitrag bearbeiten"
+      assert html_response(conn, 200) =~ "Blogbeitrag bearbeiten"
     end
   end
 
   describe "delete post" do
-    setup [:create_post, :login_user]
+    setup [:create_post]
 
     @tag login_as: "test@example.com"
-    test "deletes chosen post", %{conn: conn, post: post} do
+    test "deletes chosen post", %{conn: conn, post: post, user: user} do
+      conn = conn |> log_in_user(user)
       delete_conn = delete(conn, ~p"/admin/posts/#{post}")
       assert redirected_to(delete_conn) == ~p"/admin/posts"
 

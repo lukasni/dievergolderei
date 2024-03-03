@@ -1,0 +1,11 @@
+<.breadcrumb>
+  <:item to={~p"/admin/"}>Admin</:item>
+  <:item to={~p"/admin/hours"}>Öffnungszeiten</:item>
+  <:item>Neu</:item>
+</.breadcrumb>
+
+<.header>
+  Neue Öffnungszeiten
+</.header>
+
+<._form changeset={@changeset} action={~p"/admin/hours"} />

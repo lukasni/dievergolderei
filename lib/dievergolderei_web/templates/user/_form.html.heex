@@ -1,0 +1,13 @@
+<.simple_form :let={f} for={@changeset} action={@action} multipart class="md:max-w-md">
+  <.error :if={@changeset.action}>
+    Formular enthält Fehler und konnte nicht gespeichert werden.
+  </.error>
+
+  <.input field={f[:display_name]} type="text" label="Name" />
+  <.input field={f[:email]} type="email" label="Email" />
+  <.input field={f[:password]} type="password" label="Passwort" />
+
+  <:actions>
+    <.button>Speichern</.button>
+  </:actions>
+</.simple_form>
